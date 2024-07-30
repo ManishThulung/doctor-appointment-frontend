@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/menubar";
 import Link from "next/link";
 import { navItems } from "./constant";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   return (
@@ -46,8 +47,15 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-          <div>
-            <Menubar className="border-none">
+          <div className="flex gap-4">
+            <Link href="/login">
+              <Button>Login</Button>
+            </Link>
+            <Link href="/register">
+            <Button>Register</Button>
+
+            </Link>
+            {/* <Menubar className="border-none">
               <MenubarMenu>
                 <MenubarTrigger className="cursor-pointer">
                   <Avatar>
@@ -67,7 +75,7 @@ const Navbar = () => {
                   <MenubarItem inset>Add Profile...</MenubarItem>
                 </MenubarContent>
               </MenubarMenu>
-            </Menubar>
+            </Menubar> */}
           </div>
         </div>
       </nav>
