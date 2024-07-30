@@ -1,3 +1,4 @@
+import Footer from "@/components/sidebar/Footer";
 import Navbar from "@/components/sidebar/Navbar";
 
 export default function Layout({
@@ -8,7 +9,8 @@ export default function Layout({
   return (
     <>
       <Navbar />
-      {children}
+      <div className="max-w-[1440px] m-auto">{children}</div>
+      <Footer />
     </>
   );
 }
