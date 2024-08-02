@@ -13,6 +13,7 @@ const page = () => {
       <DoctorCard />
       <DoctorCard />
       <DoctorCard />
+      <DoctorCard />
     </div>
   );
 };

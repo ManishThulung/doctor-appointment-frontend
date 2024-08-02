@@ -9,7 +9,7 @@ export default function Layout({
   return (
     <>
       <Navbar />
-      <div className="max-w-[1440px] m-auto">{children}</div>
+      <div className="max-w-[1440px] m-auto my-6 lg:my-16">{children}</div>
       <Footer />
     </>
   );
