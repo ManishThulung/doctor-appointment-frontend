@@ -19,9 +19,10 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Flex, Rate } from "antd";
 
 const formSchema = z.object({
   review: z.string().min(2).max(50),
@@ -32,12 +33,20 @@ interface IProps {
 }
 
 const ReviewModal: FC<IProps> = ({ type }) => {
+  const [value, setValue] = useState<number>(0);
+  const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       review: "",
     },
   });
+  const handleChange = (rating: number) => {
+    console.log(rating, "rating");
+    setValue(rating);
+  };
+  console.log(value, "value");
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -55,6 +64,16 @@ const ReviewModal: FC<IProps> = ({ type }) => {
             You can rate us and share your thougts on the service.
           </DialogDescription>
         </DialogHeader>
+
+        <Flex gap="middle" vertical>
+          <Rate
+            tooltips={desc}
+            onChange={(value) => handleChange(value)}
+            value={value}
+            allowHalf
+          />
+          {value ? <span>{desc[value - 1]}</span> : null}
+        </Flex>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField

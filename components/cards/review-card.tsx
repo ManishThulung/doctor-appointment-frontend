@@ -1,8 +1,5 @@
-import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LiaStarSolid } from "react-icons/lia";
-import { PiStarHalfFill } from "react-icons/pi";
-
+import { Rate } from "antd";
 const ReviewCard = () => {
   return (
     <article className="w-full md:w-[49%] border rounded-sm p-4">
@@ -24,11 +21,7 @@ const ReviewCard = () => {
         </div>
       </div>
       <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
-        <LiaStarSolid color="#fde047" className="w-4 h-4" />
-        <LiaStarSolid color="#fde047" className="w-4 h-4" />
-        <LiaStarSolid color="#fde047" className="w-4 h-4" />
-        <PiStarHalfFill color="#fde047" className="w-4 h-4" />
-        <LiaStarSolid color="#d1d5db" className="w-4 h-4" />
+        <Rate allowHalf defaultValue={4} disabled />
       </div>
       <footer className="mb-5 text-sm text-gray-500">
         <p>
