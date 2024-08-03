@@ -1,4 +1,5 @@
 import ReviewCard from "@/components/cards/review-card";
+import ReviewModal from "@/components/modals/review-modal";
 import { Button } from "@/components/ui/button";
 import React from "react";
 
@@ -53,8 +54,9 @@ const page = () => {
                       />
                     </div>
                   </div>
-                  <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                  <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center flex gap-5 flex-wrap justify-end">
                     <Button variant={"default"}>Book now</Button>
+                    <ReviewModal type="Doctor" />
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
