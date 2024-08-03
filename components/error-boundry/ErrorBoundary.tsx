@@ -1,5 +1,6 @@
 "use client";
 import React, { Component, ReactNode } from "react";
+import { Button, Result } from "antd";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -41,7 +42,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       // You can render any custom fallback UI
       return (
         <div>
-          <h2>Oops, there is an error!</h2>
+          {/* <h2>Oops, there is an error!</h2>
           {this.state.error && <p>{this.state.error.toString()}</p>}
           {this.state.errorInfo && (
             <details style={{ whiteSpace: "pre-wrap" }}>
@@ -55,7 +56,31 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
             }
           >
             Try again?
-          </button>
+          </button> */}
+          <div role="alert" className="flex h-full items-center justify-center">
+            <Result
+              className="w-full"
+              status="500"
+              title={
+                <pre>{this.state.error && this.state.error.toString()}</pre>
+              }
+              subTitle="Sorry, something went wrong."
+              extra={
+                <Button
+                  type="primary"
+                  onClick={() =>
+                    this.setState({
+                      hasError: false,
+                      error: null,
+                      errorInfo: null,
+                    })
+                  }
+                >
+                  Try again
+                </Button>
+              }
+            />
+          </div>
         </div>
       );
     }
