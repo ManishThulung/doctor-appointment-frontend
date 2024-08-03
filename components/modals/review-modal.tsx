@@ -46,7 +46,6 @@ const ReviewModal: FC<IProps> = ({ type }) => {
     console.log(rating, "rating");
     setValue(rating);
   };
-  console.log(value, "value");
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
