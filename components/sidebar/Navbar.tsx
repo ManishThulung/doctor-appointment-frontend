@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div className="max-w-[1440px] m-auto">
       <nav className="bg-white border-gray-200">
-        <div className="flex flex-wrap items-center justify-between p-4">
+        <div className="flex flex-wrap items-center justify-between py-4">
           <Link
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"

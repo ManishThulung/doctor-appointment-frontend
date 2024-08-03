@@ -6,7 +6,9 @@ export default function Home() {
   return (
     <div className="my-6 lg:my-12">
       <div>
-        <p className="font-bold text-2xl lg:text-3xl text-center mb-4">Top Hospitals</p>
+        <p className="font-bold text-2xl lg:text-3xl text-center mb-4">
+          Top Hospitals
+        </p>
         <div className="flex gap-5 flex-wrap justify-center">
           <HospitalCard />
           <HospitalCard />
@@ -19,7 +21,9 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <p className="font-bold text-2xl lg:text-3xl text-center mb-4">Top Doctors</p>
+        <p className="font-bold text-2xl lg:text-3xl text-center mb-4">
+          Top Doctors
+        </p>
         <div className="flex gap-5 flex-wrap justify-center">
           <DoctorCard />
           <DoctorCard />

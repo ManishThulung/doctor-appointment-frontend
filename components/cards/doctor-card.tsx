@@ -1,8 +1,12 @@
+import Link from "next/link";
 import React from "react";
 
 const DoctorCard = () => {
   return (
-    <div className="flex items-center w-fit justify-center">
+    <Link
+      href={`/doctors/1`}
+      className="flex items-center w-fit justify-center"
+    >
       <div className="max-w-xs">
         <div className="bg-white shadow-xl rounded-lg py-3">
           <div className="photo-wrapper p-2">
@@ -44,7 +48,7 @@ const DoctorCard = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
