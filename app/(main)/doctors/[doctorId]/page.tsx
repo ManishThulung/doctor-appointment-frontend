@@ -1,7 +1,8 @@
 import ReviewCard from "@/components/cards/review-card";
+import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import ReviewModal from "@/components/modals/review-modal";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { Suspense } from "react";
 
 const page = () => {
   return (
@@ -151,10 +152,12 @@ const page = () => {
             </div>
           </footer>
           <div className="flex gap-6 flex-wrap">
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            <Suspense fallback={<CardSkeleton />}>
+              <ReviewCard />
+              <ReviewCard />
+              <ReviewCard />
+              <ReviewCard />
+            </Suspense>
           </div>
         </section>
       </main>
