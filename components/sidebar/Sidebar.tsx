@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Link from "next/link";
-import { BiLogOutCircle } from "react-icons/bi";
+import LogoutModal from "../modals/logout-modal";
 
 interface IMenu {
   label: string;
@@ -79,12 +79,7 @@ const Sidebar: FC<ISidebarMenus> = ({ menu }) => {
               )}
             </AccordionItem>
           ))}
-        <div
-          className={`flex gap-3 items-center cursor-pointer py-2 text-white font-medium`}
-        >
-          <BiLogOutCircle color="white" />
-          <span>Logout</span>
-        </div>
+        <LogoutModal type="dashboard" />
       </Accordion>
     </>
   );

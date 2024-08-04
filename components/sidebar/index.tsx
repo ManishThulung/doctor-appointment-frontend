@@ -4,7 +4,7 @@ export const sidebarMenus = [
     label: "Doctor",
     path: "doctor",
     icon: <FaStar />,
-    roles: ["super_admin"],
+    roles: ["admin"],
   },
   {
     label: "Hospital",
@@ -14,13 +14,13 @@ export const sidebarMenus = [
     children: [
       {
         label: "Hospitals",
-        path: "doctors",
+        path: "doctor",
         icon: <FaStar />,
         roles: ["super_admin"],
       },
       {
         label: "Hospitals",
-        path: "doctors",
+        path: "doctor",
         icon: <FaStar />,
         roles: ["super_admin", "admin"],
       },
@@ -34,13 +34,13 @@ export const sidebarMenus = [
     children: [
       {
         label: "Hospitals",
-        path: "doctors",
+        path: "doctor",
         icon: <FaStar />,
         roles: ["admin"],
       },
       {
         label: "hahas",
-        path: "doctors",
+        path: "doctor",
         icon: <FaStar />,
         roles: ["admin", "doctor"],
       },
@@ -50,6 +50,6 @@ export const sidebarMenus = [
     label: "Patient",
     path: "patient",
     icon: <FaStar />,
-    roles: ["admin"],
+    roles: ["admin", "doctor"],
   },
 ];
