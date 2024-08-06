@@ -17,17 +17,26 @@ interface IProps {
 }
 
 const LogoutModal: FC<IProps> = ({ type }) => {
-  const handleLogout = () => {};
+  const handleLogout = async () => {
+    // cookies().delete("token");
+    // redirect("/");
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div
-          className={`flex gap-3 items-center cursor-pointer py-2 text-white font-medium`}
+          className={`flex gap-2 items-center cursor-pointer py-2 text-white font-medium`}
         >
           <BiLogOutCircle
             color={`${type === "dashboard" ? "white" : "black"}`}
           />
-          <span>Logout</span>
+          <span
+            className={`${
+              type === "dashboard" ? "text-white" : "text-black font-semibold"
+            }`}
+          >
+            Logout
+          </span>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -42,6 +51,7 @@ const LogoutModal: FC<IProps> = ({ type }) => {
           <Button
             className="w-full"
             variant={"secondary"}
+            type="button"
             onClick={handleLogout}
           >
             Logout

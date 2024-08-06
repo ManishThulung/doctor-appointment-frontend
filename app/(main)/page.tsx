@@ -4,9 +4,9 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 
 export default function Home() {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token");
-  console.log(token, "token");
+  // const cookieStore = cookies();
+  // const token = cookieStore.get("token");
+  // console.log(token, "token");
   return (
     <div className="my-6 lg:my-12">
       {/* {token && token} */}

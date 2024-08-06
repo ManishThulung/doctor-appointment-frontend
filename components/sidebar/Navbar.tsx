@@ -1,19 +1,12 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarTrigger,
-} from "@/components/ui/menubar";
 import Link from "next/link";
 import { navItems } from "./constant";
 import { Button } from "@/components/ui/button";
+import { cookies } from "next/headers";
+import Userbar from "../cards/user-bar";
 
 const Navbar = () => {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
   return (
     <div className="max-w-[1440px] m-auto">
       <nav className="bg-white border-gray-200">
@@ -47,36 +40,18 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-          <div className="flex gap-4">
-            <Link href="/login">
-              <Button>Login</Button>
-            </Link>
-            <Link href="/register">
-            <Button>Register</Button>
-
-            </Link>
-            {/* <Menubar className="border-none">
-              <MenubarMenu>
-                <MenubarTrigger className="cursor-pointer">
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                </MenubarTrigger>
-                <MenubarContent>
-                  <MenubarRadioGroup value="benoit">
-                    <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                    <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                    <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-                  </MenubarRadioGroup>
-                  <MenubarSeparator />
-                  <MenubarItem inset>Edit...</MenubarItem>
-                  <MenubarSeparator />
-                  <MenubarItem inset>Add Profile...</MenubarItem>
-                </MenubarContent>
-              </MenubarMenu>
-            </Menubar> */}
-          </div>
+          {token?.name && token?.value ? (
+            <Userbar token={token?.value} />
+          ) : (
+            <div className="flex gap-4">
+              <Link href="/login">
+                <Button>Login</Button>
+              </Link>
+              <Link href="/register">
+                <Button>Register</Button>
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
     </div>
