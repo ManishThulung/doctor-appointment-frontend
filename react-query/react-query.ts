@@ -21,7 +21,7 @@ export const fetcher = async <T>({
 
 export const useFetch = <T>(
   url: string | null,
-  params?: object,
+  params?: object
   // config?: UseQueryOptions<T, Error, T, QueryKeyT>
 ) => {
   const context = useQuery<T, Error, T, QueryKeyT>({
