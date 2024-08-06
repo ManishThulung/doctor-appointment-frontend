@@ -5,6 +5,7 @@ import { QueryProvider } from "@/context/query-provider";
 import ErrorBoundary from "@/components/error-boundry/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContextProvider } from "@/context/auth-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <ErrorBoundary>
           <QueryProvider>
-            {children} <ToastContainer position="top-right" autoClose={3000} />
+            <AuthContextProvider>
+              {children}
+              <ToastContainer position="top-right" autoClose={3000} />
+            </AuthContextProvider>
           </QueryProvider>
         </ErrorBoundary>
       </body>

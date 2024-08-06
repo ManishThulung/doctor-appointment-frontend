@@ -1,12 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import { navItems } from "./constant";
 import { Button } from "@/components/ui/button";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import Userbar from "../cards/user-bar";
+import { useAuthContext } from "@/context/auth-provider";
 
 const Navbar = () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  // const cookieStore = cookies();
+  // const token = cookieStore.get("token");
+  const { isAuth } = useAuthContext();
   return (
     <div className="max-w-[1440px] m-auto">
       <nav className="bg-white border-gray-200">
@@ -40,8 +44,8 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-          {token?.name && token?.value ? (
-            <Userbar token={token?.value} />
+          {isAuth ? (
+            <Userbar />
           ) : (
             <div className="flex gap-4">
               <Link href="/login">

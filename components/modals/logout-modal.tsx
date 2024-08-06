@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useAuthContext } from "@/context/auth-provider";
 import { FC } from "react";
 import { BiLogOutCircle } from "react-icons/bi";
 
@@ -17,9 +18,9 @@ interface IProps {
 }
 
 const LogoutModal: FC<IProps> = ({ type }) => {
+  const { setIsAuth } = useAuthContext();
   const handleLogout = async () => {
-    // cookies().delete("token");
-    // redirect("/");
+    setIsAuth(false);
   };
   return (
     <Dialog>

@@ -13,7 +13,7 @@ import { FC } from "react";
 import LogoutModal from "../modals/logout-modal";
 
 interface IProps {
-  token: string;
+  token?: string;
 }
 const Userbar: FC<IProps> = ({ token }) => {
   return (

@@ -1,18 +1,30 @@
+import { Address } from "@/types/address.types";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import { FaStar } from "react-icons/fa";
 
-const HospitalCard = () => {
+interface IProps {
+  name: string;
+  id: string;
+  email: string;
+  image: string;
+  address: Address;
+}
+
+const HospitalCard: FC<IProps> = ({ name, id, email, image, address }) => {
   return (
     <Link
-      href={`/hospitals/${1}`}
+      href={`/hospitals/${id}`}
       className="min-w-[300px] max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4 cursor-pointer"
     >
       <div className="relative">
-        <img
+        <Image
           className="w-full h-44 object-cover object-center"
-          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-          alt="avatar"
+          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${image}`}
+          alt={name}
+          width={100}
+          height={100}
         />
         <div className="flex w-fit items-center justify-center gap-1 px-4 py-2 bg-gray-900 absolute bottom-0 right-0">
           <span className="text-white">4 </span>
@@ -21,9 +33,7 @@ const HospitalCard = () => {
         </div>
       </div>
       <div className="py-4 px-6">
-        <h1 className="text-2xl font-semibold text-gray-800">
-          Patterson johnson
-        </h1>
+        <h1 className="text-2xl font-semibold text-gray-800">{name}</h1>
         {/* <p className="py-2 text-lg text-gray-700">
           Full Stack maker & UI / UX Designer , love hip hop music Author of
           Building UI.
@@ -41,13 +51,15 @@ const HospitalCard = () => {
           <svg className="h-6 w-6 fill-current" viewBox="0 0 512 512">
             <path d="M256 32c-88.004 0-160 70.557-160 156.801C96 306.4 256 480 256 480s160-173.6 160-291.199C416 102.557 344.004 32 256 32zm0 212.801c-31.996 0-57.144-24.645-57.144-56 0-31.357 25.147-56 57.144-56s57.144 24.643 57.144 56c0 31.355-25.148 56-57.144 56z" />
           </svg>
-          <h1 className="px-2 text-sm">California</h1>
+          <h1 className="px-2 text-sm">
+            {address?.municipality + ", " + address?.district}
+          </h1>
         </div>
         <div className="flex items-center mt-4 text-gray-700">
           <svg className="h-6 w-6 fill-current" viewBox="0 0 512 512">
             <path d="M437.332 80H74.668C51.199 80 32 99.198 32 122.667v266.666C32 412.802 51.199 432 74.668 432h362.664C460.801 432 480 412.802 480 389.333V122.667C480 99.198 460.801 80 437.332 80zM432 170.667L256 288 80 170.667V128l176 117.333L432 128v42.667z" />
           </svg>
-          <h1 className="px-2 text-sm">patterson@example.com</h1>
+          <h1 className="px-2 text-sm">{email}</h1>
         </div>
       </div>
     </Link>

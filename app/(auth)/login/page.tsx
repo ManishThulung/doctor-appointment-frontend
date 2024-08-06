@@ -3,6 +3,7 @@
 import { useLogin } from "@/api/auth.api";
 import { FormInput } from "@/components/forms/molecules/form-input";
 import Loading from "@/components/loaders/loading";
+import { useAuthContext } from "@/context/auth-provider";
 import { AxiosError, AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,7 @@ export const emailPattern = {
 };
 
 const login = () => {
+  const { setIsAuth } = useAuthContext();
   const router = useRouter();
   const { mutateAsync, isPending } = useLogin();
 
@@ -32,11 +34,10 @@ const login = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      console.log(data, "data");
       const res: AxiosResponse = await mutateAsync(data);
-      console.log(res, "res");
       if (res.status === 200) {
         toast.success(res.data.message);
+        setIsAuth(true);
         router.push("/");
       }
     } catch (error: any) {
