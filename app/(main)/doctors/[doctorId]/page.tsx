@@ -14,7 +14,7 @@ const page = ({ params }: { params: { doctorId: string } }) => {
   const { data, isPending } = useGetDoctorById(params.doctorId);
   return (
     <div>
-      <main className="profile-page">
+      <main>
         <section className="relative block h-[500px]">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
