@@ -13,10 +13,10 @@ export const navItems = [
   },
   {
     label: "About Us",
-    path: "/about-us",
+    path: "/aboutUs",
   },
-  {
-    label: "Contact Us",
-    path: "/contact-us",
-  },
+  // {
+  //   label: "Contact Us",
+  //   path: "/contact-us",
+  // },
 ];

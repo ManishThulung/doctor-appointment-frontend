@@ -6,6 +6,7 @@ import ErrorBoundary from "@/components/error-boundry/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContextProvider } from "@/context/auth-provider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           <QueryProvider>
             <AuthContextProvider>
               {children}
+              <ReactQueryDevtools initialIsOpen={false} />
               <ToastContainer position="top-right" autoClose={3000} />
             </AuthContextProvider>
           </QueryProvider>

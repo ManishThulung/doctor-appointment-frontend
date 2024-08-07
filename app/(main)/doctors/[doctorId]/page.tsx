@@ -12,7 +12,6 @@ import React, { Suspense } from "react";
 
 const page = ({ params }: { params: { doctorId: string } }) => {
   const { data, isPending } = useGetDoctorById(params.doctorId);
-  console.log(data, "dataaaaaa");
   return (
     <div>
       <main className="profile-page">

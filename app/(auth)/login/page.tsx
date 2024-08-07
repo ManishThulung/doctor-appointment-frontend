@@ -11,7 +11,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export type RegistrationFormFields = {
+export type LoginFormFields = {
   password: string;
   email: string;
 };
@@ -30,7 +30,7 @@ const login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegistrationFormFields>();
+  } = useForm<LoginFormFields>();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -55,7 +55,7 @@ const login = () => {
                   Sign in
                 </h3>
                 <p className="text-sm mt-4 text-gray-800">
-                  Don't have an account{" "}
+                  Don't have an account?{" "}
                   <Link
                     href="/register"
                     className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
@@ -65,7 +65,7 @@ const login = () => {
                 </p>
               </div>
 
-              <FormInput<RegistrationFormFields>
+              <FormInput<LoginFormFields>
                 id="email"
                 type="email"
                 name="email"
@@ -80,7 +80,7 @@ const login = () => {
                 errors={errors}
               />
 
-              <FormInput<RegistrationFormFields>
+              <FormInput<LoginFormFields>
                 id="password"
                 type="password"
                 name="password"

@@ -27,3 +27,14 @@ export const useLogin = () => {
     ...response,
   };
 };
+export const useRegister = () => {
+  const response = usePost(
+    `auth/user/register`,
+    undefined
+    // updater
+  );
+  console.log(response, "resssss");
+  return {
+    ...response,
+  };
+};

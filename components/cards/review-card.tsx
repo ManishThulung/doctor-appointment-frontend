@@ -10,12 +10,12 @@ const ReviewCard = () => {
         </Avatar>
         <div className="font-medium">
           <p>
-            Jese Leos
+            Durgesh Nai
             <time
               dateTime="2014-08-16 19:00"
               className="block text-sm text-gray-500"
             >
-              Joined on August 2014
+              Joined on March 2024
             </time>
           </p>
         </div>
@@ -26,7 +26,7 @@ const ReviewCard = () => {
       <footer className="mb-5 text-sm text-gray-500">
         <p>
           Reviewed on
-          <time dateTime="2017-03-03 19:00"> March 3, 2017</time>
+          <time dateTime="2017-03-03 19:00"> April 3, 2014</time>
         </p>
       </footer>
       <p className="mb-2 text-gray-500">
