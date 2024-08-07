@@ -1,10 +1,18 @@
+"use client";
+
+import { useGetDoctorById } from "@/api/doctor.api";
 import ReviewCard from "@/components/cards/review-card";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
+import { PdfRenderModal } from "@/components/modals/pdf-render-modal";
 import ReviewModal from "@/components/modals/review-modal";
 import { Button } from "@/components/ui/button";
+import { Rate } from "antd";
+import Image from "next/image";
 import React, { Suspense } from "react";
 
-const page = () => {
+const page = ({ params }: { params: { doctorId: string } }) => {
+  const { data, isPending } = useGetDoctorById(params.doctorId);
+  console.log(data, "dataaaaaa");
   return (
     <div>
       <main className="profile-page">
@@ -44,84 +52,90 @@ const page = () => {
         <section className="relative py-16 bg-blueGray-200">
           <div className="container mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-              <div className="px-6">
-                <div className="flex flex-wrap justify-center">
-                  <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                    <div className="relative">
-                      <img
-                        alt="..."
-                        src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
-                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"
-                      />
-                    </div>
-                  </div>
-                  <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center flex gap-5 flex-wrap justify-end">
-                    <Button variant={"default"}>Book now</Button>
-                    <ReviewModal type="Doctor" />
-                  </div>
-                  <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                    <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                      <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          22
-                        </span>
-                        <span className="text-sm text-blueGray-400">
-                          Friends
-                        </span>
-                      </div>
-                      <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          10
-                        </span>
-                        <span className="text-sm text-blueGray-400">
-                          Photos
-                        </span>
-                      </div>
-                      <div className="lg:mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          89
-                        </span>
-                        <span className="text-sm text-blueGray-400">
-                          Comments
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-center mt-12">
-                  <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
-                    Jenna Stones
-                  </h3>
-                  <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                    <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                    Los Angeles, California
-                  </div>
-                  <div className="mb-2 text-blueGray-600 mt-10">
-                    <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                    Solution Manager - Creative Tim Officer
-                  </div>
-                  <div className="mb-2 text-blueGray-600">
-                    <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                    University of Computer Science
-                  </div>
-                </div>
-                <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+              {!isPending && data ? (
+                <div className="px-6">
                   <div className="flex flex-wrap justify-center">
-                    <div className="w-full lg:w-9/12 px-4">
-                      <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                        An artist of considerable range, Jenna the name taken by
-                        Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                        performs and records all of his own music, giving it a
-                        warm, intimate feel with a solid groove structure. An
-                        artist of considerable range.
-                      </p>
-                      <a href="#pablo" className="font-normal text-pink-500">
-                        Show more
-                      </a>
+                    <div className="w-full h-40 lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                      <div className="relative">
+                        <Image
+                          alt={data?.name}
+                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${data?.avatar?.filename}`}
+                          className="shadow-xl rounded-full h-[150px] align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px] object-cover"
+                          width={250}
+                          height={250}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center flex gap-5 flex-wrap justify-end">
+                      <Button variant={"default"}>Book now</Button>
+                      <ReviewModal type="Doctor" />
+                    </div>
+                    <div className="w-full lg:w-4/12 px-4 lg:order-1">
+                      <div className="flex justify-center py-4 lg:pt-4 pt-8">
+                        {/* <div className="mr-4 p-3 text-center">
+                          <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                            22
+                          </span>
+                          <span className="text-sm text-blueGray-400">
+                            Friends
+                          </span>
+                        </div> */}
+                        <div className="mr-4 p-3 text-center">
+                          <Rate allowHalf defaultValue={4} disabled />
+                        </div>
+                        <div className="lg:mr-4 p-3 text-center">
+                          {data?.certificates && (
+                            <PdfRenderModal
+                              src={data?.certificates[0].filename}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center mt-12">
+                    <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
+                      {data?.name}
+                    </h3>
+                    <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                      <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                      {data?.Address?.municipality +
+                        ", " +
+                        data?.Address.district}
+                    </div>
+                    <div className="mb-2 text-blueGray-600 mt-10">
+                      <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                      {data?.specialization?.map((item: string) => (
+                        <span key={item}>{item}</span>
+                      ))}
+                    </div>
+                    <div className="mb-2 text-blueGray-600">
+                      <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+                      University of Computer Science
+                    </div>
+                  </div>
+                  <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+                    <div className="flex flex-wrap justify-center">
+                      <div className="w-full lg:w-9/12 px-4">
+                        <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                          An artist of considerable range, Jenna the name taken
+                          by Melbourne-raised, Brooklyn-based Nick Murphy
+                          writes, performs and records all of his own music,
+                          giving it a warm, intimate feel with a solid groove
+                          structure. An artist of considerable range.
+                        </p>
+                        <a href="#pablo" className="font-normal text-pink-500">
+                          Show more
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="my-8 m-auto">
+                  <CardSkeleton />
+                </div>
+              )}
             </div>
           </div>
           <footer className="relative bg-blueGray-200 pt-8 pb-6 mt-8">

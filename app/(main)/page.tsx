@@ -1,13 +1,14 @@
 "use client";
 
+import { useGetDoctors } from "@/api/doctor.api";
 import { useGetHospitals } from "@/api/hospital.api";
 import DoctorCard from "@/components/cards/doctor-card";
 import HospitalCard from "@/components/cards/hospital-card";
 import { MultipleCardSkeleton } from "@/components/loaders/multiple-card-skeleton";
-import { Suspense } from "react";
 
 export default function Home() {
   const { data, isPending } = useGetHospitals();
+  const { data: doctorData, isPending: isPendingDoctor } = useGetDoctors();
 
   return (
     <div className="my-6 lg:my-12 flex flex-col gap-8 lg:gap-16">
@@ -39,16 +40,23 @@ export default function Home() {
           Top Doctors
         </p>
         <div className="flex gap-5 flex-wrap justify-center">
-          <DoctorCard />
-          <DoctorCard />
-          <DoctorCard />
-          <DoctorCard />
-          <DoctorCard />
-          <DoctorCard />
-          <DoctorCard />
-          <DoctorCard />
-          <DoctorCard />
-          <DoctorCard />
+          {!isPendingDoctor && doctorData ? (
+            doctorData?.map((item: any) => (
+              <DoctorCard
+                key={item.id}
+                name={item.name}
+                id={item.id}
+                address={item.Address}
+                email={item.email}
+                image={item?.avatar.filename}
+                specialization={item?.specialization}
+              />
+            ))
+          ) : (
+            <div className="my-16">
+              <MultipleCardSkeleton />
+            </div>
+          )}
         </div>
       </div>
     </div>
