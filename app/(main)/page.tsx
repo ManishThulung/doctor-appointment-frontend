@@ -31,7 +31,7 @@ export default function Home() {
           </div>
         </section>
         <section className="relative py-16 ">
-          <div className="container mx-auto px-4 w-3/4">
+          <div className="mx-auto px-4 w-3/4">
             <Image
               alt="hero"
               src="/assets/images/about.jpg"

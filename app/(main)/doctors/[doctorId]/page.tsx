@@ -13,7 +13,7 @@ import React, { Suspense } from "react";
 const page = ({ params }: { params: { doctorId: string } }) => {
   const { data, isPending } = useGetDoctorById(params.doctorId);
   return (
-    <div>
+    <>
       <main>
         <section className="relative block h-[500px]">
           <div
@@ -49,7 +49,7 @@ const page = ({ params }: { params: { doctorId: string } }) => {
           </div>
         </section>
         <section className="relative py-16 bg-blueGray-200">
-          <div className="container mx-auto px-4">
+          <div className="max-w-[1300px] mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
               {!isPending && data ? (
                 <div className="px-6">
@@ -174,7 +174,7 @@ const page = ({ params }: { params: { doctorId: string } }) => {
           </div>
         </section>
       </main>
-    </div>
+    </>
   );
 };
 

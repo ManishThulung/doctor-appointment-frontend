@@ -8,7 +8,7 @@ const page = () => {
       <AboutSection />
       <ResultsSection />
       <SubscribeSection />
-      <div className="container px-6 md:px-12 my-24">
+      <div className="max-w-[1440px] px-6 md:px-12 my-24">
         <div className="block rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px] border border-gray-300">
           <div className="flex flex-wrap">
             <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
@@ -188,8 +188,8 @@ const HeaderSection = () => {
     <section className="py-14 lg:py-24 relative z-0 bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative text-center">
         <h1 className="max-w-2xl mx-auto text-center font-manrope font-bold text-4xl  text-gray-900 mb-5 md:text-5xl md:leading-normal">
-          Control your Finances with our{" "}
-          <span className="text-indigo-600">Smart Tool</span>
+          Control your Health with
+          <span className="text-indigo-600"> this platform</span>
         </h1>
         <p className="max-w-sm mx-auto text-center text-base font-normal leading-7 text-gray-500 mb-9">
           Invest intelligently and discover a better way to manage your entire
