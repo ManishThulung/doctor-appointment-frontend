@@ -38,6 +38,7 @@ export default function Home() {
               quality={100}
               width={250}
               height={150}
+              unoptimized
               className="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg -mt-64 h-[500px] object-cover"
             />
           </div>

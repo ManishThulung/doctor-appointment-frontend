@@ -14,7 +14,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 
 export enum FormFieldType {
@@ -113,6 +118,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
             width={24}
             alt="user"
             className="ml-2"
+            style={{ width: "auto", height: "auto" }}
           />
           <FormControl>
             <ReactDatePicker

@@ -1,8 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,10 +23,17 @@ import "react-phone-number-input/style.css";
 import { FileUploader } from "@/components/file-uploader";
 import CustomFormField, { FormFieldType } from "./molecules/custom-fields";
 import SubmitButton from "../submit-button";
+import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 
 const RegisterDoctor = ({ user }: { user?: User }) => {
+
+  const searchParams = useSearchParams()
+
+  const hospitalId = searchParams.get('hospitalId')
+  console.log(hospitalId, "hospitalId")
+
   const isPending = true;
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof PatientFormValidation>>({

@@ -1,7 +1,12 @@
+// "use client";
+
 import RegisterDoctor from "@/components/forms/RegisterDoctor";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
-const Register = async () => {
+const page = () => {
+
+
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container">
@@ -31,4 +36,4 @@ const Register = async () => {
   );
 };
 
-export default Register;
+export default page;
