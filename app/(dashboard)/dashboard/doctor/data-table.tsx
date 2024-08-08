@@ -34,11 +34,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filterBy: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  filterBy,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -63,16 +65,16 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border">
-      <div className="flex items-center py-4">
+      <div className="flex items-center p-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder={`Filter ${filterBy}...`}
+          value={(table.getColumn(filterBy)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn(filterBy)?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
               Columns
@@ -97,7 +99,7 @@ export function DataTable<TData, TValue>({
                 );
               })}
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
       <Table>
         <TableHeader>

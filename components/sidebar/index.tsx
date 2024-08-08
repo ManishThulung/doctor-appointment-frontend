@@ -1,3 +1,4 @@
+import { Role } from "@/types/enums.types";
 import { FaStar } from "react-icons/fa";
 export const sidebarMenus = [
   {
@@ -51,5 +52,11 @@ export const sidebarMenus = [
     path: "patient",
     icon: <FaStar />,
     roles: ["admin", "doctor"],
+  },
+  {
+    label: "Department",
+    path: "department",
+    icon: <FaStar />,
+    roles: [Role.SuperAdmin],
   },
 ];

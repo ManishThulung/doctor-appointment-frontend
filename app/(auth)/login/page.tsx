@@ -4,6 +4,7 @@ import { useLogin } from "@/api/auth.api";
 import { FormInput } from "@/components/forms/molecules/form-input";
 import Loading from "@/components/loaders/loading";
 import { useAuthContext } from "@/context/auth-provider";
+import { Role } from "@/types/enums.types";
 import { AxiosError, AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,7 +23,7 @@ export const emailPattern = {
 };
 
 const login = () => {
-  const { setIsAuth } = useAuthContext();
+  const { setIsAuth, setRole } = useAuthContext();
   const router = useRouter();
   const { mutateAsync, isPending } = useLogin();
 
@@ -35,10 +36,15 @@ const login = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       const res: AxiosResponse = await mutateAsync(data);
-      if (res.status === 200) {
+      if (res.data?.success) {
         toast.success(res.data.message);
-        setIsAuth(true);
-        router.push("/");
+        setIsAuth(res.data?.success);
+        setRole(res?.data?.user?.role);
+        if (res?.data?.user?.role == Role.SuperAdmin) {
+          router.push("/dashboard");
+        } else {
+          router.push("/");
+        }
       }
     } catch (error: any) {
       toast.error(error.message);
