@@ -43,8 +43,7 @@ export const DoctorFormValidation = z.object({
   //   }
   // ),
   avatar: z.array(z.instanceof(File)).nonempty("Image is required"),
-
-  identificationDocument: z
+  certificate: z
     .array(z.instanceof(File))
     .nonempty("Document/certificate is required"),
 

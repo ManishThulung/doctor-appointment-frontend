@@ -20,7 +20,6 @@ export const useCreateDepartment = () => {
 
 export const useGetDepartment = () => {
   const response = useFetch<Department[]>(`department`);
-  console.log(response, "resssss");
   return {
     ...response,
   };

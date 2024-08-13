@@ -120,7 +120,11 @@ const CreateDepartment = () => {
               label="Department image"
               renderSkeleton={(field) => (
                 <FormControl>
-                  <FileUploader files={field.value} onChange={field.onChange} />
+                  <FileUploader
+                    files={field.value}
+                    onChange={field.onChange}
+                    type="image/*"
+                  />
                 </FormControl>
               )}
             />
