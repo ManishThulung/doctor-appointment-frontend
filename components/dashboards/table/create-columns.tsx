@@ -17,6 +17,7 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
+import Image from "next/image";
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -108,6 +109,21 @@ export const createColumn = <T extends object>(
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+      );
+    } else if (key === "image") {
+      return (
+        <div className="ml-4 w-16 h-16  rounded-md flex items-center justify-center overflow-hidden">
+          <Image
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${
+              (row.original as any)?.image?.filename
+            }`}
+            alt={(row.original as any)?.name}
+            className="w-full h-full object-cover"
+            width={50}
+            height={50}
+            unoptimized
+          />
+        </div>
       );
     }
 

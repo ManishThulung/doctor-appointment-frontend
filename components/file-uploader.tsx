@@ -9,26 +9,39 @@ import { convertFileToUrl } from "@/lib/utils";
 type FileUploaderProps = {
   files: File[] | undefined;
   onChange: (files: File[]) => void;
+  type: "image/*" | "application/pdf";
 };
 
-export const FileUploader = ({ files, onChange }: FileUploaderProps) => {
+export const FileUploader = ({ files, onChange, type }: FileUploaderProps) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     onChange(acceptedFiles);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  console.log(files, "filesss");
 
   return (
     <div {...getRootProps()} className="file-upload">
-      <input {...getInputProps()} />
+      <input {...getInputProps()} accept={type} />
       {files && files?.length > 0 ? (
-        <Image
-          src={convertFileToUrl(files[0])}
-          width={1000}
-          height={1000}
-          alt="uploaded image"
-          className="max-h-[400px] overflow-hidden object-cover"
-        />
+        <>
+          {files[0]?.type == "application/pdf" ? (
+            <iframe
+            src={convertFileToUrl(files[0])}
+            width="100%"
+            height="600px"
+            style={{border: "none"}}
+        ></iframe>
+          ) : (
+            <Image
+              src={convertFileToUrl(files[0])}
+              width={1000}
+              height={1000}
+              alt="uploaded image"
+              className="max-h-[300px] overflow-hidden object-cover"
+            />
+          )}
+        </>
       ) : (
         <>
           <Image
@@ -43,7 +56,9 @@ export const FileUploader = ({ files, onChange }: FileUploaderProps) => {
               or drag and drop
             </p>
             <p className="text-12-regular">
-              SVG, PNG, JPG or GIF (max. 800x400px)
+              {type === "image/*"
+                ? "SVG, PNG, JPG or GIF (max. 800x400px)"
+                : "Only PDF is accepted"}
             </p>
           </div>
         </>

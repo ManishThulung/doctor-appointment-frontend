@@ -85,7 +85,6 @@
   box-shadow: inset 7px 10px 12px #f0f0f0;
 }
 
-
 /* ========================================== TAILWIND STYLES */
 @layer base {
   /* Remove scrollbar */
@@ -299,15 +298,15 @@
   }
 
   .shad-select-trigger {
-    @apply bg-gray-400  placeholder:text-gray-600 border-gray-500 h-11 focus:ring-0 focus:ring-offset-0 !important;
+    @apply placeholder:text-gray-600 border-gray-500 h-11 focus:ring-0 focus:ring-offset-0 !important;
   }
 
   .shad-select-content {
-    @apply bg-gray-400 border-gray-500 !important;
+    @apply border-gray-500 !important;
   }
 
   .shad-dialog {
-    @apply bg-gray-400 border-gray-500 !important;
+    @apply border-gray-500 !important;
   }
 
   .shad-dialog button {

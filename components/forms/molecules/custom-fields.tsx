@@ -24,6 +24,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export enum FormFieldType {
   INPUT = "input",
+  PASSWORD = "password",
   TEXTAREA = "textarea",
   PHONE_INPUT = "phoneInput",
   CHECKBOX = "checkbox",
@@ -70,6 +71,19 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
           </FormControl>
         </div>
       );
+    case FormFieldType.PASSWORD:
+      return (
+        <div className="flex rounded-md border border-gray-500 ">
+          <FormControl>
+            <Input
+              type="password"
+              placeholder={props.placeholder}
+              {...field}
+              disabled={props.disabled}
+            />
+          </FormControl>
+        </div>
+      );
     case FormFieldType.TEXTAREA:
       return (
         <FormControl>
@@ -84,7 +98,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <FormControl>
           <PhoneInput
-            defaultCountry="US"
+            defaultCountry="NP"
             placeholder={props.placeholder}
             international
             withCountryCallingCode

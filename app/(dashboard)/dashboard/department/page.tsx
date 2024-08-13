@@ -7,13 +7,16 @@ import { DataTable } from "../doctor/data-table";
 import CreateDepartment from "@/components/dashboards/forms/create-department";
 import { useGetDepartment } from "@/api/dashboard/department.api";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
+import { ImageData } from "@/types/utils.types";
 
 interface IDepartment {
   name: string;
+  image: ImageData;
   description: string;
   action?: any;
 }
 export const columns: ColumnDef<IDepartment>[] = [
+  createColumn("image", "Image"),
   createColumn("name", "Name"),
   createColumn("description", "Description"),
   createColumn("action", "Action"),
@@ -28,6 +31,7 @@ const page = () => {
       </div>
     );
   }
+
   return (
     <>
       {data && (

@@ -18,6 +18,17 @@ export type RegistrationFormFields = {
   name: string;
 };
 
+export const namePattern = {
+  value: new RegExp("^[A-Za-z][A-Za-zs]*$"),
+  message: "Name must only include valid word.",
+};
+
+export const passwordPattern = {
+  value: /^(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z0-9!@#$%^&*(),.?":{}|<>]{4,}$/,
+  message:
+    "Password must include one special character and be at least 4 characters long.",
+};
+
 const page = () => {
   const router = useRouter();
   const { mutateAsync, isPending } = useRegister();
@@ -72,6 +83,7 @@ const page = () => {
                 register={register}
                 rules={{
                   required: "You must enter your name",
+                  pattern: namePattern,
                 }}
                 errors={errors}
               />
@@ -98,7 +110,10 @@ const page = () => {
                 placeholder="Password"
                 className="mb-2"
                 register={register}
-                rules={{ required: "You must enter your password." }}
+                rules={{
+                  required: "You must enter your password.",
+                  pattern: passwordPattern,
+                }}
                 errors={errors}
               />
 
