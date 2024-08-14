@@ -83,9 +83,9 @@ const page = ({ params }: { params: { doctorId: string } }) => {
                           <Rate allowHalf defaultValue={4} disabled />
                         </div>
                         <div className="lg:mr-4 p-3 text-center">
-                          {data?.certificates && (
+                          {data?.certificate && (
                             <PdfRenderModal
-                              src={data?.certificates[0].filename}
+                              src={data?.certificate.filename}
                             />
                           )}
                         </div>
@@ -98,15 +98,11 @@ const page = ({ params }: { params: { doctorId: string } }) => {
                     </h3>
                     <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                       <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                      {data?.Address?.municipality +
-                        ", " +
-                        data?.Address.district}
+                      {data.address}
                     </div>
-                    <div className="mb-2 text-blueGray-600 mt-10">
+                    <div className="mb-2 text-blueGray-600 mt-5">
                       <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                      {data?.specialization?.map((item: string) => (
-                        <span key={item}>{item}</span>
-                      ))}
+                      {data?.Department?.name}
                     </div>
                     <div className="mb-2 text-blueGray-600">
                       <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>

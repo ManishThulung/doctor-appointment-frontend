@@ -1,10 +1,14 @@
+"use client";
+
 import HospitalLearnCard from "@/components/cards/hospital-learn-card";
 import Departments from "@/components/hospitals/departments";
+import Doctors from "@/components/hospitals/Doctors";
+import { MultipleCardSkeleton } from "@/components/loaders/multiple-card-skeleton";
 import GoogleMapLocation from "@/components/maps/google-map-location";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { Suspense } from "react";
 
 const page = ({ params }: { params: { hospitalId: string } }) => {
   const lat = 85.33501135; // New Latitude
@@ -48,6 +52,10 @@ const page = ({ params }: { params: { hospitalId: string } }) => {
           </div>
         </section>
 
+        <Suspense fallback={<MultipleCardSkeleton />}>
+        <Doctors hospitalId={params.hospitalId} />
+        </Suspense>
+
         <div className="bg-[#101828]">
           <Departments />
         </div>
@@ -61,6 +69,10 @@ const page = ({ params }: { params: { hospitalId: string } }) => {
               width={100}
               height={100}
               unoptimized
+              style={{
+                width: "auto",
+                height: "auto",
+              }}
               className="object-cover w-full h-[200px]"
             />
           </div>
@@ -87,11 +99,11 @@ const page = ({ params }: { params: { hospitalId: string } }) => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  stroke-width="2"
+                  strokeWidth="2"
                   className="w-4 h-4"
                 >
                   <path
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                   ></path>

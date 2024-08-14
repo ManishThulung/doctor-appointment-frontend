@@ -188,10 +188,11 @@ export default function Home() {
                 key={item.id}
                 name={item.name}
                 id={item.id}
-                address={item.Address}
+                address={item?.address}
                 email={item.email}
                 image={item?.avatar.filename}
-                specialization={item?.specialization}
+                phone={item?.phone}
+                department={item?.Department?.name}
               />
             ))
           ) : (

@@ -7,9 +7,10 @@ interface IProps {
   name: string;
   id: string;
   email: string;
+  phone: string;
   image: string;
-  specialization: string;
-  address: Address;
+  department: string;
+  address: string;
 }
 
 const DoctorCard: FC<IProps> = ({
@@ -17,8 +18,9 @@ const DoctorCard: FC<IProps> = ({
   id,
   email,
   image,
+  phone,
   address,
-  specialization,
+  department,
 }) => {
   return (
     <Link
@@ -34,6 +36,7 @@ const DoctorCard: FC<IProps> = ({
               alt={name}
               width={128}
               height={128}
+              property="1"
             />
           </div>
           <div className="p-2">
@@ -41,7 +44,7 @@ const DoctorCard: FC<IProps> = ({
               {name}
             </h3>
             <div className="text-center text-gray-400 text-xs font-semibold">
-              <p>{specialization[0]}</p>
+              {department}
             </div>
             <table className="text-xs my-3">
               <tbody>
@@ -49,15 +52,13 @@ const DoctorCard: FC<IProps> = ({
                   <td className="px-2 py-2 text-gray-500 font-semibold">
                     Address
                   </td>
-                  <td className="px-2 py-2">
-                    {address?.municipality + ", " + address?.district}
-                  </td>
+                  <td className="px-2 py-2">{address}</td>
                 </tr>
                 <tr>
                   <td className="px-2 py-2 text-gray-500 font-semibold">
                     Phone
                   </td>
-                  <td className="px-2 py-2">+977 9955221114</td>
+                  <td className="px-2 py-2">{phone}</td>
                 </tr>
                 <tr>
                   <td className="px-2 py-2 text-gray-500 font-semibold">

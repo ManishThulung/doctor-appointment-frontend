@@ -13,6 +13,12 @@ export const useGetDoctorById = (id: string) => {
     ...response,
   };
 };
+export const useGetDoctorByHospitalId = (id: string) => {
+  const response: any = useFetch(`doctor/hospital/${id}`);
+  return {
+    ...response,
+  };
+};
 
 export const useCreateDoctor = () => {
   const response = usePost(
