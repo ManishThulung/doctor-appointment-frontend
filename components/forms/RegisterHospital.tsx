@@ -1,34 +1,49 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Form, FormControl } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { SelectItem } from "@/components/ui/select";
-import { DoctorFormDefaultValues, GenderOptions } from "@/constants";
-import { DoctorFormValidation } from "@/lib/validation";
 import { useGetDepartment } from "@/api/dashboard/department.api";
 import { useCreateDoctor } from "@/api/doctor.api";
 import { FileUploader } from "@/components/file-uploader";
+import { Form, FormControl } from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { DoctorFormDefaultValues, Types } from "@/constants";
+import { DoctorFormValidation } from "@/lib/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosResponse } from "axios";
-import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import { toast } from "react-toastify";
+import { z } from "zod";
+import MultipleSelect from "../multiple-select";
 import SubmitButton from "../submit-button";
 import CustomFormField, { FormFieldType } from "./molecules/custom-fields";
 
-const RegisterDoctor = () => {
+const RegisterHospital = () => {
   const { mutateAsync, isPending } = useCreateDoctor();
 
-  const searchParams = useSearchParams();
-  const hospitalId = searchParams.get("hospitalId");
+  const { data: departmentData } = useGetDepartment();
 
-  const { data: departmentData, isPending: departmentDataLoading } =
-    useGetDepartment();
+  const serializeData = (data: any) => {
+    const modifiedData = data.map((item: any) => {
+      const value = item?.id;
+      const label = item?.name;
+
+      return { value, label };
+    });
+    return modifiedData;
+  };
+  let departmentOptions: any;
+  if (departmentData) {
+    departmentOptions = serializeData(departmentData);
+  }
+
+  console.log(departmentOptions, "departmentOptions");
+
+  const [department, setDepartment] = useState<any>({
+    departments: [],
+  });
 
   const form = useForm<z.infer<typeof DoctorFormValidation>>({
     resolver: zodResolver(DoctorFormValidation),
@@ -39,7 +54,6 @@ const RegisterDoctor = () => {
 
   const onSubmit = async (values: z.infer<typeof DoctorFormValidation>) => {
     const formData = new FormData();
-    hospitalId && formData.append("hospitalId", hospitalId);
     formData.append("name", values.name);
     formData.append("email", values.email);
     formData.append("phone", values.phone);
@@ -62,6 +76,8 @@ const RegisterDoctor = () => {
     }
   };
 
+  console.log(department, "department");
+
   return (
     <Form {...form}>
       <form
@@ -70,25 +86,52 @@ const RegisterDoctor = () => {
       >
         <section className="space-y-4">
           <h1 className="header">Welcome 👋</h1>
-          <p className="text-dark-700">Let us know more about yourself.</p>
+          <p className="text-dark-700">Register your hospital here with us.</p>
         </section>
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Personal Information</h2>
+            <h2 className="sub-header">Hospital Information</h2>
           </div>
 
           {/* NAME */}
 
-          <CustomFormField
-            fieldType={FormFieldType.INPUT}
-            control={form.control}
-            name="name"
-            label="Name"
-            placeholder="John Doe"
-            iconSrc="/assets/icons/user.svg"
-            iconAlt="user"
-          />
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="name"
+              label="Name"
+              placeholder="Alka Hospital Pvt. Ltd."
+              iconSrc="/assets/icons/user.svg"
+              iconAlt="user"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.SKELETON}
+              control={form.control}
+              name="type"
+              label="Type"
+              renderSkeleton={(field) => (
+                <FormControl>
+                  <RadioGroup
+                    className="flex h-11 gap-6 xl:justify-between"
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    {Types.map((option, i) => (
+                      <div key={option + i} className="radio-group">
+                        <RadioGroupItem value={option} id={option} />
+                        <Label htmlFor={option} className="cursor-pointer">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+              )}
+            />
+          </div>
 
           {/* EMAIL & PHONE */}
           <div className="flex flex-col gap-6 xl:flex-row">
@@ -97,7 +140,7 @@ const RegisterDoctor = () => {
               control={form.control}
               name="email"
               label="Email address"
-              placeholder="johndoe@gmail.com"
+              placeholder="alkahospital@gmail.com"
               iconSrc="/assets/icons/email.svg"
               iconAlt="email"
             />
@@ -114,61 +157,27 @@ const RegisterDoctor = () => {
           {/* BirthDate & Gender */}
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
-              fieldType={FormFieldType.DATE_PICKER}
-              control={form.control}
-              name="dob"
-              label="Date of birth"
-            />
-
-            <CustomFormField
-              fieldType={FormFieldType.SKELETON}
-              control={form.control}
-              name="gender"
-              label="Gender"
-              renderSkeleton={(field) => (
-                <FormControl>
-                  <RadioGroup
-                    className="flex h-11 gap-6 xl:justify-between"
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    {GenderOptions.map((option, i) => (
-                      <div key={option + i} className="radio-group">
-                        <RadioGroupItem value={option} id={option} />
-                        <Label htmlFor={option} className="cursor-pointer">
-                          {option}
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </FormControl>
-              )}
-            />
-          </div>
-
-          {/* Address & Occupation */}
-          <div className="flex flex-col gap-6 xl:flex-row">
-            <CustomFormField
-              fieldType={FormFieldType.INPUT}
-              control={form.control}
-              name="address"
-              label="Address"
-              placeholder="14 street, New york, NY - 5101"
-            />
-
-            <CustomFormField
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="phone"
               label="Phone Number"
               placeholder="(555) 123-4567"
             />
+
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="pan"
+              label="Pan number (Pan number of hospital)"
+              placeholder="12324766798798"
+            />
           </div>
+
           <CustomFormField
             fieldType={FormFieldType.SKELETON}
             control={form.control}
-            name="avatar"
-            label="Your photo"
+            name="logo"
+            label="Hospital logo"
             renderSkeleton={(field) => (
               <FormControl>
                 <FileUploader
@@ -183,10 +192,65 @@ const RegisterDoctor = () => {
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Hospital Address</h2>
+          </div>
+
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="country"
+              label="Country"
+              placeholder="Nepal"
+            />
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="province"
+              label="Province"
+              placeholder="Bagmati"
+            />
+          </div>
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="district"
+              label="District"
+              placeholder="Kathmandu"
+            />
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="municipality"
+              label="Municipality"
+              placeholder="Kathmandu Municipality"
+            />
+          </div>
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="wardName"
+              label="Ward Name"
+              placeholder="Hospital located ward name"
+            />
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="wardNo"
+              label="Ward Number"
+              placeholder="Hospital located ward number"
+            />
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
             <h2 className="sub-header">Identification and Verfication</h2>
           </div>
 
-          <CustomFormField
+          {/* <CustomFormField
             fieldType={FormFieldType.SELECT}
             control={form.control}
             name="department"
@@ -208,8 +272,24 @@ const RegisterDoctor = () => {
                   </div>
                 </SelectItem>
               ))}
-          </CustomFormField>
+          </CustomFormField> */}
 
+          <CustomFormField
+            fieldType={FormFieldType.MULTIPLE_SELECT}
+            control={form.control}
+            name="departments"
+            label="Select the departments"
+            multipleSelect={(field) => (
+              <FormControl>
+                <MultipleSelect
+                  formData={department}
+                  setFormData={setDepartment}
+                  options={departmentOptions}
+                  fieldName="departments"
+                />
+              </FormControl>
+            )}
+          />
           <CustomFormField
             fieldType={FormFieldType.SKELETON}
             control={form.control}
@@ -225,6 +305,22 @@ const RegisterDoctor = () => {
               </FormControl>
             )}
           />
+
+          <CustomFormField
+            fieldType={FormFieldType.SKELETON}
+            control={form.control}
+            name="gallery"
+            label="Hospital photos"
+            renderSkeleton={(field) => (
+              <FormControl>
+                <FileUploader
+                  files={field.value}
+                  onChange={field.onChange}
+                  type="image/*"
+                />
+              </FormControl>
+            )}
+          />
         </section>
 
         <section className="space-y-6">
@@ -236,8 +332,7 @@ const RegisterDoctor = () => {
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="disclosureConsent"
-            label="I consent to the use and disclosure of my health
-            information for treatment purposes."
+            label="I consent to the use and disclosure of this hospital for the registration purposes."
           />
         </section>
 
@@ -247,4 +342,4 @@ const RegisterDoctor = () => {
   );
 };
 
-export default RegisterDoctor;
+export default RegisterHospital;

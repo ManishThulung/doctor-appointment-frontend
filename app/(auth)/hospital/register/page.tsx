@@ -1,4 +1,5 @@
 import RegisterDoctor from "@/components/forms/RegisterDoctor";
+import RegisterHospital from "@/components/forms/RegisterHospital";
 import Image from "next/image";
 
 const page = () => {
@@ -14,7 +15,7 @@ const page = () => {
             className="mb-12 h-10 w-fit"
           />
 
-          <RegisterDoctor />
+          <RegisterHospital />
         </div>
       </section>
 

@@ -1,5 +1,7 @@
 export const GenderOptions = ["Male", "Female", "Other"];
 
+export const Types = ["Clinic", "Hospital"];
+
 export const DoctorFormDefaultValues = {
   name: "",
   email: "",

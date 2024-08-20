@@ -71,6 +71,16 @@ const page = () => {
                     login here
                   </Link>
                 </p>
+
+                <p className="text-sm mt-4 text-gray-800">
+                  Register your hospital?{" "}
+                  <Link
+                    href="/hospital/register"
+                    className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
+                  >
+                    click here
+                  </Link>
+                </p>
               </div>
 
               <FormInput<RegistrationFormFields>

@@ -31,6 +31,7 @@ export enum FormFieldType {
   DATE_PICKER = "datePicker",
   SELECT = "select",
   SKELETON = "skeleton",
+  MULTIPLE_SELECT = "multipleSelect",
 }
 
 interface CustomProps {
@@ -45,6 +46,7 @@ interface CustomProps {
   showTimeSelect?: boolean;
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
+  multipleSelect?: (field: any) => React.ReactNode;
   fieldType: FormFieldType;
 }
 
@@ -162,6 +164,8 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
           </Select>
         </FormControl>
       );
+    case FormFieldType.MULTIPLE_SELECT:
+      return props.multipleSelect ? props.multipleSelect(field) : null;
     case FormFieldType.SKELETON:
       return props.renderSkeleton ? props.renderSkeleton(field) : null;
     default:

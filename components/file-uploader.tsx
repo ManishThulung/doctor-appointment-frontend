@@ -23,15 +23,15 @@ export const FileUploader = ({ files, onChange, type }: FileUploaderProps) => {
   return (
     <div {...getRootProps()} className="file-upload">
       <input {...getInputProps()} accept={type} />
-      {files && files?.length > 0 ? (
+      {files && files?.length === 1 ? (
         <>
           {files[0]?.type == "application/pdf" ? (
             <iframe
-            src={convertFileToUrl(files[0])}
-            width="100%"
-            height="600px"
-            style={{border: "none"}}
-        ></iframe>
+              src={convertFileToUrl(files[0])}
+              width="100%"
+              height="600px"
+              style={{ border: "none" }}
+            ></iframe>
           ) : (
             <Image
               src={convertFileToUrl(files[0])}
@@ -63,6 +63,22 @@ export const FileUploader = ({ files, onChange, type }: FileUploaderProps) => {
           </div>
         </>
       )}
+      <div className="flex flex-wrap gap-8">
+        {files &&
+          files?.length > 1 &&
+          files.map((item, i) => (
+            <div key={i}>
+              <Image
+                src={convertFileToUrl(files[i])}
+                width={100}
+                height={100}
+                alt="uploaded image"
+                className="max-h-[100px] overflow-hidden object-cover"
+                style={{ height: "auto", width: "auto" }}
+              />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
