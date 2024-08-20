@@ -1,3 +1,5 @@
+import { Certificate } from "crypto";
+
 export const GenderOptions = ["Male", "Female", "Other"];
 
 export const Types = ["Clinic", "Hospital"];
@@ -13,6 +15,25 @@ export const DoctorFormDefaultValues = {
   avatar: [],
   department: "",
   identificationDocument: [],
+  disclosureConsent: false,
+};
+
+export const HospitalRegisterFormDefaultValues = {
+  name: "",
+  type: "",
+  email: "",
+  password: "",
+  phone: "",
+  pan: "",
+  country: "",
+  province: "",
+  district: "",
+  municipality: "",
+  wardName: "",
+  wardNo: "",
+  logo: [],
+  Certificate: [],
+  gallery: [],
   disclosureConsent: false,
 };
 

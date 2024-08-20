@@ -1,13 +1,13 @@
 "use client";
 
 import { useGetDepartment } from "@/api/dashboard/department.api";
-import { useCreateDoctor } from "@/api/doctor.api";
+import { useRegisterHospital } from "@/api/hospital.api";
 import { FileUploader } from "@/components/file-uploader";
 import { Form, FormControl } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { DoctorFormDefaultValues, Types } from "@/constants";
-import { DoctorFormValidation } from "@/lib/validation";
+import { HospitalRegisterFormDefaultValues, Types } from "@/constants";
+import { HospitalFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosResponse } from "axios";
 import { useState } from "react";
@@ -21,7 +21,7 @@ import SubmitButton from "../submit-button";
 import CustomFormField, { FormFieldType } from "./molecules/custom-fields";
 
 const RegisterHospital = () => {
-  const { mutateAsync, isPending } = useCreateDoctor();
+  const { mutateAsync, isPending } = useRegisterHospital();
 
   const { data: departmentData } = useGetDepartment();
 
@@ -39,31 +39,35 @@ const RegisterHospital = () => {
     departmentOptions = serializeData(departmentData);
   }
 
-  console.log(departmentOptions, "departmentOptions");
-
   const [department, setDepartment] = useState<any>({
     departments: [],
   });
 
-  const form = useForm<z.infer<typeof DoctorFormValidation>>({
-    resolver: zodResolver(DoctorFormValidation),
+  const form = useForm<z.infer<typeof HospitalFormValidation>>({
+    resolver: zodResolver(HospitalFormValidation),
     defaultValues: {
-      ...DoctorFormDefaultValues,
+      ...HospitalRegisterFormDefaultValues,
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof DoctorFormValidation>) => {
+  const onSubmit = async (values: z.infer<typeof HospitalFormValidation>) => {
     const formData = new FormData();
     formData.append("name", values.name);
+    formData.append("type", values.type);
     formData.append("email", values.email);
-    formData.append("phone", values.phone);
     formData.append("password", values.password);
-    formData.append("dob", values.dob.toISOString()); // Convert Date to string if necessary
-    formData.append("gender", values.gender);
-    formData.append("address", values.address);
-    formData.append("department", values.department);
-    formData.append("avatar", values?.avatar[0]);
+    formData.append("phone", values.phone);
+    formData.append("pan", values.pan);
+    formData.append("country", values.country);
+    formData.append("province", values.province);
+    formData.append("district", values.district);
+    formData.append("municipality", values.municipality);
+    formData.append("wardName", values.wardName);
+    formData.append("wardNo", values.wardNo);
+    formData.append("departments", department?.departments);
+    formData.append("logo", values?.logo[0]);
     formData.append("certificate", values?.certificate[0]);
+    formData.append("gallery", values?.gallery[0]);
 
     try {
       const res: AxiosResponse = await mutateAsync(formData);
@@ -75,8 +79,6 @@ const RegisterHospital = () => {
       toast.error(error.response?.data?.message);
     }
   };
-
-  console.log(department, "department");
 
   return (
     <Form {...form}>

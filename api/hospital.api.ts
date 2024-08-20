@@ -6,3 +6,20 @@ export const useGetHospitals = () => {
     ...response,
   };
 };
+
+export const useRegisterHospital = () => {
+  const response = usePost(
+    `hospital`,
+    undefined,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+    // updater
+  );
+  console.log(response, "resssss");
+  return {
+    ...response,
+  };
+};

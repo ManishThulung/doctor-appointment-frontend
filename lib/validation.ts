@@ -60,6 +60,7 @@ export const HospitalFormValidation = z.object({
     .string()
     .min(2, "Name must be at least 2 characters")
     .max(50, "Name must be at most 50 characters"),
+  type: z.string().min(1, { message: "This is required" }),
   password: z
     .string()
     .min(4, "password must be at least 4 characters")
@@ -68,29 +69,20 @@ export const HospitalFormValidation = z.object({
   phone: z
     .string()
     .refine((phone) => /^\+\d{10,13}$/.test(phone), "Invalid phone number"),
-  dob: z.coerce.date(),
-  gender: z.enum(["Male", "Female", "Other"]),
-  address: z
-    .string()
-    .min(5, "Address must be at least 5 characters")
-    .max(500, "Address must be at most 500 characters"),
-  department: z.string().min(9, "Department is required"),
-  // avatar: z.custom<File[]>(
-  //   (value) => {
-  //     // Ensure it's an array of files
-  //     if (!Array.isArray(value)) return false;
-  //     // Ensure each item in the array is a File
-  //     return value.every((item) => item instanceof File);
-  //   },
-  //   {
-  //     message: "Avatar is required",
-  //   }
-  // ),
-  avatar: z.array(z.instanceof(File)).nonempty("Image is required"),
+  pan: z.string().min(1, { message: "This is required" }),
+  country: z.string().min(1, { message: "This is required" }),
+  province: z.string().min(1, { message: "This is required" }),
+  district: z.string().min(1, { message: "This is required" }),
+  municipality: z.string().min(1, { message: "This is required" }),
+  wardName: z.string().min(1, { message: "This is required" }),
+  wardNo: z.string().min(1, { message: "This is required" }),
+  logo: z.array(z.instanceof(File)).nonempty("Image is required"),
   certificate: z
     .array(z.instanceof(File))
     .nonempty("Document/certificate is required"),
-
+  gallery: z
+    .array(z.instanceof(File))
+    .nonempty("Document/certificate is required"),
   disclosureConsent: z
     .boolean()
     .default(false)
