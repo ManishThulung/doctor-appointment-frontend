@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
+import { Switch } from "@/components/ui/switch";
+import VerifyModal from "@/components/modals/verify-modal";
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -105,7 +107,10 @@ export const createColumn = <T extends object>(
               Copy ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
+            <VerifyModal
+              id={(row.original as any)?.id}
+              name={(row.original as any)?.name}
+            />
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -121,15 +126,21 @@ export const createColumn = <T extends object>(
             className="w-full h-full object-cover"
             width={50}
             height={50}
-            unoptimized
+            style={{ width: "auto", height: "auto" }}
           />
         </div>
       );
+    } else if (
+      key == "isEmailVerified" ||
+      key === "isVerified" ||
+      key === "status"
+    ) {
+      return (
+        <Switch checked={row.original[key] as boolean} disabled aria-readonly />
+      );
     }
 
-    return (
-      <div className={`pl-4 ${isUppercase ? "uppercase" : ""}`}>{value}</div>
-    );
+    return <div className={`${isUppercase ? "uppercase" : ""}`}>{value}</div>;
   },
 });
 

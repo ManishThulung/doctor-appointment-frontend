@@ -9,23 +9,9 @@ export const sidebarMenus = [
   },
   {
     label: "Hospital",
-    path: "doctor",
+    path: "hospital",
     icon: <FaStar />,
-    roles: ["super_admin", "admin"],
-    children: [
-      {
-        label: "Hospitals",
-        path: "doctor",
-        icon: <FaStar />,
-        roles: ["super_admin"],
-      },
-      {
-        label: "Hospitals",
-        path: "doctor",
-        icon: <FaStar />,
-        roles: ["super_admin", "admin"],
-      },
-    ],
+    roles: [Role.SuperAdmin],
   },
   {
     label: "Appointment",
