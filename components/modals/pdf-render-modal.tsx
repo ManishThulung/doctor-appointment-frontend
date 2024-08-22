@@ -11,14 +11,15 @@ import { PdfRender } from "../pdf/pdf-render";
 
 interface IProps {
   src: string;
+  text?: string;
 }
 
-export function PdfRenderModal({ src }: IProps) {
+export function PdfRenderModal({ src, text }: IProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <button className="bg-white flex gap-1 items-center justify-start bg-primary py-3 rounded-full font-bold text-black max-sm:w-full">
-          View full documents: <FaFilePdf />
+          {text ? text : "View full documents"}: <FaFilePdf />
         </button>
       </DialogTrigger>
       <DialogContent className="w-[95%] m-auto md:w-fit">

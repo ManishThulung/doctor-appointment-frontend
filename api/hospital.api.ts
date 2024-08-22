@@ -7,6 +7,13 @@ export const useGetHospitals = () => {
   };
 };
 
+export const useGetHospitalById = (id: string) => {
+  const response: any = useFetch(`hospital/${id}`);
+  return {
+    ...response,
+  };
+};
+
 // super-admin
 export const useGetHospitalsAdmin = () => {
   const response: any = useFetch(`hospital/admin`);

@@ -1,18 +1,16 @@
-"use client";
+// "use client";
 
 import HospitalLearnCard from "@/components/cards/hospital-learn-card";
+import AboutHospital from "@/components/hospitals/about-hospital";
 import Departments from "@/components/hospitals/departments";
-import Doctors from "@/components/hospitals/Doctors";
+import Doctors from "@/components/hospitals/doctors";
 import { MultipleCardSkeleton } from "@/components/loaders/multiple-card-skeleton";
-import GoogleMapLocation from "@/components/maps/google-map-location";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
 const page = ({ params }: { params: { hospitalId: string } }) => {
-  const lat = 85.33501135; // New Latitude
-  const lng = 27.699110100000002; // New Longitude
   return (
     <>
       <main>
@@ -53,12 +51,14 @@ const page = ({ params }: { params: { hospitalId: string } }) => {
         </section>
 
         <Suspense fallback={<MultipleCardSkeleton />}>
-        <Doctors hospitalId={params.hospitalId} />
+          <Doctors hospitalId={params.hospitalId} />
         </Suspense>
 
         <div className="bg-[#101828]">
           <Departments />
         </div>
+
+        <AboutHospital hospitalId={params.hospitalId} />
 
         {/* register as a doctor */}
         <div className="flex bg-clip-border bg-white text-gray-700 w-full max-w-[48rem] flex-row m-auto py-16">
@@ -113,7 +113,7 @@ const page = ({ params }: { params: { hospitalId: string } }) => {
           </div>
         </div>
       </main>
-      <GoogleMapLocation lat={lat} lng={lng} />
+      {/* <GoogleMapLocation lat={lat} lng={lng} /> */}
     </>
   );
 };
