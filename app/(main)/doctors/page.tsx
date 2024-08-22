@@ -18,10 +18,11 @@ const page = () => {
             key={item.id}
             name={item.name}
             id={item.id}
-            address={item.Address}
+            address={item.address}
             email={item.email}
+            phone={item.phone}
             image={item?.avatar.filename}
-            specialization={item?.specialization}
+            department={item?.Department?.name}
           />
         ))}
     </div>

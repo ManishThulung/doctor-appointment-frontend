@@ -3,6 +3,7 @@
 import { useGetDoctorById } from "@/api/doctor.api";
 import ReviewCard from "@/components/cards/review-card";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
+import AppointmenntModal from "@/components/modals/appointment-modal";
 import { PdfRenderModal } from "@/components/modals/pdf-render-modal";
 import ReviewModal from "@/components/modals/review-modal";
 import { Button } from "@/components/ui/button";
@@ -66,7 +67,10 @@ const page = ({ params }: { params: { doctorId: string } }) => {
                       </div>
                     </div>
                     <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center flex gap-5 flex-wrap justify-end">
-                      <Button variant={"default"}>Book now</Button>
+                      <AppointmenntModal
+                        doctorId={params.doctorId}
+                        hospitalId={data?.HospitalId}
+                      />
                       <ReviewModal type="Doctor" />
                     </div>
                     <div className="w-full lg:w-4/12 px-4 lg:order-1">
@@ -84,9 +88,7 @@ const page = ({ params }: { params: { doctorId: string } }) => {
                         </div>
                         <div className="lg:mr-4 p-3 text-center">
                           {data?.certificate && (
-                            <PdfRenderModal
-                              src={data?.certificate.filename}
-                            />
+                            <PdfRenderModal src={data?.certificate.filename} />
                           )}
                         </div>
                       </div>
@@ -106,18 +108,18 @@ const page = ({ params }: { params: { doctorId: string } }) => {
                     </div>
                     <div className="mb-2 text-blueGray-600">
                       <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                      University of Computer Science
+                      {data?.Hospital?.name}
                     </div>
                   </div>
                   <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
                     <div className="flex flex-wrap justify-center">
                       <div className="w-full lg:w-9/12 px-4">
                         <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                          An artist of considerable range, Jenna the name taken
-                          by Melbourne-raised, Brooklyn-based Nick Murphy
-                          writes, performs and records all of his own music,
-                          giving it a warm, intimate feel with a solid groove
-                          structure. An artist of considerable range.
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Esse, ab voluptatem. Aperiam, necessitatibus?
+                          Cumque est magnam tempore delectus omnis impedit
+                          reprehenderit, inventore earum, obcaecati aliquam
+                          laborum! Dolorem architecto quae cupiditate!
                         </p>
                         <a href="#pablo" className="font-normal text-pink-500">
                           Show more
@@ -133,34 +135,8 @@ const page = ({ params }: { params: { doctorId: string } }) => {
               )}
             </div>
           </div>
-          <footer className="relative bg-blueGray-200 pt-8 pb-6 mt-8">
-            <div className="container mx-auto px-4">
-              <div className="flex flex-wrap items-center md:justify-between justify-center">
-                <div className="w-full md:w-6/12 px-4 mx-auto text-center">
-                  <div className="text-sm text-blueGray-500 font-semibold py-1">
-                    Made with
-                    <a
-                      href="https://www.creative-tim.com/product/notus-js"
-                      className="text-blueGray-500 hover:text-gray-800"
-                      target="_blank"
-                    >
-                      Notus JS
-                    </a>
-                    by
-                    <a
-                      href="https://www.creative-tim.com"
-                      className="text-blueGray-500 hover:text-blueGray-800"
-                      target="_blank"
-                    >
-                      Creative Tim
-                    </a>
-                    .
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-          <div className="flex gap-6 flex-wrap">
+
+          <div className="flex gap-6 flex-wrap mt-20">
             <Suspense fallback={<CardSkeleton />}>
               <ReviewCard />
               <ReviewCard />

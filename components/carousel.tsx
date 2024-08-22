@@ -30,7 +30,7 @@ export function CarouselPlugin({ gallery }: { gallery: ImageData[] }) {
             <CarouselItem key={index}>
               <div className="p-1">
                 <Card>
-                  <CardContent className="flex aspect-square items-center justify-center p-6 h-[700px] w-full p-0">
+                  <CardContent className="flex aspect-square items-center justify-center h-[700px] w-full p-0">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${item?.filename}`}
                       alt={item?.filename}

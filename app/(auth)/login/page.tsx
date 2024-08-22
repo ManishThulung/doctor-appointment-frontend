@@ -5,10 +5,9 @@ import { FormInput } from "@/components/forms/molecules/form-input";
 import Loading from "@/components/loaders/loading";
 import { useAuthContext } from "@/context/auth-provider";
 import { Role } from "@/types/enums.types";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -40,7 +39,6 @@ const login = () => {
     try {
       const res: AxiosResponse = await mutateAsync(data);
       if (res.data?.success) {
-        toast.success(res.data.message);
         setIsAuth(res.data?.success);
         setRole(res?.data?.user?.role);
         if (res?.data?.user?.role == Role.SuperAdmin) {
@@ -50,7 +48,7 @@ const login = () => {
         }
       }
     } catch (error: any) {
-      toast.error(error.message);
+      toast.error(error.response.data.message);
     }
   });
   return (
