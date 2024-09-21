@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetDoctorById } from "@/api/doctor.api";
+import { useGetReviewsByDoctorId } from "@/api/review";
 import ReviewCard from "@/components/cards/review-card";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import AppointmenntModal from "@/components/modals/appointment-modal";
@@ -13,6 +14,9 @@ import React, { Suspense } from "react";
 
 const page = ({ params }: { params: { doctorId: string } }) => {
   const { data, isPending } = useGetDoctorById(params.doctorId);
+  const { data: reviewData, isPending: isPendingReviews } =
+    useGetReviewsByDoctorId(params.doctorId);
+
   return (
     <>
       <main>
@@ -71,7 +75,7 @@ const page = ({ params }: { params: { doctorId: string } }) => {
                         doctorId={params.doctorId}
                         hospitalId={data?.HospitalId}
                       />
-                      <ReviewModal type="Doctor" />
+                      <ReviewModal type="Doctor" doctorId={params.doctorId} />
                     </div>
                     <div className="w-full lg:w-4/12 px-4 lg:order-1">
                       <div className="flex justify-center py-4 lg:pt-4 pt-8">
@@ -137,12 +141,14 @@ const page = ({ params }: { params: { doctorId: string } }) => {
           </div>
 
           <div className="flex gap-6 flex-wrap mt-20">
-            <Suspense fallback={<CardSkeleton />}>
+            {/* <Suspense fallback={<CardSkeleton />}>
               <ReviewCard />
               <ReviewCard />
               <ReviewCard />
               <ReviewCard />
-            </Suspense>
+            </Suspense> */}
+            {reviewData &&
+              reviewData?.map((review: any) => <ReviewCard key={review.id} review={review}/>)}
           </div>
         </section>
       </main>

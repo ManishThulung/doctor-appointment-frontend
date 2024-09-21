@@ -23,6 +23,10 @@ import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Flex, Rate } from "antd";
+import Loading from "../loaders/loading";
+import { useCreateReview } from "@/api/review";
+import { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
 const formSchema = z.object({
   review: z.string().min(2).max(50),
@@ -30,9 +34,11 @@ const formSchema = z.object({
 
 interface IProps {
   type: "Doctor" | "Hospital";
+  doctorId: string;
 }
 
-const ReviewModal: FC<IProps> = ({ type }) => {
+const ReviewModal: FC<IProps> = ({ type, doctorId }) => {
+  const { mutateAsync, isPending } = useCreateReview();
   const [value, setValue] = useState<number>(0);
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
@@ -43,13 +49,25 @@ const ReviewModal: FC<IProps> = ({ type }) => {
     },
   });
   const handleChange = (rating: number) => {
-    console.log(rating, "rating");
     setValue(rating);
   };
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const data = {
+      rating: value,
+      review: values.review,
+      doctorId,
+    };
+    try {
+      const res: AxiosResponse = await mutateAsync(data);
+      if (res.data?.success) {
+        toast.success(res.data?.message);
+        form.reset();
+        setValue(0);
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message);
+    }
   }
   return (
     <Dialog>
@@ -90,8 +108,13 @@ const ReviewModal: FC<IProps> = ({ type }) => {
               )}
             />
             <div className="flex gap-5 w-full">
-              <Button className="w-full" type="submit">
-                Submit
+              <Button type="submit" className={"w-full"}>
+                Confirm
+                {isPending && (
+                  <div className="ml-2">
+                    <Loading />
+                  </div>
+                )}
               </Button>
               <DialogTrigger asChild>
                 <Button className="w-full" variant={"destructive"}>
