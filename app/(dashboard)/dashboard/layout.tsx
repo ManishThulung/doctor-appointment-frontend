@@ -1,12 +1,15 @@
+"use client";
+
 import { sidebarMenus } from "@/components/sidebar";
 import Sidebar from "@/components/sidebar/Sidebar";
+import { useAuthContext } from "@/context/auth-provider";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const role = "admin";
+  const { role } = useAuthContext();
 
   const filteredMenu = sidebarMenus
     .filter((menu) => menu.roles.includes(role))

@@ -3,44 +3,57 @@
 import { useLogin } from "@/api/auth.api";
 import { FormInput } from "@/components/forms/molecules/form-input";
 import Loading from "@/components/loaders/loading";
-import { AxiosError, AxiosResponse } from "axios";
+import { useAuthContext } from "@/context/auth-provider";
+import { Role } from "@/types/enums.types";
+import { AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export type RegistrationFormFields = {
+export type LoginFormFields = {
   password: string;
   email: string;
 };
 
-export const emailPattern = {
+export const emailPattern: any = {
   value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
   message: "Enter a valid email address.",
 };
 
-const login = () => {
+// export const emailPattern: RegisterOptions = {
+//   pattern: {
+//     value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
+//     message: "Enter a valid email address.",
+//   },
+// };
+
+const Login = () => {
   const router = useRouter();
   const { mutateAsync, isPending } = useLogin();
+  const {setIsAuth, setRole} = useAuthContext()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegistrationFormFields>();
+  } = useForm<LoginFormFields>();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      console.log(data, "data");
       const res: AxiosResponse = await mutateAsync(data);
-      console.log(res, "res");
-      if (res.status === 200) {
-        toast.success(res.data.message);
-        router.push("/");
+      if (res.data?.success) {
+        setIsAuth(res.data?.success);
+        setRole(res?.data?.user?.role);
+        if (res?.data?.user?.role == Role.SuperAdmin) {
+          router.push("/dashboard");
+        } else {
+          router.push("/");
+        }
       }
     } catch (error: any) {
-      toast.error(error.message);
+      toast.error(error.response.data.message);
     }
   });
   return (
@@ -64,7 +77,7 @@ const login = () => {
                 </p>
               </div>
 
-              <FormInput<RegistrationFormFields>
+              <FormInput<LoginFormFields>
                 id="email"
                 type="email"
                 name="email"
@@ -79,7 +92,7 @@ const login = () => {
                 errors={errors}
               />
 
-              <FormInput<RegistrationFormFields>
+              <FormInput<LoginFormFields>
                 id="password"
                 type="password"
                 name="password"
@@ -188,4 +201,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

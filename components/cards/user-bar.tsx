@@ -13,9 +13,9 @@ import { FC } from "react";
 import LogoutModal from "../modals/logout-modal";
 
 interface IProps {
-  token: string;
+  name?: string;
 }
-const Userbar: FC<IProps> = ({ token }) => {
+const Userbar: FC<IProps> = ({ name }) => {
   return (
     <Menubar className="border-none">
       <MenubarMenu>
@@ -27,15 +27,17 @@ const Userbar: FC<IProps> = ({ token }) => {
         </MenubarTrigger>
         <MenubarContent>
           <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
+            <MenubarRadioItem value="andy">
+              {name == "ram" ? name : "hari"}
+            </MenubarRadioItem>
+            {/* <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
+            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem> */}
           </MenubarRadioGroup>
           <MenubarSeparator />
-          <MenubarItem className="cursor-pointer" inset>
+          {/* <MenubarItem className="cursor-pointer" inset>
             Edit...
           </MenubarItem>
-          <MenubarSeparator />
+          <MenubarSeparator /> */}
           <div className="pl-8">
             <LogoutModal type="user" />
           </div>

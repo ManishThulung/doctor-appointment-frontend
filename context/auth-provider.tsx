@@ -1,55 +1,71 @@
-// "use client";
+"use client";
 
-// import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-// export interface AuthType {
-//   user: any;
-//   setUser: React.Dispatch<React.SetStateAction<any>>;
-// }
-// interface AuthProviderProps {
-//   children: React.ReactNode;
-// }
+export interface AuthType {
+  isAuth: boolean;
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  role: string;
+  setRole: React.Dispatch<React.SetStateAction<string>>;
+}
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
 
-// export const AuthContext = createContext<AuthType>({
-//   user: "",
-//   setUser: () => {
-//     return;
-//   },
-// });
+export const AuthContext = createContext<AuthType>({
+  isAuth: false,
+  setIsAuth: () => {
+    return;
+  },
+  role: "",
+  setRole: () => {
+    return;
+  },
+});
 
-// const AuthContextProvider = ({ children }: AuthProviderProps) => {
-//   const storedUserData = localStorage.getItem("user");
-//   const initialUser: string = storedUserData
-//     ? (JSON.parse(storedUserData) as string)
-//     : "";
+const AuthContextProvider = ({ children }: AuthProviderProps) => {
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [role, setRole] = useState<string>("");
+  useEffect(() => {
+    const storedAuth = localStorage.getItem("isAuth");
+    const isAuthenticated = storedAuth ? JSON.parse(storedAuth) : false;
+    setIsAuth(isAuthenticated);
+    const storedRole = localStorage.getItem("role");
+    const role = storedRole ? JSON.parse(storedRole) : "";
+    setIsAuth(role);
+  }, []);
 
-//   const [user, setUser] = useState<string>(initialUser);
+  // Update local storage whenever the user state changes.
+  useEffect(() => {
+    localStorage.setItem("isAuth", JSON.stringify(isAuth));
+  }, [isAuth]);
 
-//   // Update local storage whenever the user state changes.
-//   useEffect(() => {
-//     localStorage.setItem("user", JSON.stringify(user));
-//   }, [user]);
+  useEffect(() => {
+    localStorage.setItem("role", JSON.stringify(role));
+  }, [role]);
 
-//   return (
-//     <AuthContext.Provider
-//       value={{
-//         user,
-//         setUser,
-//       }}
-//     >
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
+  return (
+    <AuthContext.Provider
+      value={{
+        isAuth,
+        setIsAuth,
+        role,
+        setRole,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-// const useAuthContext = () => {
-//   const context = useContext(AuthContext);
+const useAuthContext = () => {
+  const context = useContext(AuthContext);
 
-//   if (context) {
-//     return context;
-//   }
+  if (context) {
+    return context;
+  }
 
-//   throw new Error(`useAuthContext must be used within a AuthContextProvider`);
-// };
+  throw new Error(`useAuthContext must be used within a AuthContextProvider`);
+};
 
-// export { AuthContextProvider, useAuthContext };
+export { AuthContextProvider, useAuthContext };
