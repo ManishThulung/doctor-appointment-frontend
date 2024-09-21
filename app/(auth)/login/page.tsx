@@ -7,7 +7,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { RegisterOptions, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export type RegistrationFormFields = {
@@ -15,12 +15,19 @@ export type RegistrationFormFields = {
   email: string;
 };
 
-export const emailPattern = {
+export const emailPattern: any = {
   value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
   message: "Enter a valid email address.",
 };
 
-const login = () => {
+// export const emailPattern: RegisterOptions = {
+//   pattern: {
+//     value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
+//     message: "Enter a valid email address.",
+//   },
+// };
+
+const Login = () => {
   const router = useRouter();
   const { mutateAsync, isPending } = useLogin();
 
@@ -188,4 +195,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
