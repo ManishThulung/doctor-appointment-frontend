@@ -54,7 +54,7 @@ const login = () => {
                   Sign in
                 </h3>
                 <p className="text-sm mt-4 text-gray-800">
-                  Don't have an account{" "}
+                  Don&apos;t have an account
                   <Link
                     href="/register"
                     className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
