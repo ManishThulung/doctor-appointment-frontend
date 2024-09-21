@@ -8,6 +8,7 @@ import { Role } from "@/types/enums.types";
 import { AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -16,18 +17,22 @@ export type LoginFormFields = {
   email: string;
 };
 
-export const emailPattern = {
-  value: new RegExp(
-    "^[a-zA-Z][a-zA-Z0-9._-]*@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$",
-    "i"
-  ),
+export const emailPattern: any = {
+  value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
   message: "Enter a valid email address.",
 };
 
-const login = () => {
-  const { setIsAuth, setRole } = useAuthContext();
+// export const emailPattern: RegisterOptions = {
+//   pattern: {
+//     value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
+//     message: "Enter a valid email address.",
+//   },
+// };
+
+const Login = () => {
   const router = useRouter();
   const { mutateAsync, isPending } = useLogin();
+  const {setIsAuth, setRole} = useAuthContext()
 
   const {
     register,
@@ -62,7 +67,7 @@ const login = () => {
                   Sign in
                 </h3>
                 <p className="text-sm mt-4 text-gray-800">
-                  Don't have an account?{" "}
+                  Don&apos;t have an account
                   <Link
                     href="/register"
                     className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
@@ -196,4 +201,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
