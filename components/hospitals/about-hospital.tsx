@@ -40,7 +40,7 @@ const AboutHospital: FC<IProps> = ({ hospitalId }) => {
                         </h2>
                         <p className="text-gray-700 text-base font-normal leading-relaxed lg:text-start text-center">
                           Our achievement story is a testament to teamwork and
-                          perseverance. Together, we've overcome challenges,
+                          perseverance. Together, we&apos;ve overcome challenges,
                           celebrated victories, and created a narrative of
                           progress and success.
                         </p>

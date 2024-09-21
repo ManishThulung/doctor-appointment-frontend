@@ -29,7 +29,7 @@ export const passwordPattern = {
     "Password must include one special character and be at least 4 characters long.",
 };
 
-const page = () => {
+const Register = () => {
   const router = useRouter();
   const { mutateAsync, isPending } = useRegister();
 
@@ -201,4 +201,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Register;

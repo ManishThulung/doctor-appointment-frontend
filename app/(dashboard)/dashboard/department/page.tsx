@@ -22,7 +22,7 @@ export const columns: ColumnDef<IDepartment>[] = [
   createColumn("action", "Action"),
 ];
 
-const page = () => {
+const Department = () => {
   const { data, isPending } = useGetDepartment();
   if (isPending) {
     return (
@@ -49,4 +49,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Department;

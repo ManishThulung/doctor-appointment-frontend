@@ -28,7 +28,7 @@ export const columns: ColumnDef<IHospital>[] = [
   createColumn("action", "Action"),
 ];
 
-const page = () => {
+const Hospital = () => {
   const { data, isPending } = useGetHospitalsAdmin();
   if (isPending) {
     return (
@@ -54,4 +54,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Hospital;
