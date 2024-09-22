@@ -218,7 +218,7 @@ const AboutSection = () => {
                 About Us
               </h2>
               <p className="font-normal text-xl leading-8 text-gray-500 max-lg:text-center max-w-2xl mx-auto">
-                Driven by a passion for seamless user experiences, we've
+                Driven by a passion for seamless user experiences, we&apos;ve
                 meticulously curated pagedone to empower creators, designers,
                 and developers alike. Our mission is to provide a comprehensive
                 toolkit, enabling you to build intuitive, beautiful interfaces
@@ -250,7 +250,7 @@ const ResultsSection = () => {
                   Health Care Growth
                 </h4>
                 <p className="text-xs text-gray-500 leading-5">
-                  Company's remarkable growth journey as we continually innovate
+                  Company&apos;s remarkable growth journey as we continually innovate
                   and drive towards new heights of success.
                 </p>
               </div>
@@ -304,7 +304,7 @@ const SubscribeSection = () => {
           </h2>
           <p className="text-indigo-200 text-center mb-11 max-lg:max-w-2xl mx-auto">
             Join our community of subscribers and receive regular updates
-            delivered straight to your inbox. It's quick, easy, and free
+            delivered straight to your inbox. It&apos;s quick, easy, and free
           </p>
           <div className="max-w-md mx-auto lg:bg-transparent lg:border border-gray-300 rounded-3xl max-lg:py-3 lg:rounded-full lg:h-12 lg:p-1.5 lg:flex-row gap-6 lg:gap-0 flex-col flex items-center justify-between">
             <input

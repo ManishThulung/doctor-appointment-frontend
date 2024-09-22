@@ -8,6 +8,7 @@ import {
   UseFormRegister,
   Path,
   FieldValues,
+  ValidationRule,
 } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { Input, InputProps } from "../atoms/input";
@@ -18,7 +19,7 @@ export type FormInputProps<TFormValues extends FieldValues> = {
   rules?: RegisterOptions<TFormValues, Path<TFormValues>>;
   register?: UseFormRegister<TFormValues>;
   errors?: Partial<DeepMap<TFormValues, FieldError>>;
-} & Omit<InputProps, "name">;
+} & Omit<InputProps, "name">;;
 
 export const FormInput = <TFormValues extends Record<string, unknown>>({
   name,

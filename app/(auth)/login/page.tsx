@@ -9,7 +9,7 @@ import { AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, ValidationRule } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export type LoginFormFields = {
@@ -17,22 +17,20 @@ export type LoginFormFields = {
   email: string;
 };
 
-export const emailPattern: any = {
-  value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
+// export const emailPattern: any = {
+//   value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
+//   message: "Enter a valid email address.",
+// };
+
+export const emailPattern: ValidationRule<RegExp> = {
+  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/i,
   message: "Enter a valid email address.",
 };
-
-// export const emailPattern: RegisterOptions = {
-//   pattern: {
-//     value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
-//     message: "Enter a valid email address.",
-//   },
-// };
 
 const Login = () => {
   const router = useRouter();
   const { mutateAsync, isPending } = useLogin();
-  const {setIsAuth, setRole} = useAuthContext()
+  const { setIsAuth, setRole } = useAuthContext();
 
   const {
     register,

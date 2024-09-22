@@ -3,6 +3,9 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
+///////////////////////////////////////////
+///// this is causing a build error////////
+///////////////////////////////////////////
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url

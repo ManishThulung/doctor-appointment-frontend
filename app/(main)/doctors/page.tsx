@@ -5,7 +5,7 @@ import DoctorCard from "@/components/cards/doctor-card";
 import { MultipleCardSkeleton } from "@/components/loaders/multiple-card-skeleton";
 import React from "react";
 
-const page = () => {
+const Doctor = () => {
   const { data, isPending } = useGetDoctors();
   if (isPending) {
     return <MultipleCardSkeleton />;
@@ -29,4 +29,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Doctor;
