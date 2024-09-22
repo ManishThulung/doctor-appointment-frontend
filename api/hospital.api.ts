@@ -1,4 +1,9 @@
-import { useFetch, usePost, useUpdate } from "@/react-query/react-query";
+import {
+  useFetch,
+  useFetchConditional,
+  usePost,
+  useUpdate,
+} from "@/react-query/react-query";
 
 export const useGetHospitals = () => {
   const response: any = useFetch(`hospital`);
@@ -17,6 +22,16 @@ export const useGetHospitalById = (id: string) => {
 // super-admin
 export const useGetHospitalsAdmin = () => {
   const response: any = useFetch(`hospital/admin`);
+  return {
+    ...response,
+  };
+};
+export const useGetHospitalsCount = (option: boolean) => {
+  const response: any = useFetchConditional(
+    `hospital/count/hospital`,
+    undefined,
+    option
+  );
   return {
     ...response,
   };

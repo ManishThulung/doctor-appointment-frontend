@@ -33,6 +33,20 @@ export const useFetch = <T>(
   return context;
 };
 
+export const useFetchConditional = <T>(
+  url: string | null,
+  params?: object,
+  options?: boolean
+) => {
+  const context = useQuery<T, Error, T, QueryKeyT>({
+    queryKey: [url!, params],
+    queryFn: ({ queryKey }) => fetcher({ queryKey }),
+    enabled: options,
+  });
+
+  return context;
+};
+
 // export const useLoadMore = <T>(url: string | null, params?: object) => {
 //   const context = useInfiniteQuery<
 //     GetInfinitePagesInterface<T>,

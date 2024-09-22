@@ -24,16 +24,17 @@ export const AuthContext = createContext<AuthType>({
 });
 
 const AuthContextProvider = ({ children }: AuthProviderProps) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [role, setRole] = useState<string>("");
-  useEffect(() => {
+  // Initialize state with localStorage values or defaults
+  // directly read from localStorage when the component mounts to ensures that the values are read before the first render.
+  const [isAuth, setIsAuth] = useState<boolean>(() => {
     const storedAuth = localStorage.getItem("isAuth");
-    const isAuthenticated = storedAuth ? JSON.parse(storedAuth) : false;
-    setIsAuth(isAuthenticated);
+    return storedAuth ? JSON.parse(storedAuth) : false;
+  });
+
+  const [role, setRole] = useState<string>(() => {
     const storedRole = localStorage.getItem("role");
-    const role = storedRole ? JSON.parse(storedRole) : "";
-    setIsAuth(role);
-  }, []);
+    return storedRole ? JSON.parse(storedRole) : "";
+  });
 
   // Update local storage whenever the user state changes.
   useEffect(() => {

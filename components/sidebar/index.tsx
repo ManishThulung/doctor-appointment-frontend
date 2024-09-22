@@ -2,10 +2,16 @@ import { Role } from "@/types/enums.types";
 import { FaStar } from "react-icons/fa";
 export const sidebarMenus = [
   {
-    label: "Doctor",
-    path: "doctor",
+    label: "Dashboard",
+    path: "/",
     icon: <FaStar />,
-    roles: ["admin"],
+    roles: [Role.SuperAdmin, Role.Admin, Role.Doctor],
+  },
+  {
+    label: "Department",
+    path: "department",
+    icon: <FaStar />,
+    roles: [Role.SuperAdmin],
   },
   {
     label: "Hospital",
@@ -13,6 +19,13 @@ export const sidebarMenus = [
     icon: <FaStar />,
     roles: [Role.SuperAdmin],
   },
+  {
+    label: "Doctor",
+    path: "doctor",
+    icon: <FaStar />,
+    roles: ["admin"],
+  },
+
   {
     label: "Appointment",
     path: "appointment",
@@ -38,11 +51,5 @@ export const sidebarMenus = [
     path: "patient",
     icon: <FaStar />,
     roles: ["admin", "doctor"],
-  },
-  {
-    label: "Department",
-    path: "department",
-    icon: <FaStar />,
-    roles: [Role.SuperAdmin],
   },
 ];
