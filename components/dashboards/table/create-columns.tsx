@@ -79,7 +79,7 @@ export const createColumn = <T extends object>(
   key: keyof T,
   headerName: string,
   isUppercase = false
-): ColumnDef<T> => ({
+): ColumnDef<T, any> => ({
   accessorKey: key,
   header: ({ column }) => (
     <DataTableColumnHeader column={column} title={headerName} />
