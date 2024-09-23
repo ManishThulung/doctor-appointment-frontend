@@ -14,13 +14,13 @@ export const useCreateAppointment = () => {
 
 export const useGetAppointments = (role: string) => {
   let response: any;
-  if (role === Role.Doctor) {
+  if (role === Role.Admin) {
     response = useFetch(`appointment`, undefined);
     return {
       ...response,
     };
   }
-  if (role === Role.Admin) {
+  if (role === Role.Doctor) {
     response = useFetch(`appointment/doctor`, undefined);
     return {
       ...response,

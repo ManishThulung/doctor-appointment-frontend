@@ -72,7 +72,6 @@ export const useHospitalLogin = () => {
     undefined
     // updater
   );
-  console.log(response, "hospital login");
   return {
     ...response,
   };

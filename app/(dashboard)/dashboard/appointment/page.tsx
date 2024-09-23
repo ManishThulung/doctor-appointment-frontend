@@ -7,7 +7,7 @@ import { AppointmentStatus } from "@/types/enums.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Skeleton } from "antd";
 
-interface IDoctor {
+interface IAppointment {
   patientName: string;
   doctorName: string;
   patientGender: string;
@@ -16,7 +16,7 @@ interface IDoctor {
   status: AppointmentStatus;
 }
 
-export const columns: ColumnDef<IDoctor>[] = [
+export const columns: ColumnDef<IAppointment>[] = [
   createColumn("patientName", "Patient Name"),
   createColumn("patientGender", "Patient Gender"),
   createColumn("doctorName", "Doctor Name"),
@@ -61,7 +61,7 @@ const Appointments = () => {
       {data && serelizedData && (
         <>
           <div className="w-full mx-auto py-10">
-            <DataTable<IDoctor, any>
+            <DataTable<IAppointment, any>
               columns={columns}
               data={serelizedData}
               filterBy="name"

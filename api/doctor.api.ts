@@ -1,4 +1,8 @@
-import { useFetch, useFetchConditional, usePost } from "@/react-query/react-query";
+import {
+  useFetch,
+  useFetchConditional,
+  usePost,
+} from "@/react-query/react-query";
 
 export const useGetDoctors = () => {
   const response: any = useFetch(`doctor`);
@@ -51,6 +55,13 @@ export const useGetDoctorsCount = (option: boolean) => {
 // hospital admin
 export const useGetDoctorByHospitalIdAdmin = () => {
   const response: any = useFetch(`doctor/hospital/admin`);
+  return {
+    ...response,
+  };
+};
+
+export const useDoctorLogin = () => {
+  const response = usePost(`doctor/login`, undefined);
   return {
     ...response,
   };
