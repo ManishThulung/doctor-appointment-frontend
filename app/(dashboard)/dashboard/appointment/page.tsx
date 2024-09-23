@@ -25,7 +25,7 @@ export const columns: ColumnDef<IDoctor>[] = [
   createColumn("status", "Status"),
 ];
 
-const Patient = () => {
+const Appointments = () => {
   const { role } = useAuthContext();
   const { data, isPending } = useGetAppointments(role);
 
@@ -73,4 +73,4 @@ const Patient = () => {
   );
 };
 
-export default Patient;
+export default Appointments;

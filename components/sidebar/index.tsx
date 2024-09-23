@@ -31,20 +31,20 @@ export const sidebarMenus = [
     path: "appointment",
     icon: <FaStar />,
     roles: [Role.Admin, Role.Doctor],
-    children: [
-      {
-        label: "Hospitals",
-        path: Role.Doctor,
-        icon: <FaStar />,
-        roles: [Role.Admin],
-      },
-      {
-        label: "hahas",
-        path: Role.Doctor,
-        icon: <FaStar />,
-        roles: [Role.Admin, Role.Doctor],
-      },
-    ],
+    // children: [
+    //   {
+    //     label: "Hospitals",
+    //     path: Role.Doctor,
+    //     icon: <FaStar />,
+    //     roles: [Role.Admin],
+    //   },
+    //   {
+    //     label: "hahas",
+    //     path: Role.Doctor,
+    //     icon: <FaStar />,
+    //     roles: [Role.Admin, Role.Doctor],
+    //   },
+    // ],
   },
   {
     label: "Patient",
