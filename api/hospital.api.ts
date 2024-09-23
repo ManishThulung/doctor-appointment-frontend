@@ -65,3 +65,15 @@ export const useVerifyHospital = (id: string, email: string) => {
     ...response,
   };
 };
+
+export const useHospitalLogin = () => {
+  const response = usePost(
+    `hospital/login/admin`,
+    undefined
+    // updater
+  );
+  console.log(response, "hospital login");
+  return {
+    ...response,
+  };
+};

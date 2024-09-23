@@ -130,6 +130,22 @@ export const createColumn = <T extends object>(
           />
         </div>
       );
+    }
+    else if (key === "avatar") {
+      return (
+        <div className="ml-4 w-16 h-16  rounded-md flex items-center justify-center overflow-hidden">
+          <Image
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${
+              (row.original as any)?.avatar?.filename
+            }`}
+            alt={(row.original as any)?.name}
+            className="w-full h-full object-cover"
+            width={50}
+            height={50}
+            style={{ width: "auto", height: "auto" }}
+          />
+        </div>
+      );
     } else if (
       key == "isEmailVerified" ||
       key === "isVerified" ||

@@ -23,26 +23,26 @@ export const sidebarMenus = [
     label: "Doctor",
     path: "doctor",
     icon: <FaStar />,
-    roles: ["admin"],
+    roles: [Role.Admin],
   },
 
   {
     label: "Appointment",
     path: "appointment",
     icon: <FaStar />,
-    roles: ["admin", "doctor"],
+    roles: [Role.Admin, Role.Doctor],
     children: [
       {
         label: "Hospitals",
-        path: "doctor",
+        path: Role.Doctor,
         icon: <FaStar />,
-        roles: ["admin"],
+        roles: [Role.Admin],
       },
       {
         label: "hahas",
-        path: "doctor",
+        path: Role.Doctor,
         icon: <FaStar />,
-        roles: ["admin", "doctor"],
+        roles: [Role.Admin, Role.Doctor],
       },
     ],
   },
@@ -50,6 +50,6 @@ export const sidebarMenus = [
     label: "Patient",
     path: "patient",
     icon: <FaStar />,
-    roles: ["admin", "doctor"],
+    roles: [Role.Admin, Role.Doctor],
   },
 ];

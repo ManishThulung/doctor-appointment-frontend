@@ -1,175 +1,59 @@
-import { User, columns } from "./columns";
-import { DataTable } from "./data-table";
+"use client";
 
-async function getData(): Promise<User[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "ram",
-      email: "ram@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "a@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      age: 100,
-      name: "pending",
-      email: "m@example.com",
-    },
-    // ...
-  ];
+import { useGetDoctorByHospitalIdAdmin } from "@/api/doctor.api";
+import CreateDepartment from "@/components/dashboards/forms/create-department";
+import { createColumn } from "@/components/dashboards/table/create-columns";
+import { DataTable } from "@/components/dashboards/table/data-table";
+import { CardSkeleton } from "@/components/loaders/card-skeleton";
+import { ImageData } from "@/types/utils.types";
+import { ColumnDef } from "@tanstack/react-table";
+import { NextPage } from "next";
+
+interface IDoctor {
+  name: string;
+  avatar: ImageData;
+  isEmailVerified: boolean;
+  isVerified: boolean;
+  action?: any;
 }
 
-export default async function DemoPage() {
-  const data = await getData();
+export const columns: ColumnDef<IDoctor>[] = [
+  createColumn("avatar", "Avatar"),
+  createColumn("name", "Name"),
+  createColumn("isEmailVerified", "IsEmailVerified"),
+  createColumn("isVerified", "IsVerified"),
+  createColumn("action", "Action"),
+];
+
+const Doctor: NextPage = () => {
+  const { data, isPending } = useGetDoctorByHospitalIdAdmin();
+  if (isPending) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <CardSkeleton />
+      </div>
+    );
+  }
 
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
-    </div>
+    <>
+      {data && (
+        <>
+          <div className="flex justify-between flex-row">
+            <h2 className="font-semibold text-3xl">Department</h2>
+            <CreateDepartment />
+          </div>
+          <div className="w-full mx-auto py-10">
+            <DataTable<IDoctor, any>
+              columns={columns}
+              data={data}
+              filterBy="name"
+            />
+          </div>
+        </>
+      )}
+    </>
   );
-}
+};
+
+export default Doctor;

@@ -3,12 +3,12 @@
 import { createColumn } from "@/components/dashboards/table/create-columns";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
-import { DataTable } from "../doctor/data-table";
 import CreateDepartment from "@/components/dashboards/forms/create-department";
 import { useGetDepartment } from "@/api/dashboard/department.api";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import { ImageData } from "@/types/utils.types";
 import { NextPage } from "next";
+import { DataTable } from "@/components/dashboards/table/data-table";
 
 interface IDepartment {
   name: string;
