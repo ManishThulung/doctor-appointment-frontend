@@ -1,12 +1,29 @@
-import { usePost } from "@/react-query/react-query";
+import { useFetch, usePost } from "@/react-query/react-query";
+import { Role } from "@/types/enums.types";
 
 export const useCreateAppointment = () => {
   const response = usePost(
-    `doctor/appointment`,
+    `appointment`,
     undefined
     // updater
   );
   return {
     ...response,
   };
+};
+
+export const useGetAppointments = (role: string) => {
+  let response: any;
+  if (role === Role.Admin) {
+    response = useFetch(`appointment`, undefined);
+    return {
+      ...response,
+    };
+  }
+  if (role === Role.Doctor) {
+    response = useFetch(`appointment/doctor`, undefined);
+    return {
+      ...response,
+    };
+  }
 };

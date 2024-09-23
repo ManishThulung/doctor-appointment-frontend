@@ -1,12 +1,11 @@
 "use client";
 
-import { useGetHospitals } from "@/api/hospital.api";
+import { useGetHospitalsAdmin } from "@/api/hospital.api";
 import { createColumn } from "@/components/dashboards/table/create-columns";
+import { DataTable } from "@/components/dashboards/table/data-table";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import { ImageData } from "@/types/utils.types";
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTable } from "../doctor/data-table";
-import { useGetHospitalsAdmin } from "../../../../api/hospital.api";
 
 interface IHospital {
   name: string;
@@ -28,7 +27,7 @@ export const columns: ColumnDef<IHospital>[] = [
   createColumn("action", "Action"),
 ];
 
-const page = () => {
+const Hospital = () => {
   const { data, isPending } = useGetHospitalsAdmin();
   if (isPending) {
     return (
@@ -54,4 +53,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Hospital;

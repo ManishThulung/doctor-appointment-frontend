@@ -3,11 +3,12 @@
 import { createColumn } from "@/components/dashboards/table/create-columns";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
-import { DataTable } from "../doctor/data-table";
 import CreateDepartment from "@/components/dashboards/forms/create-department";
 import { useGetDepartment } from "@/api/dashboard/department.api";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import { ImageData } from "@/types/utils.types";
+import { NextPage } from "next";
+import { DataTable } from "@/components/dashboards/table/data-table";
 
 interface IDepartment {
   name: string;
@@ -15,6 +16,7 @@ interface IDepartment {
   description: string;
   action?: any;
 }
+
 export const columns: ColumnDef<IDepartment>[] = [
   createColumn("image", "Image"),
   createColumn("name", "Name"),
@@ -22,7 +24,7 @@ export const columns: ColumnDef<IDepartment>[] = [
   createColumn("action", "Action"),
 ];
 
-const page = () => {
+const Department: NextPage = () => {
   const { data, isPending } = useGetDepartment();
   if (isPending) {
     return (
@@ -41,7 +43,11 @@ const page = () => {
             <CreateDepartment />
           </div>
           <div className="w-full mx-auto py-10">
-            <DataTable columns={columns} data={data} filterBy="name" />
+            <DataTable<IDepartment, any>
+              columns={columns}
+              data={data}
+              filterBy="name"
+            />
           </div>
         </>
       )}
@@ -49,4 +55,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Department;

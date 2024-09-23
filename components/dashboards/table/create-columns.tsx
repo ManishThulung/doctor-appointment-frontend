@@ -79,7 +79,7 @@ export const createColumn = <T extends object>(
   key: keyof T,
   headerName: string,
   isUppercase = false
-): ColumnDef<T> => ({
+): ColumnDef<T, any> => ({
   accessorKey: key,
   header: ({ column }) => (
     <DataTableColumnHeader column={column} title={headerName} />
@@ -130,10 +130,42 @@ export const createColumn = <T extends object>(
           />
         </div>
       );
-    } else if (
+    }
+    else if (key === "avatar") {
+      return (
+        <div className="ml-4 w-16 h-16  rounded-md flex items-center justify-center overflow-hidden">
+          <Image
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${
+              (row.original as any)?.avatar?.filename
+            }`}
+            alt={(row.original as any)?.name}
+            className="w-full h-full object-cover"
+            width={50}
+            height={50}
+            style={{ width: "auto", height: "auto" }}
+          />
+        </div>
+      );
+    }
+    // else if (key === "status") {
+    //   return (
+    //     <div className="ml-4 w-16 h-16  rounded-md flex items-center justify-center overflow-hidden">
+    //       <Image
+    //         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${
+    //           (row.original as any)?.avatar?.filename
+    //         }`}
+    //         alt={(row.original as any)?.name}
+    //         className="w-full h-full object-cover"
+    //         width={50}
+    //         height={50}
+    //         style={{ width: "auto", height: "auto" }}
+    //       />
+    //     </div>
+    //   );
+    // } 
+    else if (
       key == "isEmailVerified" ||
-      key === "isVerified" ||
-      key === "status"
+      key === "isVerified" 
     ) {
       return (
         <Switch checked={row.original[key] as boolean} disabled aria-readonly />

@@ -131,3 +131,41 @@ export function getAppointmentSchema(type: string) {
       return ScheduleAppointmentSchema;
   }
 }
+
+export const LoginFormValidation = z.object({
+  password: z
+    .string()
+    .min(4, "password must be at least 4 characters")
+    .max(15, "password must be at most 15 characters"),
+  email: z.string().email("Invalid email address"),
+});
+
+export const namePattern = {
+  value: new RegExp("^[A-Za-z][A-Za-zs]*$"),
+  message: "Name must only include valid words.",
+};
+
+export const passwordPattern = {
+  value: /^(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z0-9!@#$%^&*(),.?":{}|<>]{4,}$/,
+  message:
+    "Password must include one special character and be at least 4 characters long.",
+};
+
+// export const emailPattern: any = {
+//   value: new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$", "ig"),
+//   message: "Enter a valid email address.",
+// };
+
+export const RegisterFormValidation = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be at most 50 characters")
+    .regex(namePattern.value, namePattern.message),
+  password: z
+    .string()
+    .min(4, "password must be at least 4 characters")
+    .max(15, "password must be at most 15 characters")
+    .regex(passwordPattern.value, passwordPattern.message),
+  email: z.string().email("Invalid email address"),
+});

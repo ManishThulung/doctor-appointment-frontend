@@ -7,12 +7,10 @@ import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import AppointmenntModal from "@/components/modals/appointment-modal";
 import { PdfRenderModal } from "@/components/modals/pdf-render-modal";
 import ReviewModal from "@/components/modals/review-modal";
-import { Button } from "@/components/ui/button";
 import { Rate } from "antd";
 import Image from "next/image";
-import React, { Suspense } from "react";
 
-const page = ({ params }: { params: { doctorId: string } }) => {
+const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
   const { data, isPending } = useGetDoctorById(params.doctorId);
   const { data: reviewData, isPending: isPendingReviews } =
     useGetReviewsByDoctorId(params.doctorId);
@@ -54,7 +52,7 @@ const page = ({ params }: { params: { doctorId: string } }) => {
           </div>
         </section>
         <section className="relative py-16 bg-blueGray-200">
-          <div className="max-w-[1300px] mx-auto px-4">
+           <div className="max-w-[1300px] mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
               {!isPending && data ? (
                 <div className="px-6">
@@ -92,7 +90,7 @@ const page = ({ params }: { params: { doctorId: string } }) => {
                         </div>
                         <div className="lg:mr-4 p-3 text-center">
                           {data?.certificate && (
-                            <PdfRenderModal src={data?.certificate.filename} />
+                            <PdfRenderModal src={data?.certificate?.filename} />
                           )}
                         </div>
                       </div>
@@ -104,7 +102,7 @@ const page = ({ params }: { params: { doctorId: string } }) => {
                     </h3>
                     <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                       <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                      {data.address}
+                      {data?.address}
                     </div>
                     <div className="mb-2 text-blueGray-600 mt-5">
                       <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
@@ -156,4 +154,4 @@ const page = ({ params }: { params: { doctorId: string } }) => {
   );
 };
 
-export default page;
+export default DoctorPage;

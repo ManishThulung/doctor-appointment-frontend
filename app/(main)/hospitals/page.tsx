@@ -4,7 +4,7 @@ import { useGetHospitals } from "@/api/hospital.api";
 import HospitalCard from "@/components/cards/hospital-card";
 import { MultipleCardSkeleton } from "@/components/loaders/multiple-card-skeleton";
 
-const page = () => {
+const Hospital = () => {
   const { data, isPending } = useGetHospitals();
   if (isPending) {
     return <MultipleCardSkeleton />;
@@ -28,4 +28,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Hospital;

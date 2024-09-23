@@ -2,10 +2,16 @@ import { Role } from "@/types/enums.types";
 import { FaStar } from "react-icons/fa";
 export const sidebarMenus = [
   {
-    label: "Doctor",
-    path: "doctor",
+    label: "Dashboard",
+    path: "/",
     icon: <FaStar />,
-    roles: ["admin"],
+    roles: [Role.SuperAdmin, Role.Admin, Role.Doctor],
+  },
+  {
+    label: "Department",
+    path: "department",
+    icon: <FaStar />,
+    roles: [Role.SuperAdmin],
   },
   {
     label: "Hospital",
@@ -14,35 +20,36 @@ export const sidebarMenus = [
     roles: [Role.SuperAdmin],
   },
   {
+    label: "Doctor",
+    path: "doctor",
+    icon: <FaStar />,
+    roles: [Role.Admin],
+  },
+
+  {
     label: "Appointment",
     path: "appointment",
     icon: <FaStar />,
-    roles: ["admin", "doctor"],
-    children: [
-      {
-        label: "Hospitals",
-        path: "doctor",
-        icon: <FaStar />,
-        roles: ["admin"],
-      },
-      {
-        label: "hahas",
-        path: "doctor",
-        icon: <FaStar />,
-        roles: ["admin", "doctor"],
-      },
-    ],
+    roles: [Role.Admin, Role.Doctor],
+    // children: [
+    //   {
+    //     label: "Hospitals",
+    //     path: Role.Doctor,
+    //     icon: <FaStar />,
+    //     roles: [Role.Admin],
+    //   },
+    //   {
+    //     label: "hahas",
+    //     path: Role.Doctor,
+    //     icon: <FaStar />,
+    //     roles: [Role.Admin, Role.Doctor],
+    //   },
+    // ],
   },
   {
     label: "Patient",
     path: "patient",
     icon: <FaStar />,
-    roles: ["admin", "doctor"],
-  },
-  {
-    label: "Department",
-    path: "department",
-    icon: <FaStar />,
-    roles: [Role.SuperAdmin],
+    roles: [Role.Admin, Role.Doctor],
   },
 ];
