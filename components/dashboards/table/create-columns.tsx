@@ -87,6 +87,7 @@ export const createColumn = <T extends object>(
   cell: ({ row }) => {
     const value = row.original[key] as React.ReactNode;
     if (key === "action") {
+      const actionValue: any = row.original[key];
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -96,7 +97,30 @@ export const createColumn = <T extends object>(
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <div className="pl-2">
+              {actionValue && actionValue.length > 0 ? (
+                actionValue?.map((action: any, index: number) => (
+                  <Button
+                    key={index}
+                    variant="ghost"
+                    onClick={action.callback}
+                    className="text-xs p-0 hover:bg-transparent h-0 "
+                  >
+                    {action.imgSrc && (
+                      <img
+                        src={action.imgSrc}
+                        alt={action.label ?? ""}
+                        className="w-4 h-4"
+                      />
+                    )}
+                    {action.label && <span>{action.label}</span>}
+                  </Button>
+                ))
+              ) : (
+                <span>-</span>
+              )}
+            </div>
+            {/* <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() =>
                 navigator.clipboard.writeText(
@@ -111,7 +135,7 @@ export const createColumn = <T extends object>(
               id={(row.original as any)?.id}
               name={(row.original as any)?.name}
             />
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>View payment details</DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -130,8 +154,7 @@ export const createColumn = <T extends object>(
           />
         </div>
       );
-    }
-    else if (key === "avatar") {
+    } else if (key === "avatar") {
       return (
         <div className="ml-4 w-16 h-16  rounded-md flex items-center justify-center overflow-hidden">
           <Image
@@ -162,11 +185,8 @@ export const createColumn = <T extends object>(
     //       />
     //     </div>
     //   );
-    // } 
-    else if (
-      key == "isEmailVerified" ||
-      key === "isVerified" 
-    ) {
+    // }
+    else if (key == "isEmailVerified" || key === "isVerified") {
       return (
         <Switch checked={row.original[key] as boolean} disabled aria-readonly />
       );

@@ -27,3 +27,17 @@ export const useGetAppointments = (role: string) => {
     };
   }
 };
+
+export const useGetMyAppointments = () => {
+  const response: any = useFetch(`appointment/me`, undefined);
+  return {
+    ...response,
+  };
+};
+
+export const useCancelAppointment = () => {
+  const response = usePost(`appointment/me/cancel`, undefined);
+  return {
+    ...response,
+  };
+};

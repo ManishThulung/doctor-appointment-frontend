@@ -2,20 +2,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Menubar,
   MenubarContent,
-  MenubarItem,
   MenubarMenu,
   MenubarRadioGroup,
   MenubarRadioItem,
   MenubarSeparator,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import { FC } from "react";
 import LogoutModal from "../modals/logout-modal";
+import Link from "next/link";
+import ProfileModal from "../modals/cancel-modal";
+import { useGetUserProfile } from "@/api/auth.api";
 
-interface IProps {
-  name?: string;
-}
-const Userbar: FC<IProps> = ({ name }) => {
+const Userbar = () => {
+  const { data } = useGetUserProfile();
   return (
     <Menubar className="border-none">
       <MenubarMenu>
@@ -27,18 +26,17 @@ const Userbar: FC<IProps> = ({ name }) => {
         </MenubarTrigger>
         <MenubarContent>
           <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem value="andy">
-              {name == "ram" ? name : "hari"}
-            </MenubarRadioItem>
-            {/* <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem> */}
+            <div className="pl-2 py-1">{data && data?.data?.name}</div>
           </MenubarRadioGroup>
           <MenubarSeparator />
-          {/* <MenubarItem className="cursor-pointer" inset>
-            Edit...
-          </MenubarItem>
-          <MenubarSeparator /> */}
-          <div className="pl-8">
+          <MenubarRadioGroup value="benoit">
+            <Link href={"appointments"} className="pl-2 py-1">
+              Appointments
+            </Link>
+          </MenubarRadioGroup>
+          <MenubarSeparator />
+
+          <div className="pl-2">
             <LogoutModal type="user" />
           </div>
         </MenubarContent>

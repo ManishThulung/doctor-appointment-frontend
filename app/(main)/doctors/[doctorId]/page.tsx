@@ -52,7 +52,7 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
           </div>
         </section>
         <section className="relative py-16 bg-blueGray-200">
-           <div className="max-w-[1300px] mx-auto px-4">
+          <div className="max-w-[1300px] mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
               {!isPending && data ? (
                 <div className="px-6">
@@ -114,20 +114,21 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
                     </div>
                   </div>
                   <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-                    <div className="flex flex-wrap justify-center">
-                      <div className="w-full lg:w-9/12 px-4">
-                        <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Esse, ab voluptatem. Aperiam, necessitatibus?
-                          Cumque est magnam tempore delectus omnis impedit
-                          reprehenderit, inventore earum, obcaecati aliquam
-                          laborum! Dolorem architecto quae cupiditate!
-                        </p>
-                        <a href="#pablo" className="font-normal text-pink-500">
-                          Show more
-                        </a>
-                      </div>
-                    </div>
+                      <p className="mb-4 text-lg leading-relaxed text-gray-700 px-8 py-4">
+                        A psychiatrist is a medical doctor specializing in the
+                        diagnosis, treatment, and prevention of mental health
+                        disorders, including conditions such as depression,
+                        anxiety, bipolar disorder, schizophrenia, and substance
+                        abuse. With a background in both psychology and
+                        medicine, psychiatrists are able to assess both the
+                        mental and physical aspects of psychological conditions.
+                        They often prescribe medications, provide therapy, and
+                        develop comprehensive treatment plans to help patients
+                        manage their mental health. Psychiatrists work in
+                        various settings, including hospitals, private
+                        practices, and mental health clinics, and may also
+                        collaborate with other healthcare professionals.
+                      </p>
                   </div>
                 </div>
               ) : (
@@ -146,7 +147,9 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
               <ReviewCard />
             </Suspense> */}
             {reviewData &&
-              reviewData?.map((review: any) => <ReviewCard key={review.id} review={review}/>)}
+              reviewData?.map((review: any) => (
+                <ReviewCard key={review.id} review={review} />
+              ))}
           </div>
         </section>
       </main>

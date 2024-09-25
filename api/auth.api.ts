@@ -1,4 +1,4 @@
-import { usePost } from "@/react-query/react-query";
+import { useFetch, usePost } from "@/react-query/react-query";
 
 // updater?: (oldData: any[], newData: any) => any[]
 // export const useRegister = () => {
@@ -34,6 +34,13 @@ export const useRegister = () => {
     // updater
   );
   console.log(response, "resssss");
+  return {
+    ...response,
+  };
+};
+
+export const useGetUserProfile = () => {
+  const response: any = useFetch(`auth/me`);
   return {
     ...response,
   };
