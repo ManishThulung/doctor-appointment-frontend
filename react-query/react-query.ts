@@ -19,15 +19,10 @@ export const fetcher = async <T>({
   return response.data;
 };
 
-export const useFetch = <T>(
-  url: string | null,
-  params?: object
-  // config?: UseQueryOptions<T, Error, T, QueryKeyT>
-) => {
+export const useFetch = <T>(url: string | null, params?: object) => {
   const context = useQuery<T, Error, T, QueryKeyT>({
     queryKey: [url!, params],
     queryFn: ({ queryKey }) => fetcher({ queryKey }),
-    // options: [config],
   });
 
   return context;
@@ -85,6 +80,7 @@ export const useFetchConditional = <T>(
 const useGenericMutation = <T, S>(
   func: (data: T | S) => Promise<AxiosResponse<S>>,
   url: string,
+  invalidate?: string,
   params?: object,
   updater?: ((oldData: T, newData: S) => T) | undefined
 ) => {
@@ -113,12 +109,14 @@ const useGenericMutation = <T, S>(
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [url, params] });
+      invalidate && queryClient.invalidateQueries({ queryKey: [invalidate] });
     },
   } as UseMutationOptions<AxiosResponse<S>, AxiosError, T | S>);
 };
 
 export const usePost = <T, S>(
   url: string,
+  invalidate?: string,
   params?: object,
   config?: any,
   updater?: (oldData: T, newData: S) => T
@@ -126,6 +124,7 @@ export const usePost = <T, S>(
   return useGenericMutation<T, S>(
     (data) => request.post<S>(url, data, config),
     url,
+    invalidate,
     params,
     updater
   );
@@ -133,12 +132,14 @@ export const usePost = <T, S>(
 
 export const useDelete = <T>(
   url: string,
+  invalidate?: string,
   params?: object,
   updater?: (oldData: T, id: string | number) => T
 ) => {
   return useGenericMutation<T, string | number>(
     (id) => request.delete(`${url}/${id}`),
     url,
+    invalidate,
     params,
     updater
   );
@@ -146,12 +147,14 @@ export const useDelete = <T>(
 
 export const useUpdate = <T, S>(
   url: string,
+  invalidate?: string,
   params?: object,
   updater?: (oldData: T, newData: S) => T
 ) => {
   return useGenericMutation<T, S>(
     (data) => request.patch<S>(url, data),
     url,
+    invalidate,
     params,
     updater
   );

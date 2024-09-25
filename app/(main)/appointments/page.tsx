@@ -47,10 +47,8 @@ const MyAppointments = () => {
   }
 
   const confirmCancel = (id: string) => {
-    console.log("heree");
     setIsOpen(true);
     setAppointmentId(id);
-    console.log("theree");
   };
 
   const serelizeData = () => {

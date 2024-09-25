@@ -98,27 +98,29 @@ export const createColumn = <T extends object>(
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <div className="pl-2">
-              {actionValue && actionValue.length > 0 ? (
-                actionValue?.map((action: any, index: number) => (
-                  <Button
-                    key={index}
-                    variant="ghost"
-                    onClick={action.callback}
-                    className="text-xs p-0 hover:bg-transparent h-0 "
-                  >
-                    {action.imgSrc && (
-                      <img
-                        src={action.imgSrc}
-                        alt={action.label ?? ""}
-                        className="w-4 h-4"
-                      />
-                    )}
-                    {action.label && <span>{action.label}</span>}
-                  </Button>
-                ))
-              ) : (
-                <span>-</span>
-              )}
+              <div className="flex gap-2 flex-col items-start">
+                {actionValue && actionValue.length > 0 ? (
+                  actionValue?.map((action: any, index: number) => (
+                    <Button
+                      key={index}
+                      variant="ghost"
+                      onClick={action.callback}
+                      className="text-xs py-1 hover:bg-transparent h-auto"
+                    >
+                      {action.imgSrc && (
+                        <img
+                          src={action.imgSrc}
+                          alt={action.label ?? ""}
+                          className="w-4 h-4"
+                        />
+                      )}
+                      {action.label && <span>{action.label}</span>}
+                    </Button>
+                  ))
+                ) : (
+                  <span>-</span>
+                )}
+              </div>
             </div>
             {/* <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
