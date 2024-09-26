@@ -2,6 +2,7 @@ import {
   useFetch,
   useFetchConditional,
   usePost,
+  usePostFormData,
   useUpdate,
 } from "@/react-query/react-query";
 
@@ -38,7 +39,7 @@ export const useGetHospitalsCount = (option: boolean) => {
 };
 
 export const useRegisterHospital = () => {
-  const response = usePost(
+  const response = usePostFormData(
     `hospital`,
     undefined,
     {

@@ -2,6 +2,7 @@ import {
   useFetch,
   useFetchConditional,
   usePost,
+  usePostFormData,
   useUpdate,
 } from "@/react-query/react-query";
 
@@ -26,7 +27,7 @@ export const useGetDoctorByHospitalId = (id: string) => {
 };
 
 export const useCreateDoctor = () => {
-  const response = usePost(
+  const response = usePostFormData(
     `doctor`,
     undefined,
     {

@@ -1,8 +1,8 @@
-import { useFetch, usePost } from "@/react-query/react-query";
+import { useFetch, usePost, usePostFormData } from "@/react-query/react-query";
 import { Department } from "@/types/utils.types";
 
 export const useCreateDepartment = () => {
-  const response = usePost(
+  const response = usePostFormData(
     `department`,
     undefined,
     {

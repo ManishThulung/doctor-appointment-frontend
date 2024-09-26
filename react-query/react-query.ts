@@ -130,6 +130,21 @@ export const usePost = <T, S>(
   );
 };
 
+export const usePostFormData = <T, S>(
+  url: string,
+  params?: object,
+  config?: any,
+  updater?: (oldData: T, newData: S) => T
+) => {
+  return useGenericMutation<T, S>(
+    (data) => request.post<S>(url, data, config),
+    url,
+    undefined,
+    params,
+    updater
+  );
+};
+
 export const useDelete = <T>(
   url: string,
   invalidate?: string,
