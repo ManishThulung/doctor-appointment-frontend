@@ -31,6 +31,8 @@ const CancelModal: FC<IProps> = ({
       }
     } catch (error: any) {
       toast.error(error.response.data.message);
+      setIsOpen(false);
+      setAppointmentId(null);
     } finally {
       setIsOpen(false);
       setAppointmentId(null);

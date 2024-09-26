@@ -6,7 +6,6 @@ import {
 } from "@radix-ui/react-icons";
 import { Column, ColumnDef } from "@tanstack/react-table";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,12 +13,11 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
+import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
 import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
-import { Switch } from "@/components/ui/switch";
-import VerifyModal from "@/components/modals/verify-modal";
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -197,129 +195,3 @@ export const createColumn = <T extends object>(
     return <div className={`${isUppercase ? "uppercase" : ""}`}>{value}</div>;
   },
 });
-
-// export const createColumn = <T extends object>(
-//   key: keyof T,
-//   headerName: string,
-//   isUppercase = false
-// ): ColumnDef<T> => ({
-//   accessorKey: key,
-//   header: ({ column }) => (
-//     <DataTableColumnHeader column={column} title={headerName} />
-//   ),
-//   cell: ({ row }) => {
-//     const value = row.original[key] as React.ReactNode;
-//     console.log(value, "value");
-//     console.log(row.original, "row.original");
-//     // if (key === "action" && Array.isArray(value)) {
-//     if (key === "action") {
-//       return (
-//         <DropdownMenu>
-//           <DropdownMenuTrigger asChild>
-//             <Button variant="ghost" className="h-8 w-8 p-0">
-//               <span className="sr-only">Open menu</span>
-//               <MoreHorizontal className="h-4 w-4" />
-//             </Button>
-//           </DropdownMenuTrigger>
-//           <DropdownMenuContent align="end">
-//             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-//             <DropdownMenuItem
-//               onClick={() => navigator.clipboard.writeText(row.original && row.original?.name)}
-//             >
-//               Copy payment ID
-//             </DropdownMenuItem>
-//             <DropdownMenuSeparator />
-//             <DropdownMenuItem>View customer</DropdownMenuItem>
-//             <DropdownMenuItem>View payment details</DropdownMenuItem>
-//           </DropdownMenuContent>
-//         </DropdownMenu>
-//       );
-//     }
-//     // if (key === "code" && Array.isArray(value)) {
-//     //   return (
-//     //     <div className="flex space-x-2 ">
-//     //       {value.map((code, index) => (
-//     //         <Button
-//     //           key={index}
-//     //           variant="ghost"
-//     //           onClick={code.callback}
-//     //           className="text-xs p-2 hover:bg-transparent h-0 text-blue-500"
-//     //         >
-//     //           {code.label && <span>{code.label}</span>}
-//     //         </Button>
-//     //       ))}
-//     //     </div>
-//     //   );
-//     // }
-
-//     // if (
-//     //   (key === 'status' || key === 'featured' || key === 'required') &&
-//     //   value === ''
-//     // )
-//     // {
-//     //   return (
-//     //     <div className={`pl-4 ${isUppercase ? 'uppercase' : ''}  `}>
-//     //       {value}
-//     //     </div>
-//     //   );
-//     // } else if ((key === 'featured' || key === 'status') && !value) {
-//     //   return (
-//     //     <div className="pl-4 ">
-//     //       <Switch />
-//     //     </div>
-//     //   );
-//     // } else if (key === 'verify') {
-//     //   return (
-//     //     <div className="pl-4 ">
-//     //       <Switch />
-//     //     </div>
-//     //   );
-//     // } else if (key === 'history') {
-//     //   const historyValue = row.original['history'];
-
-//     //   return (
-//     //     <div className={`pl-4 ${isUppercase ? 'uppercase' : ''} `}>
-//     //       {historyValue ? (
-//     //         <p className="text-white text-center font-medium bg-green-800 p-1 rounded-md dark: hover:underline">
-//     //           {value}
-//     //         </p>
-//     //       ) : (
-//     //         value
-//     //       )}
-//     //     </div>
-//     //   );
-//     // } else if (key === 'name' || key === 'user' || key === 'categoryName') {
-//     //   return (
-//     //     <div className={`pl-4 ${isUppercase ? 'uppercase' : ''} `}>
-//     //       <p className="font-semibold  p-1 rounded-md dark: hover:underline">
-//     //         {value}
-//     //       </p>
-//     //     </div>
-//     //   );
-//     // } else if (key === 'photo') {
-//     //   return (
-//     //     <div className="ml-4 w-16 h-16  rounded-md flex items-center justify-center overflow-hidden">
-//     //       <img
-//     //         src={`${IMAGE_BASE_URI}${row.original.photo}`}
-//     //         alt={row.original.name}
-//     //         className="w-full h-full object-cover  "
-//     //       />
-//     //     </div>
-//     //   );
-//     // } else if (key === 'image') {
-//     //   return (
-//     //     <div className="ml-4 w-16 h-16  rounded-md flex items-center justify-center overflow-hidden">
-//     //       <img
-//     //         src={`${IMAGE_BASE_URI}${row.original.image}`}
-//     //         alt={row.original.name}
-//     //         className="w-full h-full object-cover  "
-//     //       />
-//     //     </div>
-//     //   );
-//     // }
-
-//     return (
-//       <div className={`pl-4 ${isUppercase ? "uppercase" : ""}`}>{value}</div>
-//     );
-//   },
-// });

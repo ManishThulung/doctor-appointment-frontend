@@ -6,10 +6,10 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 ///////////////////////////////////////////
 ///// this is causing a build error////////
 ///////////////////////////////////////////
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-//   "pdfjs-dist/build/pdf.worker.min.mjs",
-//   import.meta.url
-// ).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
+).toString();
 
 export const PdfRender = ({ src }: { src: string }) => {
   const [numPages, setNumPages] = useState<number | null>(null);

@@ -1,7 +1,6 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import { toast } from "react-toastify";
 import Loading from "../loaders/loading";
-import SubmitButton from "../submit-button";
 import { Button } from "../ui/button";
 
 interface IProps {
@@ -35,6 +34,8 @@ const GenericlModal: FC<IProps> = ({
       }
     } catch (error: any) {
       toast.error(error.response.data.message);
+      setIsOpen(false);
+      setAppointmentId(null);
     } finally {
       setIsOpen(false);
       setAppointmentId(null);

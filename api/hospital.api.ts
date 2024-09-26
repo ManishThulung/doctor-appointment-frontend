@@ -76,3 +76,11 @@ export const useHospitalLogin = () => {
     ...response,
   };
 };
+
+// super-admin
+export const useApproveHospital = () => {
+  const response = useUpdate(`hospital/approve`, "hospital/admin", undefined);
+  return {
+    ...response,
+  };
+};
