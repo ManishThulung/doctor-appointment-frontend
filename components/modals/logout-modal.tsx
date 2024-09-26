@@ -19,10 +19,14 @@ interface IProps {
 }
 
 const LogoutModal: FC<IProps> = ({ type }) => {
-  const { setIsAuth } = useAuthContext();
+  const { setIsAuth, setRole } = useAuthContext();
   const router = useRouter();
   const handleLogout = async () => {
     setIsAuth(false);
+    setRole("");
+    // setCookie("isLogged", false);
+    // setCookie("role", Role.User);
+
     router.push("/");
   };
   return (

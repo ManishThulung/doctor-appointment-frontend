@@ -39,6 +39,8 @@ const Login = () => {
     try {
       const res: AxiosResponse = await mutateAsync(values);
       if (res.data?.success && res?.data?.hospital?.role) {
+        // setCookie("isLogged", res.data?.success);
+        // setCookie("role", res?.data?.user?.role);
         setIsAuth(res.data?.success);
         setRole(res?.data?.hospital?.role);
         if (res?.data?.hospital?.role === Role.Admin) {

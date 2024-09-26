@@ -1,7 +1,6 @@
 "use client";
 
 import { useDoctorLogin } from "@/api/doctor.api";
-import { useHospitalLogin } from "@/api/hospital.api";
 import CustomFormField, {
   FormFieldType,
 } from "@/components/forms/molecules/custom-fields";
@@ -40,6 +39,8 @@ const Login = () => {
     try {
       const res: AxiosResponse = await mutateAsync(values);
       if (res.data?.success && res?.data?.doctor?.role) {
+        // setCookie("isLogged", res.data?.success);
+        // setCookie("role", res?.data?.user?.role);
         setIsAuth(res.data?.success);
         setRole(res?.data?.doctor?.role);
         if (res?.data?.doctor?.role === Role.Doctor) {
