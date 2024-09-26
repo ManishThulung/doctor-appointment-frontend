@@ -39,12 +39,14 @@ const Login = () => {
     try {
       const res: AxiosResponse = await mutateAsync(values);
       if (res.data?.success && res?.data?.user?.role) {
-        // setCookie("isLogged", res.data?.success);
-        // setCookie("role", res?.data?.user?.role);
         setIsAuth(res.data?.success);
         setRole(res?.data?.user?.role);
         if (res?.data?.user?.role === Role.SuperAdmin) {
-          router.push("/dashboard");
+          // router.push("/dashboard");
+          if (typeof window != "undefined") {
+            window.location.reload();
+            window.location.href = "/dashboard";
+          }
         } else {
           router.push("/");
         }

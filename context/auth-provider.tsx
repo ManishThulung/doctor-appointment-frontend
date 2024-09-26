@@ -44,7 +44,7 @@ const AuthContextProvider = ({ children }: AuthProviderProps) => {
   }, [isAuth]);
 
   useEffect(() => {
-    setCookie("role", JSON.stringify(role));
+    setCookie("role", role);
   }, [role]);
 
   return (

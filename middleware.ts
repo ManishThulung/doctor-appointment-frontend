@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
     const isLogin = request.cookies.get("isLogged");
     const role = request.cookies.get("role");
-    if (isLogin?.value && role?.value) {
+    if (isLogin?.value) {
       if (
         role?.value === Role.SuperAdmin ||
         role?.value === Role.Admin ||
@@ -29,11 +29,12 @@ export async function middleware(request: NextRequest) {
           new URL(request.nextUrl.pathname, request.url)
         );
       } else {
-        // return NextResponse.rewrite(new URL("/unauthorized", request.url));
-        return NextResponse.rewrite(new URL("/login", request.url));
+        return NextResponse.rewrite(new URL("/unauthorized", request.url));
+        // return NextResponse.rewrite(new URL("/login", request.url));
       }
     } else {
       return NextResponse.rewrite(new URL("/login", request.url));
+
     }
   }
 

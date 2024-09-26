@@ -44,7 +44,11 @@ const Login = () => {
         setIsAuth(res.data?.success);
         setRole(res?.data?.doctor?.role);
         if (res?.data?.doctor?.role === Role.Doctor) {
-          router.push("/dashboard");
+          // router.push("/dashboard");
+          if (typeof window != "undefined") {
+            window.location.reload();
+            window.location.href = "/dashboard";
+          }
         } else {
           router.push("/");
         }

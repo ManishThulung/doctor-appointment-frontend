@@ -44,7 +44,11 @@ const Login = () => {
         setIsAuth(res.data?.success);
         setRole(res?.data?.hospital?.role);
         if (res?.data?.hospital?.role === Role.Admin) {
-          router.push("/dashboard");
+          // router.push("/dashboard");
+          if (typeof window != "undefined") {
+            window.location.reload();
+            window.location.href = "/dashboard";
+          }
         } else {
           router.push("/");
         }
