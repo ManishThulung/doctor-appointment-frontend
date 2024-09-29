@@ -7,6 +7,7 @@ import HospitalCard from "@/components/cards/hospital-card";
 import LandingCard from "@/components/cards/landing-card";
 import ServiceCard from "@/components/cards/service-card";
 import { MultipleCardSkeleton } from "@/components/loaders/multiple-card-skeleton";
+import Slider from "@/components/slider";
 import Image from "next/image";
 
 export default function Home() {
@@ -63,6 +64,8 @@ export default function Home() {
           </p>
         </div>
 
+        <Slider />
+
         <div className="flex justify-between">
           <LandingCard
             link="#"
@@ -98,6 +101,7 @@ export default function Home() {
               <HospitalCard
                 key={item.id}
                 name={item.name}
+                phone={item?.phone}
                 id={item.id}
                 address={item.Address}
                 email={item.email}

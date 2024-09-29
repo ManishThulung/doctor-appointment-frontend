@@ -10,9 +10,10 @@ interface IProps {
   email: string;
   image: string;
   address: Address;
+  phone: string;
 }
 
-const HospitalCard: FC<IProps> = ({ name, id, email, image, address }) => {
+const HospitalCard: FC<IProps> = ({ name, id, email, image, address, phone }) => {
   return (
     <Link
       href={`/hospitals/${id}`}
@@ -25,12 +26,13 @@ const HospitalCard: FC<IProps> = ({ name, id, email, image, address }) => {
           alt={name}
           width={100}
           height={100}
+          priority
+          // unoptimized
         />
-        <div className="flex w-fit items-center justify-center gap-1 px-4 py-2 bg-gray-900 absolute bottom-0 right-0">
+        {/* <div className="flex w-fit items-center justify-center gap-1 px-4 py-2 bg-gray-900 absolute bottom-0 right-0">
           <span className="text-white">4 </span>
           <FaStar color="yellow" />
-          {/* <h1 className="mx-3 text-white font-semibold text-base">Focusing</h1> */}
-        </div>
+        </div> */}
       </div>
       <div className="py-4 px-6">
         <h1 className="text-2xl font-semibold text-gray-800">{name}</h1>
@@ -45,7 +47,7 @@ const HospitalCard: FC<IProps> = ({ name, id, email, image, address }) => {
               <path d="M322.602 384H480c-10.638-42-39.537-81.691-86.703-96.072-17.781 10.104-38.343 15.873-60.256 15.873-14.823 0-29.024-2.654-42.168-7.49-7.445 12.47-16.927 25.592-27.974 34.906C289.245 341.354 309.146 364 322.602 384zM306.545 200h100.493c-11.554 28-40.327 50.293-73.997 50.293-8.875 0-17.404-1.692-25.375-4.51a128.411 128.411 0 0 1-6.52 25.118c10.066 3.174 20.779 4.862 31.895 4.862 58.479 0 105.886-47.41 105.886-105.872 0-58.465-47.407-105.866-105.886-105.866-37.49 0-70.427 19.703-89.243 49.09C275.607 131.383 298.961 163 306.545 200z" />
             </g>
           </svg>
-          <h1 className="px-2 text-sm">MerakiTeam</h1>
+          <h1 className="px-2 text-sm">{phone}</h1>
         </div>
         <div className="flex items-center mt-4 text-gray-700">
           <svg className="h-6 w-6 fill-current" viewBox="0 0 512 512">

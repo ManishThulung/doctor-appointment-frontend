@@ -78,3 +78,11 @@ export const useDoctorLogin = () => {
     ...response,
   };
 };
+
+// public
+export const useGetDoctorsCountOfHospital = (id: string) => {
+  const response: any = useFetch(`doctor/count/doctor/${id}`, undefined);
+  return {
+    ...response,
+  };
+};

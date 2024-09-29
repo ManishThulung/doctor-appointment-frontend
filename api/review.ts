@@ -1,8 +1,9 @@
 import { useFetch, usePost } from "@/react-query/react-query";
 
-export const useCreateReview = () => {
+export const useCreateReview = (doctorId: string) => {
   const response = usePost(
     `review`,
+    `review/doctor/${doctorId}`, // invalidate
     undefined
     // updater
   );

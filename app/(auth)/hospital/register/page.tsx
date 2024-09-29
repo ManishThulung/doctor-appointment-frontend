@@ -1,4 +1,3 @@
-import RegisterDoctor from "@/components/forms/RegisterDoctor";
 import RegisterHospital from "@/components/forms/RegisterHospital";
 import Image from "next/image";
 

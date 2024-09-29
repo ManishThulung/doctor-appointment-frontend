@@ -55,7 +55,7 @@ const RegisterDoctor = () => {
       const res: AxiosResponse = await mutateAsync(formData);
       if (res.data?.success) {
         toast.success(res.data?.message);
-        form.reset();
+        // form.reset();
       }
     } catch (error: any) {
       toast.error(error.response?.data?.message);

@@ -29,7 +29,7 @@ import { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 
 const formSchema = z.object({
-  review: z.string().min(2).max(50),
+  review: z.string().min(2).max(500),
 });
 
 interface IProps {
@@ -38,7 +38,7 @@ interface IProps {
 }
 
 const ReviewModal: FC<IProps> = ({ type, doctorId }) => {
-  const { mutateAsync, isPending } = useCreateReview();
+  const { mutateAsync, isPending } = useCreateReview(doctorId);
   const [value, setValue] = useState<number>(0);
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 

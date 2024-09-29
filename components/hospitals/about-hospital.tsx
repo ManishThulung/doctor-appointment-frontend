@@ -6,6 +6,7 @@ import React, { FC } from "react";
 import { NormalSkeleton } from "../loaders/normal-skeleton";
 import { PdfRenderModal } from "../modals/pdf-render-modal";
 import { CarouselPlugin } from "../carousel";
+import { useGetDoctorsCountOfHospital } from "@/api/doctor.api";
 
 interface IProps {
   hospitalId: string;
@@ -13,6 +14,8 @@ interface IProps {
 
 const AboutHospital: FC<IProps> = ({ hospitalId }) => {
   const { data, isPending } = useGetHospitalById(hospitalId);
+  const { data: doctorCount, isPending: doctorCountPending } =
+    useGetDoctorsCountOfHospital(hospitalId);
 
   const currentDate = moment();
   const yearsElapsed =
@@ -40,9 +43,9 @@ const AboutHospital: FC<IProps> = ({ hospitalId }) => {
                         </h2>
                         <p className="text-gray-700 text-base font-normal leading-relaxed lg:text-start text-center">
                           Our achievement story is a testament to teamwork and
-                          perseverance. Together, we&apos;ve overcome challenges,
-                          celebrated victories, and created a narrative of
-                          progress and success.
+                          perseverance. Together, we&apos;ve overcome
+                          challenges, celebrated victories, and created a
+                          narrative of progress and success.
                         </p>
                       </div>
                     </div>
@@ -58,7 +61,7 @@ const AboutHospital: FC<IProps> = ({ hospitalId }) => {
                         </div>
                         <div className="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
                           <h4 className="text-gray-900 text-2xl font-bold font-manrope leading-9">
-                            25+ Doctors
+                            {doctorCount?.verifiedDoctor}+ Doctors
                           </h4>
                           <p className="text-gray-500 text-base font-normal leading-relaxed">
                             Excellence and Certified Doctors

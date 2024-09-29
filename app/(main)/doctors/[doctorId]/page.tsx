@@ -15,6 +15,10 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
   const { data: reviewData, isPending: isPendingReviews } =
     useGetReviewsByDoctorId(params.doctorId);
 
+  function roundDownToNearestHalf(number: number) {
+    return Math.floor(number * 2) / 2;
+  }
+
   return (
     <>
       <main>
@@ -75,18 +79,16 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
                       />
                       <ReviewModal type="Doctor" doctorId={params.doctorId} />
                     </div>
-                    <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                      <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                        {/* <div className="mr-4 p-3 text-center">
-                          <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                            22
-                          </span>
-                          <span className="text-sm text-blueGray-400">
-                            Friends
-                          </span>
-                        </div> */}
+                    <div className="w-full lg:w-[40%] px-4 lg:order-1 flex items-center">
+                      <div className="flex justify-center items-center py-4 lg:pt-4 pt-8">
                         <div className="mr-4 p-3 text-center">
-                          <Rate allowHalf defaultValue={4} disabled />
+                          <Rate
+                            allowHalf
+                            defaultValue={roundDownToNearestHalf(
+                              Number(data?.averageRating)
+                            )}
+                            disabled
+                          />
                         </div>
                         <div className="lg:mr-4 p-3 text-center">
                           {data?.certificate && (
@@ -114,21 +116,21 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
                     </div>
                   </div>
                   <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-                      <p className="mb-4 text-lg leading-relaxed text-gray-700 px-8 py-4">
-                        A psychiatrist is a medical doctor specializing in the
-                        diagnosis, treatment, and prevention of mental health
-                        disorders, including conditions such as depression,
-                        anxiety, bipolar disorder, schizophrenia, and substance
-                        abuse. With a background in both psychology and
-                        medicine, psychiatrists are able to assess both the
-                        mental and physical aspects of psychological conditions.
-                        They often prescribe medications, provide therapy, and
-                        develop comprehensive treatment plans to help patients
-                        manage their mental health. Psychiatrists work in
-                        various settings, including hospitals, private
-                        practices, and mental health clinics, and may also
-                        collaborate with other healthcare professionals.
-                      </p>
+                    <p className="mb-4 text-lg leading-relaxed text-gray-700 px-8 py-4">
+                      A psychiatrist is a medical doctor specializing in the
+                      diagnosis, treatment, and prevention of mental health
+                      disorders, including conditions such as depression,
+                      anxiety, bipolar disorder, schizophrenia, and substance
+                      abuse. With a background in both psychology and medicine,
+                      psychiatrists are able to assess both the mental and
+                      physical aspects of psychological conditions. They often
+                      prescribe medications, provide therapy, and develop
+                      comprehensive treatment plans to help patients manage
+                      their mental health. Psychiatrists work in various
+                      settings, including hospitals, private practices, and
+                      mental health clinics, and may also collaborate with other
+                      healthcare professionals.
+                    </p>
                   </div>
                 </div>
               ) : (
