@@ -86,3 +86,11 @@ export const useGetDoctorsCountOfHospital = (id: string) => {
     ...response,
   };
 };
+
+// recommedations
+export const useGetDoctorRecommedations = () => {
+  const response: any = useFetch(`recommendations`);
+  return {
+    ...response,
+  };
+};

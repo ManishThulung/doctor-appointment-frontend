@@ -7,6 +7,7 @@ import HospitalCard from "@/components/cards/hospital-card";
 import LandingCard from "@/components/cards/landing-card";
 import ServiceCard from "@/components/cards/service-card";
 import { MultipleCardSkeleton } from "@/components/loaders/multiple-card-skeleton";
+import Rocommedations from "@/components/rocommedations";
 import Slider from "@/components/slider";
 import Image from "next/image";
 
@@ -64,7 +65,7 @@ export default function Home() {
           </p>
         </div>
 
-        <Slider />
+        {/* <Slider /> */}
 
         <div className="flex justify-between">
           <LandingCard
@@ -226,6 +227,10 @@ export default function Home() {
           <ServiceCard />
           <ServiceCard />
         </div>
+      </div>
+
+      <div>
+        <Rocommedations />
       </div>
     </>
   );

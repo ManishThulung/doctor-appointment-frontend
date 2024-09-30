@@ -1,17 +1,15 @@
+import { useGetUserProfile } from "@/api/auth.api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Menubar,
   MenubarContent,
   MenubarMenu,
   MenubarRadioGroup,
-  MenubarRadioItem,
   MenubarSeparator,
-  MenubarTrigger,
+  MenubarTrigger
 } from "@/components/ui/menubar";
-import LogoutModal from "../modals/logout-modal";
 import Link from "next/link";
-import ProfileModal from "../modals/cancel-modal";
-import { useGetUserProfile } from "@/api/auth.api";
+import LogoutModal from "../modals/logout-modal";
 
 const Userbar = () => {
   const { data } = useGetUserProfile();

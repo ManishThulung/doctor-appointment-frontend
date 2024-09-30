@@ -1,4 +1,5 @@
 import { Address } from "@/types/address.types";
+import { Rate } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
@@ -11,6 +12,7 @@ interface IProps {
   image: string;
   department: string;
   address: string;
+  rating?: any;
 }
 
 const DoctorCard: FC<IProps> = ({
@@ -21,13 +23,17 @@ const DoctorCard: FC<IProps> = ({
   phone,
   address,
   department,
+  rating,
 }) => {
+  function roundDownToNearestHalf(number: number) {
+    return Math.floor(number * 2) / 2;
+  }
   return (
     <Link
       href={`/doctors/${id}`}
       className="flex items-center w-fit justify-center"
     >
-      <div className="max-w-xs">
+      <div className="max-w-xs w-[17rem]">
         <div className="bg-white shadow-xl rounded-lg py-3">
           <div className="photo-wrapper p-2">
             <Image
@@ -48,6 +54,20 @@ const DoctorCard: FC<IProps> = ({
             </div>
             <table className="text-xs my-3">
               <tbody>
+                {rating && (
+                  <tr>
+                    <td className="px-2 py-2 text-gray-500 font-semibold">
+                      Rating
+                    </td>
+                    <td className="px-2 py-2">
+                      <Rate
+                        allowHalf
+                        defaultValue={roundDownToNearestHalf(Number(rating))}
+                        disabled
+                      />
+                    </td>
+                  </tr>
+                )}
                 <tr>
                   <td className="px-2 py-2 text-gray-500 font-semibold">
                     Address
