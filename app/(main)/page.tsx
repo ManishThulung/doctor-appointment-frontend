@@ -8,15 +8,15 @@ import LandingCard from "@/components/cards/landing-card";
 import ServiceCard from "@/components/cards/service-card";
 import { MultipleCardSkeleton } from "@/components/loaders/multiple-card-skeleton";
 import Rocommedations from "@/components/rocommedations";
-import Slider from "@/components/slider";
 import Image from "next/image";
+import { Fragment } from "react";
 
 export default function Home() {
   const { data, isPending } = useGetHospitals();
   const { data: doctorData, isPending: isPendingDoctor } = useGetDoctors();
 
   return (
-    <>
+    <Fragment>
       <main>
         <section className="relative block h-[500px]">
           <div
@@ -220,18 +220,40 @@ export default function Home() {
           </p>
         </div>
         <div className="flex flex-wrap gap-8">
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
+          <ServiceCard
+            title="General Treatment"
+            desc="Here are the biggest enterprise technology acquisitions of 2024 so
+          far, in reverse chronological order."
+          />
+          <ServiceCard
+            title="Advancements in Telemedicine"
+            desc="Explore how telemedicine is revolutionizing patient care with remote diagnostics, virtual consultations, and digital health monitoring."
+          />
+          <ServiceCard
+            title="Breakthroughs in Cancer Treatment"
+            desc="Learn about the latest breakthroughs in cancer therapies, including immunotherapy, gene editing, and personalized medicine."
+          />
+
+          <ServiceCard
+            title="The Future of Medical Wearables"
+            desc="Discover how wearable devices are transforming healthcare, offering real-time monitoring of vital signs, glucose levels, and heart rhythms."
+          />
+
+          <ServiceCard
+            title="AI in Medical Diagnostics"
+            desc="Uncover the role of artificial intelligence in improving diagnostic accuracy for diseases like Alzheimer's, diabetes, and cardiovascular conditions."
+          />
+
+          <ServiceCard
+            title="Gene Therapy: A New Era of Medicine"
+            desc="Explore the cutting-edge world of gene therapy, offering potential cures for genetic disorders like cystic fibrosis, hemophilia, and muscular dystrophy."
+          />
         </div>
       </div>
 
       <div>
         <Rocommedations />
       </div>
-    </>
+    </Fragment>
   );
 }

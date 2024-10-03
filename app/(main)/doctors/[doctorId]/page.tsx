@@ -9,6 +9,7 @@ import { PdfRenderModal } from "@/components/modals/pdf-render-modal";
 import ReviewModal from "@/components/modals/review-modal";
 import { Rate } from "antd";
 import Image from "next/image";
+import { Fragment } from "react";
 
 const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
   const { data, isPending } = useGetDoctorById(params.doctorId);
@@ -20,7 +21,7 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
   }
 
   return (
-    <>
+    <Fragment>
       <main>
         <section className="relative block h-[500px]">
           <div
@@ -94,6 +95,7 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
                           {data?.certificate && (
                             <PdfRenderModal src={data?.certificate?.filename} />
                           )}
+                          
                         </div>
                       </div>
                     </div>
@@ -155,7 +157,7 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
           </div>
         </section>
       </main>
-    </>
+    </Fragment>
   );
 };
 
