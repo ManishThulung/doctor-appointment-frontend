@@ -78,14 +78,14 @@ export const createColumn = <T extends object>(
   headerName: string,
   isUppercase = false
 ): ColumnDef<T, any> => ({
-  accessorKey: key,
+  accessorKey: key as string,
   header: ({ column }) => (
     <DataTableColumnHeader column={column} title={headerName} />
   ),
   cell: ({ row }) => {
     const value = row.original[key] as React.ReactNode;
     if (key === "action") {
-      const actionValue: any = row.original[key];
+      const actionValue: any = row.original[key] as any;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -120,22 +120,6 @@ export const createColumn = <T extends object>(
                 )}
               </div>
             </div>
-            {/* <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  row.original && (row.original as any)?.id
-                )
-              }
-            >
-              Copy ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <VerifyModal
-              id={(row.original as any)?.id}
-              name={(row.original as any)?.name}
-            />
-            <DropdownMenuItem>View payment details</DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       );

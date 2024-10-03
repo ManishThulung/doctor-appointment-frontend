@@ -1,6 +1,15 @@
 import { Role } from "@/types/enums.types";
 import { FaStar } from "react-icons/fa";
-export const sidebarMenus = [
+
+type SidebarMenu = {
+  label: string;
+  path: string;
+  icon: React.ReactNode;
+  roles: Role[];
+  children?: SidebarMenu[];
+};
+
+export const sidebarMenus: SidebarMenu[] = [
   {
     label: "Dashboard",
     path: "/",

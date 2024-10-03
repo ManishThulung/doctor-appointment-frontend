@@ -8,6 +8,7 @@ import GenericlModal from "@/components/modals/generic-model";
 import ViewDetailModal from "@/components/modals/view-modal";
 import { ImageData } from "@/types/utils.types";
 import { ColumnDef } from "@tanstack/react-table";
+import React from "react";
 import { useState } from "react";
 
 interface IHospital {
@@ -20,7 +21,7 @@ interface IHospital {
   isVerified: boolean;
   action?: any;
 }
-export const columns: ColumnDef<IHospital>[] = [
+const columns: ColumnDef<IHospital>[] = [
   createColumn("name", "Name"),
   createColumn("email", "Email"),
   createColumn("phone", "Phone"),

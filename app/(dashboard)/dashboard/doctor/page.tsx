@@ -13,6 +13,7 @@ import ViewDetailModal from "@/components/modals/view-modal";
 import { ImageData } from "@/types/utils.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { NextPage } from "next";
+import React from "react";
 import { useState } from "react";
 
 interface IDoctor {
@@ -26,7 +27,7 @@ interface IDoctor {
   action?: any;
 }
 
-export const columns: ColumnDef<IDoctor>[] = [
+const columns: ColumnDef<IDoctor>[] = [
   createColumn("department", "Department"),
   createColumn("avatar", "Avatar"),
   createColumn("name", "Name"),
@@ -121,7 +122,7 @@ const Doctor: NextPage = () => {
             <CreateDepartment />
           </div>
           <div className="w-full mx-auto py-10">
-            <DataTable<IDoctor, any>
+            <DataTable
               columns={columns}
               data={serelizedData}
               filterBy="name"

@@ -11,6 +11,7 @@ import { useAuthContext } from "@/context/auth-provider";
 import { AppointmentStatus } from "@/types/enums.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Skeleton } from "antd";
+import React from "react";
 import { useState } from "react";
 
 interface IAppointment {
@@ -22,7 +23,7 @@ interface IAppointment {
   action: any;
 }
 
-export const columns: ColumnDef<IAppointment>[] = [
+const columns: ColumnDef<IAppointment>[] = [
   createColumn("hospitalName", "Hospital Name"),
   createColumn("doctorName", "Doctor Name"),
   createColumn("date", "Date"),
@@ -80,7 +81,7 @@ const MyAppointments = () => {
       {data && serelizedData && (
         <>
           <div className="w-full mx-auto py-10">
-            <DataTable<IAppointment, any>
+            <DataTable
               columns={columns}
               data={serelizedData}
               filterBy="name"

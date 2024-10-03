@@ -3,6 +3,7 @@
 import { sidebarMenus } from "@/components/sidebar";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { useAuthContext } from "@/context/auth-provider";
+import { Role } from "@/types/enums.types";
 
 export default function RootLayout({
   children,
@@ -12,13 +13,13 @@ export default function RootLayout({
   const { role } = useAuthContext();
 
   const filteredMenu = sidebarMenus
-    .filter((menu) => menu.roles.includes(role))
+    .filter((menu) => menu.roles.includes(role as Role))
     .map((menu) => {
       if (menu.children && menu.children.length > 0) {
         return {
           ...menu,
           children: menu.children.filter((subMenu) =>
-            subMenu.roles.includes(role)
+            subMenu.roles.includes(role as Role)
           ),
         };
       }
