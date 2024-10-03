@@ -17,7 +17,7 @@ interface IDepartment {
   action?: any;
 }
 
-export const columns: ColumnDef<IDepartment>[] = [
+const columns: ColumnDef<IDepartment>[] = [
   createColumn("image", "Image"),
   createColumn("name", "Name"),
   createColumn("description", "Description"),
@@ -43,9 +43,9 @@ const Department: NextPage = () => {
             <CreateDepartment />
           </div>
           <div className="w-full mx-auto py-10">
-            <DataTable<IDepartment, any>
+            <DataTable
               columns={columns}
-              data={data}
+              data={data ?? []}
               filterBy="name"
             />
           </div>

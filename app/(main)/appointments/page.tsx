@@ -1,34 +1,43 @@
 "use client";
-import { useGetAppointments } from "@/api/appointment";
+import {
+  useCancelAppointment,
+  useGetAppointments,
+  useGetMyAppointments,
+} from "@/api/appointment";
 import { createColumn } from "@/components/dashboards/table/create-columns";
 import { DataTable } from "@/components/dashboards/table/data-table";
+import CancelModal from "@/components/modals/cancel-modal";
 import { useAuthContext } from "@/context/auth-provider";
 import { AppointmentStatus } from "@/types/enums.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Skeleton } from "antd";
 import React from "react";
+import { useState } from "react";
 
-interface IDoctor {
-  patientName: string;
+interface IAppointment {
+  hospitalName: string;
   doctorName: string;
-  patientGender: string;
   date: string;
   time: string;
   status: AppointmentStatus;
+  action: any;
 }
 
-const columns: ColumnDef<IDoctor>[] = [
-  createColumn("patientName", "Patient Name"),
-  createColumn("patientGender", "Patient Gender"),
+const columns: ColumnDef<IAppointment>[] = [
+  createColumn("hospitalName", "Hospital Name"),
   createColumn("doctorName", "Doctor Name"),
   createColumn("date", "Date"),
   createColumn("time", "Time"),
   createColumn("status", "Status"),
+  createColumn("action", "Action"),
 ];
 
-const Patient = () => {
-  const { role } = useAuthContext();
-  const { data, isPending } = useGetAppointments(role);
+const MyAppointments = () => {
+  const { data, isPending } = useGetMyAppointments();
+  const { mutateAsync, isPending: isLoading } = useCancelAppointment();
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [appointmentId, setAppointmentId] = useState<string | null>(null);
 
   if (isPending) {
     return (
@@ -38,6 +47,11 @@ const Patient = () => {
     );
   }
 
+  const confirmCancel = (id: string) => {
+    setIsOpen(true);
+    setAppointmentId(id);
+  };
+
   const serelizeData = () => {
     if (data?.success) {
       const newData = data?.appointments?.map((appointment: any) => {
@@ -46,9 +60,14 @@ const Patient = () => {
           date: appointment?.date,
           time: appointment?.timeSlot,
           status: appointment?.status,
-          patientName: appointment?.User?.name,
-          patientGender: appointment?.User?.gender ?? "N/A",
+          hospitalName: appointment?.Hospital?.name,
           doctorName: appointment?.Doctor?.name,
+          action: [
+            {
+              label: "Cancel",
+              callback: () => confirmCancel(appointment?.id),
+            },
+          ],
         };
       });
       return newData;
@@ -70,8 +89,18 @@ const Patient = () => {
           </div>
         </>
       )}
+
+      {isOpen && (
+        <CancelModal
+          setIsOpen={setIsOpen}
+          setAppointmentId={setAppointmentId}
+          appointmentId={appointmentId}
+          mutateAsync={mutateAsync}
+          isLoading={isLoading}
+        />
+      )}
     </>
   );
 };
 
-export default Patient;
+export default MyAppointments;

@@ -2,6 +2,8 @@ import {
   useFetch,
   useFetchConditional,
   usePost,
+  usePostFormData,
+  useUpdate,
 } from "@/react-query/react-query";
 
 export const useGetDoctors = () => {
@@ -25,7 +27,7 @@ export const useGetDoctorByHospitalId = (id: string) => {
 };
 
 export const useCreateDoctor = () => {
-  const response = usePost(
+  const response = usePostFormData(
     `doctor`,
     undefined,
     {
@@ -59,9 +61,35 @@ export const useGetDoctorByHospitalIdAdmin = () => {
     ...response,
   };
 };
+export const useApproveDoctor = () => {
+  const response = useUpdate(
+    `doctor/approve`,
+    "doctor/hospital/admin",
+    undefined
+  );
+  return {
+    ...response,
+  };
+};
 
 export const useDoctorLogin = () => {
   const response = usePost(`doctor/login`, undefined);
+  return {
+    ...response,
+  };
+};
+
+// public
+export const useGetDoctorsCountOfHospital = (id: string) => {
+  const response: any = useFetch(`doctor/count/doctor/${id}`, undefined);
+  return {
+    ...response,
+  };
+};
+
+// recommedations
+export const useGetDoctorRecommedations = () => {
+  const response: any = useFetch(`recommendations`);
   return {
     ...response,
   };

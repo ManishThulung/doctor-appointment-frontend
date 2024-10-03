@@ -1,5 +1,7 @@
 import RegisterDoctor from "@/components/forms/RegisterDoctor";
+import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import Image from "next/image";
+import { Suspense } from "react";
 
 const page = () => {
   return (
@@ -13,8 +15,9 @@ const page = () => {
             alt="patient"
             className="mb-12 h-10 w-fit"
           />
-
-          <RegisterDoctor />
+          <Suspense fallback={<CardSkeleton />}>
+            <RegisterDoctor />
+          </Suspense>
         </div>
       </section>
 

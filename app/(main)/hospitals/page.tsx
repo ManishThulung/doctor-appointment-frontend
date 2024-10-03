@@ -16,6 +16,7 @@ const Hospital = () => {
           data?.map((item: any) => (
             <HospitalCard
               key={item.id}
+              phone={item.phone}
               name={item.name}
               id={item.id}
               address={item.Address}

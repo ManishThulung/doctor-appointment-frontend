@@ -1,26 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { navItems } from "./constant";
 import { Button } from "@/components/ui/button";
-import Userbar from "../cards/user-bar";
 import { useAuthContext } from "@/context/auth-provider";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import Userbar from "../cards/user-bar";
+import { navItems } from "./constant";
 
 const Navbar = () => {
   const { isAuth } = useAuthContext();
-
-  const [data, setData] = useState<any>(null);
-
-  useEffect(() => {
-    // Check if window is defined to ensure we're in the browser
-    if (typeof window !== 'undefined') {
-      const storedData = localStorage.getItem('name');
-      if (storedData) {
-        setData(storedData);
-      }
-    }
-  }, []);
   return (
     <div className="max-w-[1440px] m-auto">
       <nav className="bg-white border-gray-200">
@@ -55,7 +42,7 @@ const Navbar = () => {
             </ul>
           </div>
           {isAuth ? (
-            <Userbar name={data} />
+            <Userbar />
           ) : (
             <div className="flex gap-4">
               <Link href="/login">

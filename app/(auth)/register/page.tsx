@@ -10,9 +10,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
+import { Form } from "@/components/ui/form";
 
 export type RegistrationFormFields = {
   password: string;
@@ -109,8 +110,9 @@ const Register = () => {
                     label="Password"
                     placeholder="Enter a new password"
                   />
-
-                  <SubmitButton isPending={isPending}>Log in</SubmitButton>
+                  <div className="mt-6">
+                    <SubmitButton isPending={isPending}>Register</SubmitButton>
+                  </div>
                 </form>
               </Form>
 
@@ -168,4 +170,4 @@ const Register = () => {
   );
 };
 
-export default Register
+export default Register;

@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -42,12 +43,18 @@ const Login = () => {
         setIsAuth(res.data?.success);
         setRole(res?.data?.user?.role);
         if (res?.data?.user?.role === Role.SuperAdmin) {
-          router.push("/dashboard");
+          // router.push("/dashboard");
+          if (typeof window != "undefined") {
+            window.location.reload();
+            window.location.href = "/dashboard";
+          }
         } else {
           router.push("/");
         }
       }
     } catch (error: any) {
+      // setCookie("isLogged", "false");
+      setIsAuth(false);
       toast.error(error.response.data.message);
     }
   };

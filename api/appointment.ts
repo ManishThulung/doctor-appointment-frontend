@@ -1,4 +1,4 @@
-import { useFetch, usePost } from "@/react-query/react-query";
+import { useFetch, usePost, useUpdate } from "@/react-query/react-query";
 import { Role } from "@/types/enums.types";
 
 export const useCreateAppointment = () => {
@@ -26,4 +26,41 @@ export const useGetAppointments = (role: string) => {
       ...response,
     };
   }
+};
+
+export const useGetMyAppointments = () => {
+  const response: any = useFetch(`appointment/me`, undefined);
+  return {
+    ...response,
+  };
+};
+
+export const useCancelAppointment = () => {
+  const response = usePost(`appointment/me/cancel`, undefined);
+  return {
+    ...response,
+  };
+};
+
+export const useCancelAppointmentByDoctor = () => {
+  const response = usePost(`appointment/doctor/cancel`, undefined);
+  return {
+    ...response,
+  };
+};
+export const useApproveAppointmentByDoctor = () => {
+  const response = useUpdate(`appointment/doctor/approve`, undefined);
+  return {
+    ...response,
+  };
+};
+export const useStatusUpateAppointment = () => {
+  const response = useUpdate(
+    `appointment/doctor/status`,
+    "appointment/doctor",
+    undefined
+  );
+  return {
+    ...response,
+  };
 };

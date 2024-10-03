@@ -26,7 +26,8 @@ export function PdfRenderModal({ src, text }: IProps) {
         <DialogHeader>
           <DialogTitle>Documents</DialogTitle>
         </DialogHeader>
-        <PdfRender src={src} />
+        {src && <PdfRender src={src} />}
+
         <DialogFooter>
           <div className="w-full flex gap-4 items-center justify-center max-sm:flex-col">
             <DialogTrigger asChild>

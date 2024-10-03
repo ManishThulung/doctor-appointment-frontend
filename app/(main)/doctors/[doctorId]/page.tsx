@@ -9,14 +9,19 @@ import { PdfRenderModal } from "@/components/modals/pdf-render-modal";
 import ReviewModal from "@/components/modals/review-modal";
 import { Rate } from "antd";
 import Image from "next/image";
+import { Fragment } from "react";
 
 const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
   const { data, isPending } = useGetDoctorById(params.doctorId);
   const { data: reviewData, isPending: isPendingReviews } =
     useGetReviewsByDoctorId(params.doctorId);
 
+  function roundDownToNearestHalf(number: number) {
+    return Math.floor(number * 2) / 2;
+  }
+
   return (
-    <>
+    <Fragment>
       <main>
         <section className="relative block h-[500px]">
           <div
@@ -52,7 +57,7 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
           </div>
         </section>
         <section className="relative py-16 bg-blueGray-200">
-           <div className="max-w-[1300px] mx-auto px-4">
+          <div className="max-w-[1300px] mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
               {!isPending && data ? (
                 <div className="px-6">
@@ -75,23 +80,22 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
                       />
                       <ReviewModal type="Doctor" doctorId={params.doctorId} />
                     </div>
-                    <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                      <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                        {/* <div className="mr-4 p-3 text-center">
-                          <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                            22
-                          </span>
-                          <span className="text-sm text-blueGray-400">
-                            Friends
-                          </span>
-                        </div> */}
+                    <div className="w-full lg:w-[40%] px-4 lg:order-1 flex items-center">
+                      <div className="flex justify-center items-center py-4 lg:pt-4 pt-8">
                         <div className="mr-4 p-3 text-center">
-                          <Rate allowHalf defaultValue={4} disabled />
+                          <Rate
+                            allowHalf
+                            defaultValue={roundDownToNearestHalf(
+                              Number(data?.averageRating)
+                            )}
+                            disabled
+                          />
                         </div>
                         <div className="lg:mr-4 p-3 text-center">
                           {data?.certificate && (
                             <PdfRenderModal src={data?.certificate?.filename} />
                           )}
+                          
                         </div>
                       </div>
                     </div>
@@ -114,20 +118,21 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
                     </div>
                   </div>
                   <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-                    <div className="flex flex-wrap justify-center">
-                      <div className="w-full lg:w-9/12 px-4">
-                        <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Esse, ab voluptatem. Aperiam, necessitatibus?
-                          Cumque est magnam tempore delectus omnis impedit
-                          reprehenderit, inventore earum, obcaecati aliquam
-                          laborum! Dolorem architecto quae cupiditate!
-                        </p>
-                        <a href="#pablo" className="font-normal text-pink-500">
-                          Show more
-                        </a>
-                      </div>
-                    </div>
+                    <p className="mb-4 text-lg leading-relaxed text-gray-700 px-8 py-4">
+                      A psychiatrist is a medical doctor specializing in the
+                      diagnosis, treatment, and prevention of mental health
+                      disorders, including conditions such as depression,
+                      anxiety, bipolar disorder, schizophrenia, and substance
+                      abuse. With a background in both psychology and medicine,
+                      psychiatrists are able to assess both the mental and
+                      physical aspects of psychological conditions. They often
+                      prescribe medications, provide therapy, and develop
+                      comprehensive treatment plans to help patients manage
+                      their mental health. Psychiatrists work in various
+                      settings, including hospitals, private practices, and
+                      mental health clinics, and may also collaborate with other
+                      healthcare professionals.
+                    </p>
                   </div>
                 </div>
               ) : (
@@ -146,11 +151,13 @@ const DoctorPage = ({ params }: { params: { doctorId: string } }) => {
               <ReviewCard />
             </Suspense> */}
             {reviewData &&
-              reviewData?.map((review: any) => <ReviewCard key={review.id} review={review}/>)}
+              reviewData?.map((review: any) => (
+                <ReviewCard key={review.id} review={review} />
+              ))}
           </div>
         </section>
       </main>
-    </>
+    </Fragment>
   );
 };
 

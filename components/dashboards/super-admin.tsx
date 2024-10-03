@@ -1,12 +1,11 @@
 "use client";
+import { useGetDoctorsCount } from "@/api/doctor.api";
 import { useGetHospitalsCount } from "@/api/hospital.api";
 import { useAuthContext } from "@/context/auth-provider";
 import { Role } from "@/types/enums.types";
-import Image from "next/image";
-import React from "react";
-import { StatCard } from "../cards/stat-card";
 import { Skeleton } from "antd";
-import { useGetDoctorsCount } from "@/api/doctor.api";
+import Image from "next/image";
+import { StatCard } from "../cards/stat-card";
 
 const Dashboard = () => {
   const { role } = useAuthContext();
