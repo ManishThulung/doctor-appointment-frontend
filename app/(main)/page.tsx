@@ -48,8 +48,8 @@ export default function Home() {
       </main>
 
       {/* get started */}
-      <section className="my-10 md:my-20">
-        <div className="flex gap-8 md:gap-16 flex-col bg-white md:flex-row mx-4 w-[full] lg:w-3/4 m-auto mb-14">
+      <section className="my-10 md:mt-10 md:mb-20 mx-4">
+        <div className="flex gap-8 md:gap-16 flex-col bg-white md:flex-row mx-4 w-[full] lg:w-3/4 md:m-auto">
           <h1 className="text-3xl font-semibold w-full md:w-[48%] flex items-center">
             Experience Exceptional Healthcare In Nepal With Us
           </h1>
@@ -67,7 +67,7 @@ export default function Home() {
 
         {/* <Slider /> */}
 
-        <div className="flex gap-6 flex-wrap justify-center mx-4">
+        <div className="flex gap-6 flex-wrap justify-center mt-12">
           <LandingCard
             link="#"
             title="Explore"
