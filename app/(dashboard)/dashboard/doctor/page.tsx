@@ -63,7 +63,7 @@ const Doctor: NextPage = () => {
   };
 
   const serelizeData = () => {
-    if (data) {
+    if (data && data?.length > 0) {
       const newData = data?.map((doctor: any) => {
         return {
           id: doctor?.id,
@@ -93,7 +93,7 @@ const Doctor: NextPage = () => {
   const serelizedData = data && serelizeData();
 
   const serelizeDisplayData = () => {
-    if (data && doctorId) {
+    if (data && data?.length > 0 && doctorId) {
       const doctor = data?.find((doctor: any) => doctor.id === doctorId);
       const newData = {
         id: doctor?.id,
@@ -117,10 +117,10 @@ const Doctor: NextPage = () => {
     <>
       {data && (
         <>
-          <div className="flex justify-between flex-row">
+          {/* <div className="flex justify-between flex-row">
             <h2 className="font-semibold text-3xl">Department</h2>
             <CreateDepartment />
-          </div>
+          </div> */}
           <div className="w-full mx-auto py-10">
             <DataTable
               columns={columns}

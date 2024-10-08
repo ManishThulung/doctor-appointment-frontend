@@ -25,11 +25,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <ErrorBoundary>
           <QueryProvider>
-            <AuthContextProvider>
-              {children}
-              <ReactQueryDevtools initialIsOpen={false} />
-              <ToastContainer position="top-right" autoClose={3000} />
-            </AuthContextProvider>
+              <AuthContextProvider>
+                {children}
+                <ReactQueryDevtools initialIsOpen={false} />
+                <ToastContainer position="top-right" autoClose={3000} />
+              </AuthContextProvider>
           </QueryProvider>
         </ErrorBoundary>
       </body>
