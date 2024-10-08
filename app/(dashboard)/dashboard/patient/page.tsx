@@ -65,7 +65,7 @@ const Patient = () => {
             <DataTable
               columns={columns}
               data={serelizedData}
-              filterBy="name"
+              filterBy="patientName"
             />
           </div>
         </>
