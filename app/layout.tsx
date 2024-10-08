@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContextProvider } from "@/context/auth-provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,13 +25,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <ErrorBoundary>
           <QueryProvider>
-            <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID}`}>
               <AuthContextProvider>
                 {children}
                 <ReactQueryDevtools initialIsOpen={false} />
                 <ToastContainer position="top-right" autoClose={3000} />
               </AuthContextProvider>
-            </GoogleOAuthProvider>
           </QueryProvider>
         </ErrorBoundary>
       </body>

@@ -2,7 +2,6 @@ import { Address } from "@/types/address.types";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
-import { FaStar } from "react-icons/fa";
 
 interface IProps {
   name: string;
@@ -17,7 +16,7 @@ const HospitalCard: FC<IProps> = ({ name, id, email, image, address, phone }) =>
   return (
     <Link
       href={`/hospitals/${id}`}
-      className="min-w-[300px] max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4 cursor-pointer"
+      className="min-w-[288px] md:min-w-[300px] max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4 cursor-pointer"
     >
       <div className="relative">
         <Image

@@ -3,7 +3,7 @@ import { FaUserDoctor } from "react-icons/fa6";
 
 const ServiceCard = ({title, desc}: {title: string, desc:string}) => {
   return (
-    <div className="flex flex-col items-start bg-white md:flex-row md:max-w-lg  w-[30%]">
+    <div className="flex items-start bg-white flex-row md:max-w-lg sm:w-[45%] lg:w-[30%]">
       <div className="pt-1">
         <FaUserDoctor className="h-12 w-12" />
       </div>

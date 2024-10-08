@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <Fragment>
-      <main>
+      <main className="max-md:hidden">
         <section className="relative block h-[500px]">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -48,13 +48,13 @@ export default function Home() {
       </main>
 
       {/* get started */}
-      <section className="my-20">
-        <div className="flex gap-16 flex-col bg-white md:flex-row w-3/4 m-auto mb-14">
-          <h1 className="text-3xl font-semibold w-[48%] flex items-center">
+      <section className="my-10 md:my-20">
+        <div className="flex gap-8 md:gap-16 flex-col bg-white md:flex-row mx-4 w-[full] lg:w-3/4 m-auto mb-14">
+          <h1 className="text-3xl font-semibold w-full md:w-[48%] flex items-center">
             Experience Exceptional Healthcare In Nepal With Us
           </h1>
 
-          <p className="font-normal text-gray-700 w-[48%]">
+          <p className="font-normal text-gray-700 w-full md:w-[48%]">
             Discover the pinnacle of healthcare services in the United States,
             where advancements, quality, cutting edge research, expert doctors
             and a commitment to patient success, combine to provide an
@@ -67,7 +67,7 @@ export default function Home() {
 
         {/* <Slider /> */}
 
-        <div className="flex justify-between">
+        <div className="flex gap-6 flex-wrap justify-center mx-4">
           <LandingCard
             link="#"
             title="Explore"
@@ -94,9 +94,9 @@ export default function Home() {
       {/* top hospitals */}
       <div>
         <p className="font-bold text-2xl lg:text-3xl text-center mb-4">
-          Top Hospitals
+          Hospitals
         </p>
-        <div className="flex gap-5 flex-wrap justify-center">
+        <div className="flex gap-5 flex-wrap justify-center mx-4">
           {!isPending && data ? (
             data?.map((item: any) => (
               <HospitalCard
@@ -119,17 +119,17 @@ export default function Home() {
 
       {/* two */}
       <div className="my-16">
-        <div className="flex flex-col gap-8 mx-auto w-1/2 mb-10">
+        <div className="flex flex-col gap-8 mx-auto max-sm:mx-4 sm:w-3/4 lg:w-1/2 mb-10">
           <h2 className="text-3xl font-semibold text-center">
             We are always ready to help you
           </h2>
-          <p className="text-base text-center">
+          <p className="text-base text-center w-full">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae
             aliquid odit cupiditate quas, expedita accusantium commodi beatae
             mollitia facere soluta?
           </p>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-center lg:justify-between flex-wrap">
           <div className="w-full max-w-sm bg-white ">
             <div className="flex flex-col items-center pb-10">
               <img
@@ -137,7 +137,7 @@ export default function Home() {
                 src="/assets/images/about.jpg"
                 alt="Bonnie image"
               />
-              <h5 className=" text-2xl font-semibold text-gray-900 mt-8">
+              <h5 className=" text-2xl font-semibold text-gray-900 mt-4 lg:mt-8">
                 Emergency Help
               </h5>
               <span className="text-base text-gray-500 mt-2 text-center">
@@ -153,7 +153,7 @@ export default function Home() {
                 src="/assets/images/about.jpg"
                 alt="Bonnie image"
               />
-              <h5 className=" text-2xl font-semibold text-gray-900 mt-8">
+              <h5 className=" text-2xl font-semibold text-gray-900 mt-4 lg:mt-8">
                 Enriched Pharmecy
               </h5>
               <span className="text-base text-gray-500 mt-2 text-center">
@@ -169,7 +169,7 @@ export default function Home() {
                 src="/assets/images/about.jpg"
                 alt="Bonnie image"
               />
-              <h5 className=" text-2xl font-semibold text-gray-900 mt-8">
+              <h5 className=" text-2xl font-semibold text-gray-900 mt-4 lg:mt-8">
                 Medical Treatment
               </h5>
               <span className="text-base text-gray-500 mt-2 text-center">
@@ -184,9 +184,9 @@ export default function Home() {
       {/* top doctors */}
       <div>
         <p className="font-bold text-2xl lg:text-3xl text-center mb-4">
-          Top Doctors
+          Doctors
         </p>
-        <div className="flex gap-5 flex-wrap justify-center">
+        <div className="flex gap-5 flex-wrap justify-center mx-4">
           {!isPendingDoctor && doctorData ? (
             doctorData?.map((item: any) => (
               <DoctorCard
@@ -210,7 +210,7 @@ export default function Home() {
 
       {/* services */}
       <div className="my-20">
-        <div className="flex flex-col gap-8 mx-auto w-1/2 mb-12">
+        <div className="flex flex-col gap-8 mx-auto max-sm:mx-4 sm:w-3/4 lg:w-1/2 mb-12">
           <h2 className="text-3xl font-semibold text-center">
             We offer different to improve your health
           </h2>
@@ -219,7 +219,7 @@ export default function Home() {
             aliquid odit cupiditate quas beatae mollitia facere soluta?
           </p>
         </div>
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap justify-center gap-8 mx-4">
           <ServiceCard
             title="General Treatment"
             desc="Here are the biggest enterprise technology acquisitions of 2024 so
