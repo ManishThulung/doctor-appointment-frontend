@@ -5,7 +5,7 @@ import moment from "moment";
 import React, { FC } from "react";
 import { NormalSkeleton } from "../loaders/normal-skeleton";
 import { PdfRenderModal } from "../modals/pdf-render-modal";
-import { CarouselPlugin } from "../carousel";
+import { CarouselDApiDemo } from "../carousel";
 import { useGetDoctorsCountOfHospital } from "@/api/doctor.api";
 
 interface IProps {
@@ -110,7 +110,7 @@ const AboutHospital: FC<IProps> = ({ hospitalId }) => {
               <p className="text-black text-4xl text-center font-bold my-4">
                 Our Galleries
               </p>
-              <CarouselPlugin gallery={data?.gallery} />
+              <CarouselDApiDemo gallery={data?.gallery} />
             </div>
           </section>
 

@@ -12,7 +12,7 @@ import {
 import { ImageData } from "@/types/utils.types";
 import Image from "next/image";
 
-export function CarouselPlugin({ gallery }: { gallery: ImageData[] }) {
+export function CarouselDApiDemo({ gallery }: { gallery: ImageData[] }) {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
@@ -26,23 +26,26 @@ export function CarouselPlugin({ gallery }: { gallery: ImageData[] }) {
     >
       <CarouselContent>
         {gallery &&
-          gallery?.map((item, index) => (
-            <CarouselItem key={index}>
-              <div className="p-1">
-                <Card>
-                  <CardContent className="flex aspect-square items-center justify-center h-[700px] w-full p-0">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${item?.filename}`}
-                      alt={item?.filename}
-                      height={700}
-                      width={700}
-                      className="w-full h-[700px] object-cover"
-                    />
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
+          gallery?.map((item, index) => {
+            console.log(item, index);
+            return (
+              <CarouselItem key={index}>
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex aspect-square items-center justify-center h-[700px] w-full p-0">
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${item?.filename}`}
+                        alt={item?.filename}
+                        height={700}
+                        width={700}
+                        className="w-full h-[700px] object-cover"
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            );
+          })}
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
