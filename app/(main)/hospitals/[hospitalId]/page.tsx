@@ -54,9 +54,7 @@ const page = ({ params }: { params: { hospitalId: string } }) => {
           <Doctors hospitalId={params.hospitalId} />
         </Suspense>
 
-        <div className="bg-[#101828]">
-          <Departments />
-        </div>
+        <Departments />
 
         <AboutHospital hospitalId={params.hospitalId} />
 
