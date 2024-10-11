@@ -12,19 +12,21 @@ export const useCreateAppointment = () => {
   };
 };
 
-export const useGetAppointments = (role: string) => {
+export const useGetAppointments = (role: Role) => {
   let response: any;
   if (role === Role.Admin) {
     response = useFetch(`appointment`, undefined);
-    return {
-      ...response,
-    };
+    if (response)
+      return {
+        ...response,
+      };
   }
   if (role === Role.Doctor) {
     response = useFetch(`appointment/doctor`, undefined);
-    return {
-      ...response,
-    };
+    if (response)
+      return {
+        ...response,
+      };
   }
 };
 

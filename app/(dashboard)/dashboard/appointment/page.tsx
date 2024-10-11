@@ -1,4 +1,5 @@
 "use client";
+
 import {
   useApproveAppointmentByDoctor,
   useCancelAppointmentByDoctor,
@@ -10,7 +11,7 @@ import { DataTable } from "@/components/dashboards/table/data-table";
 import CancelModal from "@/components/modals/cancel-modal";
 import GenericlModal from "@/components/modals/generic-model";
 import { useAuthContext } from "@/context/auth-provider";
-import { AppointmentStatus } from "@/types/enums.types";
+import { AppointmentStatus, Role } from "@/types/enums.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Skeleton } from "antd";
 import React from "react";
@@ -36,9 +37,9 @@ const columns: ColumnDef<IAppointment>[] = [
   createColumn("action", "Action"),
 ];
 
-const Appointments = () => {
+const Appointment = () => {
   const { role } = useAuthContext();
-  const { data, isPending } = useGetAppointments(role);
+  const { data, isPending } = useGetAppointments(role as Role);
   const { mutateAsync, isPending: isLoading } = useCancelAppointmentByDoctor();
   const { mutateAsync: mutateAsyncApprove, isPending: isLoadingApprove } =
     useApproveAppointmentByDoctor();
@@ -106,7 +107,7 @@ const Appointments = () => {
 
   return (
     <>
-      {data && serelizedData && (
+       {data && serelizedData && (
         <>
           <div className="w-full mx-auto py-10">
             <DataTable
@@ -148,9 +149,10 @@ const Appointments = () => {
           isLoading={isLoadingStatus}
           type={"Update"}
         />
-      )}
+      )} 
+      
     </>
   );
 };
 
-export default Appointments;
+export default Appointment;

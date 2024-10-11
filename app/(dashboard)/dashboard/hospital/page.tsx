@@ -38,6 +38,7 @@ const Hospital = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isApproveModalOpen, setIsApproveModalOpen] = useState<boolean>(false);
   const [hospitalId, setHospitalId] = useState<string | null>(null);
+
   if (isPending) {
     return (
       <div className="flex justify-center items-center h-[80vh]">
@@ -46,7 +47,7 @@ const Hospital = () => {
     );
   }
 
-  const approveDoctor = (id: string) => {
+  const approveHospital = (id: string) => {
     setIsApproveModalOpen(true);
     setHospitalId(id);
   };
@@ -73,7 +74,7 @@ const Hospital = () => {
             },
             {
               label: "Approve",
-              callback: () => approveDoctor(doctor?.id),
+              callback: () => approveHospital(doctor?.id),
             },
           ],
         };
@@ -114,7 +115,11 @@ const Hospital = () => {
             <h2 className="font-semibold text-3xl">Hospitals</h2>
           </div>
           <div className="w-full mx-auto py-10">
-            <DataTable columns={columns} data={serelizedData} filterBy="name" />
+            <DataTable
+              columns={columns}
+              data={serelizedData ?? []}
+              filterBy="name"
+            />
           </div>
         </>
       )}

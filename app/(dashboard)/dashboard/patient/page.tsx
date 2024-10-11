@@ -3,7 +3,7 @@ import { useGetAppointments } from "@/api/appointment";
 import { createColumn } from "@/components/dashboards/table/create-columns";
 import { DataTable } from "@/components/dashboards/table/data-table";
 import { useAuthContext } from "@/context/auth-provider";
-import { AppointmentStatus } from "@/types/enums.types";
+import { AppointmentStatus, Role } from "@/types/enums.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Skeleton } from "antd";
 import React from "react";
@@ -28,7 +28,7 @@ const columns: ColumnDef<IDoctor>[] = [
 
 const Patient = () => {
   const { role } = useAuthContext();
-  const { data, isPending } = useGetAppointments(role);
+  const { data, isPending } = useGetAppointments(role as Role);
 
   if (isPending) {
     return (
