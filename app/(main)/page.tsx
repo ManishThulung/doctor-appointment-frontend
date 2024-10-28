@@ -65,8 +65,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* <Slider /> */}
-
         <div className="flex gap-6 flex-wrap justify-center mt-12">
           <LandingCard
             link="#"

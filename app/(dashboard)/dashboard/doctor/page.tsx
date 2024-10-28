@@ -36,7 +36,7 @@ const columns: ColumnDef<IDoctor>[] = [
   createColumn("action", "Action"),
 ];
 
-const Doctor: NextPage = () => {
+const DoctorDashboard: NextPage = () => {
   const { data, isPending } = useGetDoctorByHospitalIdAdmin();
   const { mutateAsync, isPending: isLoadingApprove } = useApproveDoctor();
 
@@ -145,4 +145,4 @@ const Doctor: NextPage = () => {
   );
 };
 
-export default Doctor;
+export default DoctorDashboard;

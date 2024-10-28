@@ -14,6 +14,7 @@ import { useAuthContext } from "@/context/auth-provider";
 import { AppointmentStatus, Role } from "@/types/enums.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Skeleton } from "antd";
+import { NextPage } from "next";
 import React from "react";
 import { useState } from "react";
 
@@ -37,7 +38,7 @@ const columns: ColumnDef<IAppointment>[] = [
   createColumn("action", "Action"),
 ];
 
-const Appointment = () => {
+const Appointment: NextPage = () => {
   const { role } = useAuthContext();
   const { data, isPending } = useGetAppointments(role as Role);
   const { mutateAsync, isPending: isLoading } = useCancelAppointmentByDoctor();
