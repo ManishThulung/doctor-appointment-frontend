@@ -24,6 +24,8 @@ export const useGetHospitalById = (id: string) => {
 export const useGetHospitalsAdmin = () => {
   const response: any = useFetch(`hospital/admin`);
   return {
+    data: response?.data || null, // Default data to `null` if undefined
+    isPending: response?.isPending ?? true, // Default loading state to true
     ...response,
   };
 };

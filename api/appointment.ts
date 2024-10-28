@@ -16,18 +16,16 @@ export const useGetAppointments = (role: Role) => {
   let response: any;
   if (role === Role.Admin) {
     response = useFetch(`appointment`, undefined);
-    if (response)
-      return {
-        ...response,
-      };
-  }
-  if (role === Role.Doctor) {
+  } else if (role === Role.Doctor) {
     response = useFetch(`appointment/doctor`, undefined);
-    if (response)
-      return {
-        ...response,
-      };
   }
+
+  // Ensure response is always an object with `data` and `isPending` defaults
+  return {
+    data: response?.data || null, // Default data to `null` if undefined
+    isPending: response?.isPending ?? true, // Default loading state to true
+    ...response,
+  };
 };
 
 export const useGetMyAppointments = () => {
