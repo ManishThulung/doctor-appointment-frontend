@@ -10,6 +10,7 @@ import { useAuthContext } from "@/context/auth-provider";
 import { LoginFormValidation } from "@/lib/validation";
 import { Role } from "@/types/enums.types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import axios, { AxiosResponse } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
+import Googles from "./google";
 
 export type LoginFormFields = {
   password: string;
@@ -59,16 +61,6 @@ const Login = () => {
     }
   };
 
-  const handleLogin = async () => {
-    // Retrieve Google Authentication url from the server
-    const url = (
-      await axios.get("http://localhost:8000/api/auth/redirect/oauth")
-    ).data;
-    console.log(url, "urllllll");
-
-    // Redirect to the Google Authentication page
-    window.location.href = url;
-  };
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center">
@@ -134,9 +126,13 @@ const Login = () => {
               </form>
             </Form>
 
-            <div className="space-x-6 flex justify-center mt-6">
-              <button onClick={handleLogin}>Sign in with Google 🚀 </button>
-            </div>
+            <GoogleOAuthProvider
+              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
+            >
+              <div className="App">
+                <Googles setIsAuth={setIsAuth} setRole={setRole} router={router} />
+              </div>
+            </GoogleOAuthProvider>
           </div>
 
           <div className="md:h-full bg-[#000842] rounded-xl lg:p-12 p-8">

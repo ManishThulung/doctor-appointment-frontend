@@ -12,20 +12,20 @@ export const useCreateAppointment = () => {
   };
 };
 
-export const useGetAppointments = (role: string) => {
+export const useGetAppointments = (role: Role) => {
   let response: any;
   if (role === Role.Admin) {
     response = useFetch(`appointment`, undefined);
-    return {
-      ...response,
-    };
-  }
-  if (role === Role.Doctor) {
+  } else if (role === Role.Doctor) {
     response = useFetch(`appointment/doctor`, undefined);
-    return {
-      ...response,
-    };
   }
+
+  // Ensure response is always an object with `data` and `isPending` defaults
+  return {
+    data: response?.data || null, // Default data to `null` if undefined
+    isPending: response?.isPending ?? true, // Default loading state to true
+    ...response,
+  };
 };
 
 export const useGetMyAppointments = () => {

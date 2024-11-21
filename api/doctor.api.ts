@@ -58,6 +58,8 @@ export const useGetDoctorsCount = (option: boolean) => {
 export const useGetDoctorByHospitalIdAdmin = () => {
   const response: any = useFetch(`doctor/hospital/admin`);
   return {
+    data: response?.data || [],
+    isPending: response?.isPending ?? true,
     ...response,
   };
 };

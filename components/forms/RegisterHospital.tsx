@@ -67,7 +67,13 @@ const RegisterHospital = () => {
     formData.append("departments", department?.departments);
     formData.append("logo", values?.logo[0]);
     formData.append("certificate", values?.certificate[0]);
-    formData.append("gallery", values?.gallery[0]);
+    const galleryFiles = values?.gallery;
+
+    if (galleryFiles && galleryFiles.length > 0) {
+      galleryFiles.forEach((file) => {
+        formData.append("gallery", file);
+      });
+    }
 
     try {
       const res: AxiosResponse = await mutateAsync(formData);

@@ -4,7 +4,6 @@ import {
   useApproveDoctor,
   useGetDoctorByHospitalIdAdmin,
 } from "@/api/doctor.api";
-import CreateDepartment from "@/components/dashboards/forms/create-department";
 import { createColumn } from "@/components/dashboards/table/create-columns";
 import { DataTable } from "@/components/dashboards/table/data-table";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
@@ -13,7 +12,6 @@ import ViewDetailModal from "@/components/modals/view-modal";
 import { ImageData } from "@/types/utils.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { NextPage } from "next";
-import React from "react";
 import { useState } from "react";
 
 interface IDoctor {
@@ -38,7 +36,7 @@ const columns: ColumnDef<IDoctor>[] = [
   createColumn("action", "Action"),
 ];
 
-const Doctor: NextPage = () => {
+const DoctorDashboard: NextPage = () => {
   const { data, isPending } = useGetDoctorByHospitalIdAdmin();
   const { mutateAsync, isPending: isLoadingApprove } = useApproveDoctor();
 
@@ -112,26 +110,20 @@ const Doctor: NextPage = () => {
     }
   };
 
-  const doctorData = serelizeDisplayData();
+  const doctorData = data && serelizeDisplayData();
   return (
     <>
-      {data && (
-        <>
-          {/* <div className="flex justify-between flex-row">
-            <h2 className="font-semibold text-3xl">Department</h2>
-            <CreateDepartment />
-          </div> */}
-          <div className="w-full mx-auto py-10">
-            <DataTable
-              columns={columns}
-              data={serelizedData}
-              filterBy="name"
-            />
-          </div>
-        </>
+      {data && serelizedData && (
+        <div className="w-full mx-auto py-10">
+          <DataTable
+            columns={columns}
+            data={serelizedData ?? []}
+            filterBy="name"
+          />
+        </div>
       )}
 
-      {isOpen && (
+      {isOpen && data && (
         <ViewDetailModal
           setIsOpen={setIsOpen}
           data={doctorData}
@@ -153,4 +145,4 @@ const Doctor: NextPage = () => {
   );
 };
 
-export default Doctor;
+export default DoctorDashboard;
