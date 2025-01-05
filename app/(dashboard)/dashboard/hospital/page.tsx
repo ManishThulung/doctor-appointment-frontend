@@ -5,11 +5,16 @@ import { createColumn } from "@/components/dashboards/table/create-columns";
 import { DataTable } from "@/components/dashboards/table/data-table";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import GenericlModal from "@/components/modals/generic-model";
-import ViewDetailModal from "@/components/modals/view-modal";
 import { ImageData } from "@/types/utils.types";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 import { useState } from "react";
+import dynamic from 'next/dynamic'
+ 
+const ViewDetailModal = dynamic(
+  () => import('@/components/modals/view-modal'),
+  { ssr: false }
+)
 
 interface IHospital {
   name: string;

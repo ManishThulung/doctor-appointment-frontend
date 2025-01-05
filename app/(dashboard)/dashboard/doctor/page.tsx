@@ -8,11 +8,16 @@ import { createColumn } from "@/components/dashboards/table/create-columns";
 import { DataTable } from "@/components/dashboards/table/data-table";
 import { CardSkeleton } from "@/components/loaders/card-skeleton";
 import GenericlModal from "@/components/modals/generic-model";
-import ViewDetailModal from "@/components/modals/view-modal";
 import { ImageData } from "@/types/utils.types";
 import { ColumnDef } from "@tanstack/react-table";
 import { NextPage } from "next";
 import { useState } from "react";
+import dynamic from 'next/dynamic'
+ 
+const ViewDetailModal = dynamic(
+  () => import('@/components/modals/view-modal'),
+  { ssr: false }
+)
 
 interface IDoctor {
   department: string;
@@ -112,36 +117,38 @@ const DoctorDashboard: NextPage = () => {
 
   const doctorData = data && serelizeDisplayData();
   return (
-    <>
-      {data && serelizedData && (
-        <div className="w-full mx-auto py-10">
-          <DataTable
-            columns={columns}
-            data={serelizedData ?? []}
-            filterBy="name"
+      <>
+        {data && serelizedData && (
+          <div className="w-full mx-auto py-10">
+            <DataTable
+              columns={columns}
+              data={serelizedData ?? []}
+              filterBy="name"
+            />
+          </div>
+        )}
+
+        {isOpen && data && (
+          <ViewDetailModal
+            setIsOpen={setIsOpen}
+            data={doctorData}
+            type={"Doctor"}
           />
-        </div>
-      )}
+        )}
 
-      {isOpen && data && (
-        <ViewDetailModal
-          setIsOpen={setIsOpen}
-          data={doctorData}
-          type={"Doctor"}
-        />
-      )}
+        {isApproveModalOpen && (
+          <GenericlModal
+            setIsOpen={setIsApproveModalOpen}
+            setAppointmentId={setDoctorId}
+            appointmentId={doctorId}
+            mutateAsync={mutateAsync}
+            isLoading={isLoadingApprove}
+            type={"Approve"}
+          />
+        )}
+      </>
 
-      {isApproveModalOpen && (
-        <GenericlModal
-          setIsOpen={setIsApproveModalOpen}
-          setAppointmentId={setDoctorId}
-          appointmentId={doctorId}
-          mutateAsync={mutateAsync}
-          isLoading={isLoadingApprove}
-          type={"Approve"}
-        />
-      )}
-    </>
+
   );
 };
 
