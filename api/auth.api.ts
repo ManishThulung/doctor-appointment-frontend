@@ -33,7 +33,6 @@ export const useRegister = () => {
     undefined
     // updater
   );
-  console.log(response, "resssss");
   return {
     ...response,
   };

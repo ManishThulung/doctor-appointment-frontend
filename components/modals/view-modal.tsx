@@ -1,3 +1,5 @@
+"use client"
+
 import { Dispatch, FC, SetStateAction } from "react";
 import { Button } from "../ui/button";
 import { PdfRender } from "../pdf/pdf-render";

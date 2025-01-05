@@ -12,7 +12,6 @@ export const useCreateDepartment = () => {
     }
     // updater
   );
-  console.log(response, "resssss");
   return {
     ...response,
   };
