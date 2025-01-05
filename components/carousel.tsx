@@ -27,7 +27,6 @@ export function CarouselDApiDemo({ gallery }: { gallery: ImageData[] }) {
       <CarouselContent>
         {gallery &&
           gallery?.map((item, index) => {
-            console.log(item, index);
             return (
               <CarouselItem key={index}>
                 <div className="p-1">

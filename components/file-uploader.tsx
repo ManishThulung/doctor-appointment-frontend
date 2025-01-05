@@ -18,7 +18,6 @@ export const FileUploader = ({ files, onChange, type }: FileUploaderProps) => {
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
-  console.log(files, "filesss");
 
   return (
     <div {...getRootProps()} className="file-upload">
