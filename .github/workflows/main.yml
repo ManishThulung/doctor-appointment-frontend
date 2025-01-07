@@ -31,7 +31,7 @@ jobs:
 
   Deploy-Production:
     runs-on: ubuntu-latest
-    # Run only on push to main
+    # Run only on push to main 
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
